@@ -1,4 +1,4 @@
-package dev.reuise.core;
+package dev.reuise.core.component;
 
 public class AbstractCoreComponent{
 }
