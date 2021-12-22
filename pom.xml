@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.reuise</groupId>
   <artifactId>reuise-core</artifactId>
-  <version>1.0.0</version>
+  <version>0.2.0-beta</version>
   <name>Reuise for Java: Core</name>
   <build>
     <sourceDirectory>${basedir}/src/main/java</sourceDirectory>

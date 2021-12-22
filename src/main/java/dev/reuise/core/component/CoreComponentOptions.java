@@ -1,2 +1,5 @@
 package dev.reuise.core.component;
-public interface CoreComponentOptions {}
+public class CoreComponentOptions {
+    public CoreComponentOptions() {
+    }
+}
