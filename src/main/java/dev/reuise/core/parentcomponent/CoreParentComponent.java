@@ -1,6 +1,6 @@
 package dev.reuise.core.parentcomponent;
-import dev.reuise.core.component.CoreComponent;
-/**
- * Interface for ParentComponent and ParentComponentAdapter (Core).
- */
-public interface CoreParentComponent extends CoreComponent {}
+import dev.reuise.core.CoreComponent;
+import dev.reuise.core.basecomponent.CoreBaseComponent;
+public interface CoreParentComponent extends CoreComponent , CoreBaseComponent , CoreParentComponentPart {
+    CoreParentComponent getComponent();
+}
