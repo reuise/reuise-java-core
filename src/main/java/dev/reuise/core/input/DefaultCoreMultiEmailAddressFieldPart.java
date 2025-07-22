@@ -69,8 +69,6 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
 
     private CoreBaseComponentPart baseComponentPart;
 
-    private CoreChipGroup chipGroup;
-
     private CoreLabel labelContainer;
 
     private CoreContainer inputContainer;
@@ -83,6 +81,8 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
 
     private CoreInlineText supportingTextContainer;
 
+    private CoreChipGroup chipGroup;
+
     protected DefaultCoreMultiEmailAddressFieldPart(O options) {
     }
 
@@ -93,13 +93,13 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
         parentComponentPart = getParentComponentPart();
         baseComponentPart = getBaseComponentPart();
         // Layout children (indirect)
-        chipGroup = getChipGroup();
         labelContainer = getLabelContainer();
         inputContainer = getInputContainer();
         startIcon = getStartIcon();
         input = getInput();
         endIcon = getEndIcon();
         supportingTextContainer = getSupportingTextContainer();
+        chipGroup = getChipGroup();
     }
 
     @Override

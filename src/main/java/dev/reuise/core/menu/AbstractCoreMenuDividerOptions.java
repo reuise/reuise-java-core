@@ -7,6 +7,9 @@ import dev.reuise.core.link.CoreLinkPartOptions;
 import dev.reuise.core.text.CoreInlineTextPartOptions;
 public abstract class AbstractCoreMenuDividerOptions<S extends AbstractCoreMenuDividerOptions<S>> implements CoreMenuDividerOptions , CoreComponentOptions {
     // Indirect layout child
+    private CoreLinkPartOptions linkOptions;
+
+    // Indirect layout child
     private CoreCheckboxPartOptions checkboxOptions;
 
     // Indirect layout child
@@ -24,9 +27,6 @@ public abstract class AbstractCoreMenuDividerOptions<S extends AbstractCoreMenuD
     // Indirect layout child
     private CoreIconPartOptions endIconOptions;
 
-    // Indirect layout child
-    private CoreLinkPartOptions linkOptions;
-
     protected AbstractCoreMenuDividerOptions() {
     }
 
@@ -34,13 +34,13 @@ public abstract class AbstractCoreMenuDividerOptions<S extends AbstractCoreMenuD
     }
 
     public boolean onPreInitialize() {
+        linkOptions = getLinkOptions();
         checkboxOptions = getCheckboxOptions();
         startIconOptions = getStartIconOptions();
         textContainerOptions = getTextContainerOptions();
         labelContainerOptions = getLabelContainerOptions();
         secondaryLabelContainerOptions = getSecondaryLabelContainerOptions();
         endIconOptions = getEndIconOptions();
-        linkOptions = getLinkOptions();
         return true;
     }
 
