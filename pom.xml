@@ -18,6 +18,12 @@
     <java.version>17</java.version>
     <maven.compiler.source>17</maven.compiler.source>
   </properties>
+  <repositories>
+    <repository>
+      <id>local-mirror</id>
+      <url>file://${user.home}/.m2/repository</url>
+    </repository>
+  </repositories>
   <build>
     <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
     <outputDirectory>${basedir}/target/classes</outputDirectory>
