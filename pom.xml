@@ -8,12 +8,11 @@
   <name>Reuise for Java (Core)</name>
   <distributionManagement>
     <repository>
-      <id>github</id>
+      <id>github-reuise-core</id>
       <name>GitHub Packages</name>
       <url>https://maven.pkg.github.com/reuise/reuise-java-core</url>
     </repository>
   </distributionManagement>
-  
   <properties>
     <maven.compiler.target>17</maven.compiler.target>
     <java.version>17</java.version>
