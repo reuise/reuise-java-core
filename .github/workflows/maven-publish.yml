@@ -13,11 +13,16 @@ jobs:
       packages: write
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 17
+    - name: Set environment variables for Maven auth
       run: |-
         echo "GITHUB_ACTOR=aeromac" >> $GITHUB_ENV
         echo "GITHUB_TOKEN=${{ secrets.GH_PAT }}" >> $GITHUB_ENV
-    - uses: actions/setup-java@v4
+    - name: Set up custom Maven settings
+      run: |-
+        mkdir -p ~/.m2
+        cp .github/maven/settings.xml ~/.m2/settings.xml
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: temurin
