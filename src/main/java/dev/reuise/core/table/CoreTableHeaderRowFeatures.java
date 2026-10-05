@@ -8,4 +8,6 @@ public interface CoreTableHeaderRowFeatures {
     CoreTableHeaderRowFeatures addColumn(CoreTableColumnOptions column);
 
     CoreTableHeaderRowFeatures removeColumn(CoreTableColumnOptions column);
+
+    CoreTableHeaderRowFeatures clearColumns();
 }

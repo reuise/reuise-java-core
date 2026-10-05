@@ -24,4 +24,6 @@ public interface CoreTableFeatures {
     CoreTableFeatures addColumn(CoreTableColumnOptions column);
 
     CoreTableFeatures removeColumn(CoreTableColumnOptions column);
+
+    CoreTableFeatures clearColumns();
 }

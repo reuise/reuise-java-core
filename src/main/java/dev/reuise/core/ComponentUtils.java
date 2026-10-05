@@ -1,5 +1,6 @@
 package dev.reuise.core;
 
+import java.util.Stack;
 import java.util.zip.Adler32;
 
 public class ComponentUtils {
@@ -11,7 +12,7 @@ public class ComponentUtils {
             '2', '3', '4', '5' };
 
     public static String generateRandomString() {
-        //Adler32 hash = new Adler32();
+        // Adler32 hash = new Adler32();
         counter++;
         return makeIdent(counter);
     }

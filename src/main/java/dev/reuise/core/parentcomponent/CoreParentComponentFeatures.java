@@ -9,4 +9,6 @@ public interface CoreParentComponentFeatures {
     CoreParentComponentFeatures setChild(CoreComponent child);
 
     CoreParentComponentFeatures removeChild(CoreComponent child);
+
+    CoreParentComponentFeatures clearChildren();
 }

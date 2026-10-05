@@ -181,6 +181,16 @@ public abstract class AbstractCoreTableOptions<S extends AbstractCoreTableOption
         return self();
     }
 
+    @Override
+    public S clearColumns() {
+        List<CoreTableColumnOptions> list = getColumns();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
     private void setDefaultColumns(List<CoreTableColumnOptions> columns) {
         setDefaultOption("columns", columns);
     }

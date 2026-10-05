@@ -14,6 +14,8 @@ public interface CoreTableHeaderRowPartOptions {
 
     CoreTableHeaderRowPartOptions removeColumn(CoreTableColumnOptions column);
 
+    CoreTableHeaderRowPartOptions clearColumns();
+
     <T> void setDefaultOption(String option, T value);
 
     <T> void setDefaultOption(String option, T value, boolean force);

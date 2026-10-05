@@ -46,8 +46,6 @@ public abstract class DefaultCoreImagePart<S extends DefaultCoreImagePart<S, O>,
 
     protected CoreLink link;
 
-    protected String linkUrl;
-
     protected DefaultCoreImagePart(O options) {
     }
 
@@ -637,18 +635,15 @@ public abstract class DefaultCoreImagePart<S extends DefaultCoreImagePart<S, O>,
 
     private boolean needsLink(O options) {
         if (link != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasLinkOptions())
-            return true;
-
         if (options.getLinkUrl() != null)
             return true;
 
-        return false;
+        return options.hasLinkOptions();
     }
 
     private CoreLink createLink(O options) {
@@ -687,16 +682,19 @@ public abstract class DefaultCoreImagePart<S extends DefaultCoreImagePart<S, O>,
         baseComponentPart.onInitializeComponentType(rootComponent);
     }
 
-    protected abstract S self();
-
-    @Override
-    public String getLinkUrl() {
-        return linkUrl;
-    }
-
-    @Override
     public S setLinkUrl(String linkUrl) {
-        this.linkUrl = linkUrl;
+        if (link != null)
+            link.setUrl(linkUrl);
+
         return self();
     }
+
+    public String getLinkUrl() {
+        if (link == null)
+            return null;
+
+        return link.getUrl();
+    }
+
+    protected abstract S self();
 }

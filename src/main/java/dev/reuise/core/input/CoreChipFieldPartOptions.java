@@ -23,6 +23,8 @@ public interface CoreChipFieldPartOptions {
 
     CoreChipFieldPartOptions removeValue(String value);
 
+    CoreChipFieldPartOptions clearValues();
+
     boolean hasValue(String value);
 
     List<String> getDelimiters();
@@ -34,6 +36,8 @@ public interface CoreChipFieldPartOptions {
     CoreChipFieldPartOptions addDelimiter(String delimiter);
 
     CoreChipFieldPartOptions removeDelimiter(String delimiter);
+
+    CoreChipFieldPartOptions clearDelimiters();
 
     boolean hasDelimiter(String delimiter);
 

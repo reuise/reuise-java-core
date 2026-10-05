@@ -47,25 +47,6 @@ import java.util.List;
 // add composition for baseComponent: log
 // add composition for baseComponent: removeFromParent
 public abstract class DefaultCoreIconButtonPart<S extends DefaultCoreIconButtonPart<S, O>, O extends CoreIconButtonPartOptions> implements ComponentPart , CoreIconButton {
-    @Override
-    public S setSize(IconSize size) {
-        if (size == null)
-            return self();
-
-        setSize(size.getSize());
-        return self();
-    }
-
-    @Override
-    public Object getSize() {
-        return null;
-    }
-
-    @Override
-    public S setSize(Object size) {
-        return self();
-    }
-
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
@@ -101,6 +82,12 @@ public abstract class DefaultCoreIconButtonPart<S extends DefaultCoreIconButtonP
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -122,6 +109,12 @@ public abstract class DefaultCoreIconButtonPart<S extends DefaultCoreIconButtonP
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -129,6 +122,12 @@ public abstract class DefaultCoreIconButtonPart<S extends DefaultCoreIconButtonP
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -715,12 +714,12 @@ public abstract class DefaultCoreIconButtonPart<S extends DefaultCoreIconButtonP
 
     private boolean needsIcon(O options) {
         if (icon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        return options.hasIconOptions();
+        return false;
     }
 
     private CoreIcon createIcon(O options) {
@@ -750,13 +749,39 @@ public abstract class DefaultCoreIconButtonPart<S extends DefaultCoreIconButtonP
             System.out.println("component is null");
 
         // Apply options for default state
-        applicator.add(options.getSizeOption(), component::setSize);
         applicator.add(options.getUrlOption(), component::setUrl);
         applicator.add(options.getTargetOption(), component::setTarget);
     }
 
     public void onInitializeComponentType(RootComponent rootComponent) {
         parentComponentPart.onInitializeComponentType(rootComponent);
+    }
+
+    // Implementation
+    @Override
+    public Object getSize() {
+        return null;
+    }
+
+    // Implementation
+    @Override
+    public S setSize(Object size) {
+        if (this.icon != null)
+            this.icon.setSize(size);
+
+        setWidth(size);
+        setHeight(size);
+        return self();
+    }
+
+    // Implementation
+    @Override
+    public S setSize(IconSize size) {
+        if (size == null)
+            return self();
+
+        setSize(size.getSize());
+        return self();
     }
 
     protected abstract S self();

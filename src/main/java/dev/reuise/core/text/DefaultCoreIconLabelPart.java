@@ -60,8 +60,6 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
 
     protected CoreIcon endIcon;
 
-    protected String linkUrl;
-
     protected DefaultCoreIconLabelPart(O options) {
     }
 
@@ -87,6 +85,12 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -121,6 +125,12 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -128,6 +138,12 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -719,18 +735,15 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
 
     private boolean needsLink(O options) {
         if (link != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasLinkOptions())
-            return true;
-
         if (options.getLinkUrl() != null)
             return true;
 
-        return false;
+        return options.hasLinkOptions();
     }
 
     private CoreLink createLink(O options) {
@@ -754,7 +767,7 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
 
     private boolean needsStartIcon(O options) {
         if (startIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -784,7 +797,7 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
 
     private boolean needsLabelContainer(O options) {
         if (labelContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -814,7 +827,7 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
 
     private boolean needsEndIcon(O options) {
         if (endIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -858,6 +871,20 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
         parentComponentPart.onInitializeComponentType(rootComponent);
     }
 
+    public S setLinkUrl(String linkUrl) {
+        if (link != null)
+            link.setUrl(linkUrl);
+
+        return self();
+    }
+
+    public String getLinkUrl() {
+        if (link == null)
+            return null;
+
+        return link.getUrl();
+    }
+
     public S setText(String text) {
         if (labelContainer != null)
             labelContainer.setText(text);
@@ -873,17 +900,6 @@ public abstract class DefaultCoreIconLabelPart<S extends DefaultCoreIconLabelPar
     }
 
     protected abstract S self();
-
-    @Override
-    public String getLinkUrl() {
-        return linkUrl;
-    }
-
-    @Override
-    public S setLinkUrl(String linkUrl) {
-        this.linkUrl = linkUrl;
-        return self();
-    }
 
     public S setHighlightText(String text) {
         if (labelContainer != null)

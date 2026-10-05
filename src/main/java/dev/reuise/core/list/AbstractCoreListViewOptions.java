@@ -2,8 +2,8 @@ package dev.reuise.core.list;
 import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 public abstract class AbstractCoreListViewOptions<S extends AbstractCoreListViewOptions<S>> implements CoreListViewOptions , CoreComponentOptions {
     @Override
     public S addItem(String text) {
@@ -13,6 +13,10 @@ public abstract class AbstractCoreListViewOptions<S extends AbstractCoreListView
         return addItem(listItem);
     }
 
+    private List<Object> itemData;
+
+    private Function<Object, CoreListItem> itemDataMapper;
+
     protected AbstractCoreListViewOptions() {
     }
 
@@ -20,7 +24,7 @@ public abstract class AbstractCoreListViewOptions<S extends AbstractCoreListView
     }
 
     public boolean onPreInitialize() {
-        setDefaultItems(new ArrayList<>());
+        setItems(new ArrayList<>());
         setDefaultOrdered(false);
         return true;
     }
@@ -40,7 +44,7 @@ public abstract class AbstractCoreListViewOptions<S extends AbstractCoreListView
 
     @Override
     public S setItems(List<CoreListItem> items) {
-        setOption("items", items);
+        setOption("items", items, true);
         return self();
     }
 
@@ -57,12 +61,6 @@ public abstract class AbstractCoreListViewOptions<S extends AbstractCoreListView
     }
 
     @Override
-    public S setItem(CoreListItem item) {
-        setItems(new ArrayList<CoreListItem>(Arrays.asList(item)));
-        return self();
-    }
-
-    @Override
     public S removeItem(CoreListItem item) {
         List<CoreListItem> list = getItems();
         if (list == null) {
@@ -72,8 +70,33 @@ public abstract class AbstractCoreListViewOptions<S extends AbstractCoreListView
         return self();
     }
 
+    @Override
+    public S clearItems() {
+        List<CoreListItem> list = getItems();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
+    public List<Object> getItemData() {
+        return itemData;
+    }
+
+    public Function<Object, CoreListItem> getItemDataMapper() {
+        return itemDataMapper;
+    }
+
+    @Override
+    public <T> S setItems(List<T> data, Function<T, CoreListItem> mapper) {
+        this.itemData = ((List<Object>) (data));
+        this.itemDataMapper = ((Function<Object, CoreListItem>) (mapper));
+        return self();
+    }
+
     private void setDefaultItems(List<CoreListItem> items) {
-        setDefaultOption("items", items);
+        setDefaultOption("items", items, true);
     }
 
     @Override

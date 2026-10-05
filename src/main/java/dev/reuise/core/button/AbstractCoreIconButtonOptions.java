@@ -4,25 +4,16 @@ import dev.reuise.core.icon.CoreIconOptions;
 import dev.reuise.core.icon.IconSize;
 import dev.reuise.core.option.ComponentOption;
 public abstract class AbstractCoreIconButtonOptions<S extends AbstractCoreIconButtonOptions<S>> implements CoreComponentOptions , CoreIconButtonOptions {
-    @Override
-    public S setSize(IconSize size) {
-        if (size == null)
-            return self();
-
-        setSize(size.getSize());
-        return self();
-    }
-
     protected dev.reuise.core.icon.CoreIconOptions iconOptions;
 
     protected AbstractCoreIconButtonOptions() {
+        iconOptions = createDefaultIconOptions();
     }
 
     public <O extends CoreComponentOptions> void initialize(O options) {
     }
 
     public boolean onPreInitialize() {
-        setDefaultSize(IconSize.SMALL);
         return true;
     }
 
@@ -31,27 +22,23 @@ public abstract class AbstractCoreIconButtonOptions<S extends AbstractCoreIconBu
 
     @Override
     public Object getSize() {
-        return ((Object) (getOptionValue("size")));
-    }
-
-    @Override
-    public ComponentOption<Object> getSizeOption() {
-        return ((ComponentOption<Object>) (getOption("size")));
+        return iconOptions.getSize();
     }
 
     @Override
     public S setSize(Object size) {
-        setOption("size", size);
-        setLayoutChildrenSize(size);
+        this.iconOptions.setSize(size);
         return self();
     }
 
-    protected void setLayoutChildrenSize(Object size) {
-    }
+    // Implementation
+    @Override
+    public S setSize(IconSize size) {
+        if (size == null)
+            return self();
 
-    private void setDefaultSize(Object size) {
-        setDefaultOption("size", size);
-        setLayoutChildrenSize(size);
+        setSize(size.getSize());
+        return self();
     }
 
     @Override
@@ -126,7 +113,7 @@ public abstract class AbstractCoreIconButtonOptions<S extends AbstractCoreIconBu
 
     protected CoreIconOptions createDefaultIconOptions() {
         CoreIconOptions options = getComponentFactory().createIconOptions();
-        options.setRequiredLayoutComponent(false);
+        options.setRequiredLayoutComponent(true);
         return options;
     }
 

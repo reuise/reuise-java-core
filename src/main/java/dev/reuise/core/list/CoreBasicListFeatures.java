@@ -11,6 +11,8 @@ public interface CoreBasicListFeatures {
 
     CoreBasicListFeatures removeItem(CoreBasicListItem item);
 
+    CoreBasicListFeatures clearItems();
+
     boolean isOrdered();
 
     CoreBasicListFeatures setOrdered(Boolean ordered);

@@ -143,6 +143,16 @@ public abstract class AbstractCoreTextTrackOptions<S extends AbstractCoreTextTra
         return self();
     }
 
+    @Override
+    public S clearCues() {
+        List<TextTrackCue> list = getCues();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
     private void setDefaultCues(List<TextTrackCue> cues) {
         setDefaultOption("cues", cues);
     }

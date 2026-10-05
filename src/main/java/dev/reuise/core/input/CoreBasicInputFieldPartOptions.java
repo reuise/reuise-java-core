@@ -66,6 +66,8 @@ public interface CoreBasicInputFieldPartOptions {
 
     CoreBasicInputFieldPartOptions removeValidator(InputValidator validator);
 
+    CoreBasicInputFieldPartOptions clearValidators();
+
     boolean isRequired();
 
     ComponentOption<Boolean> getRequiredOption();

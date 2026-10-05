@@ -9,18 +9,25 @@ import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
+import dev.reuise.core.divider.CoreDivider;
+import dev.reuise.core.image.CoreImage;
 import dev.reuise.core.layout.BackdropFilter;
 import dev.reuise.core.layout.BackdropFilterSetting;
 import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.layout.CoreContainerPart;
+import dev.reuise.core.link.CoreLink;
+import dev.reuise.core.list.CoreBasicList;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.text.CoreHeading;
+import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Padding - CORE
 // Option: PaddingTop - CORE
 // Option: PaddingRight - CORE
@@ -52,9 +59,7 @@ import java.util.List;
 // Option: Debug - CORE
 // Option: DebugId - CORE
 // base comp: container
-// add composition for container: addHeading
-// add composition for container: addDivider
-// add composition for container: addParagraph
+// add composition for container: addMarkdown
 // base comp: parentComponent
 // base comp: baseComponent
 // add composition for baseComponent: hasWrapper
@@ -94,6 +99,10 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     protected CoreContainer activeIndicator;
 
     protected List<CoreTab> tabs;
+
+    private List<Object> tabData;
+
+    private Function<Object, CoreTab> tabDataMapper;
 
     protected Integer activeTab;
 
@@ -394,6 +403,11 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
         return self();
     }
 
+    public S addMarkdown(String markdown) {
+        containerPart.addMarkdown(markdown);
+        return self();
+    }
+
     public S addHeading(int level, String text) {
         containerPart.addHeading(level, text);
         return self();
@@ -414,6 +428,22 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
         return self();
     }
 
+    public CoreHeading createHeading(int level, String text) {
+        return containerPart.createHeading(level, text);
+    }
+
+    public CoreHeading createHeading(String text) {
+        return containerPart.createHeading(text);
+    }
+
+    public CoreHeading createHeading(int level, Html html) {
+        return containerPart.createHeading(level, html);
+    }
+
+    public CoreHeading createHeading(Html html) {
+        return containerPart.createHeading(html);
+    }
+
     public S addDivider() {
         containerPart.addDivider();
         return self();
@@ -424,6 +454,32 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
         return self();
     }
 
+    public CoreDivider createDivider() {
+        return containerPart.createDivider();
+    }
+
+    public CoreDivider createDivider(String label) {
+        return containerPart.createDivider(label);
+    }
+
+    public S addImage(String altText, String url) {
+        containerPart.addImage(altText, url);
+        return self();
+    }
+
+    public CoreImage createImage(String altText, String url) {
+        return containerPart.createImage(altText, url);
+    }
+
+    public S addLink(String label, String url) {
+        containerPart.addLink(label, url);
+        return self();
+    }
+
+    public CoreLink createLink(String label, String url) {
+        return containerPart.createLink(label, url);
+    }
+
     public S addParagraph(String text) {
         containerPart.addParagraph(text);
         return self();
@@ -432,6 +488,50 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     public S addParagraph(Html html) {
         containerPart.addParagraph(html);
         return self();
+    }
+
+    public CoreParagraph createParagraph(String text) {
+        return containerPart.createParagraph(text);
+    }
+
+    public CoreParagraph createParagraph(Html html) {
+        return containerPart.createParagraph(html);
+    }
+
+    public S addBasicList(boolean ordered, String... items) {
+        containerPart.addBasicList(ordered, items);
+        return self();
+    }
+
+    public S addBasicList(boolean ordered, List<String> items) {
+        containerPart.addBasicList(ordered, items);
+        return self();
+    }
+
+    public S addBasicList(String... items) {
+        containerPart.addBasicList(items);
+        return self();
+    }
+
+    public S addBasicList(List<String> items) {
+        containerPart.addBasicList(items);
+        return self();
+    }
+
+    public CoreBasicList createBasicList(boolean ordered, String... items) {
+        return containerPart.createBasicList(ordered, items);
+    }
+
+    public CoreBasicList createBasicList(boolean ordered, List<String> items) {
+        return containerPart.createBasicList(ordered, items);
+    }
+
+    public CoreBasicList createBasicList(String... items) {
+        return containerPart.createBasicList(items);
+    }
+
+    public CoreBasicList createBasicList(List<String> items) {
+        return containerPart.createBasicList(items);
     }
 
     @Override
@@ -465,6 +565,12 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -1037,7 +1143,7 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
 
     private boolean needsContainer(O options) {
         if (container != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1069,6 +1175,12 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        container.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         container.insertBefore(child, beforeChild);
     }
@@ -1076,6 +1188,12 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     @Override
     public S addText(String text) {
         container.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        container.addLineBreak();
         return self();
     }
 
@@ -1100,7 +1218,7 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
 
     private boolean needsActiveIndicator(O options) {
         if (activeIndicator != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1131,6 +1249,8 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     }
 
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
+        tabData = options.getTabData();
+        tabDataMapper = options.getTabDataMapper();
         CoreTabBarPart component = ((CoreTabBarPart) (options.getComponent()));
         if (component == null)
             System.out.println("component is null");
@@ -1180,6 +1300,38 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
             this.tabs.remove(tab);
 
         return self();
+    }
+
+    @Override
+    public S clearTabs() {
+        container.clearChildren();
+        this.tabs.clear();
+        return self();
+    }
+
+    @Override
+    public <T> S setTabs(List<T> data, Function<T, CoreTab> mapper) {
+        if (data == null)
+            return self();
+
+        this.tabData = ((List<Object>) (data));
+        this.tabDataMapper = ((Function<Object, CoreTab>) (mapper));
+        refreshTabs();
+        return self();
+    }
+
+    @Override
+    public void refreshTabs() {
+        clearTabs();
+        tabData.forEach(item -> addTab(tabDataMapper.apply(item)));
+    }
+
+    public List<Object> getTabData() {
+        return tabData;
+    }
+
+    public Function<Object, CoreTab> getTabDataMapper() {
+        return tabDataMapper;
     }
 
     @Override

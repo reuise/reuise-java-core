@@ -8,4 +8,6 @@ public interface CoreTableColumnGroupFeatures {
     CoreTableColumnGroupFeatures addColumn(CoreTableColumnOptions column);
 
     CoreTableColumnGroupFeatures removeColumn(CoreTableColumnOptions column);
+
+    CoreTableColumnGroupFeatures clearColumns();
 }

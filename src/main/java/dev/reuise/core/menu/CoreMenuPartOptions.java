@@ -27,6 +27,8 @@ public interface CoreMenuPartOptions {
 
     CoreMenuPartOptions removeItem(CoreMenuItem item);
 
+    CoreMenuPartOptions clearItems();
+
     Position getAnchorPosition();
 
     ComponentOption<Position> getAnchorPositionOption();

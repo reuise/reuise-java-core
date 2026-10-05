@@ -137,6 +137,12 @@ public abstract class DefaultCoreFilterChipPart<S extends DefaultCoreFilterChipP
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        chipPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         chipPart.insertBefore(child, beforeChild);
     }
@@ -144,6 +150,12 @@ public abstract class DefaultCoreFilterChipPart<S extends DefaultCoreFilterChipP
     @Override
     public S addText(String text) {
         chipPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        chipPart.addLineBreak();
         return self();
     }
 
@@ -177,6 +189,12 @@ public abstract class DefaultCoreFilterChipPart<S extends DefaultCoreFilterChipP
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 

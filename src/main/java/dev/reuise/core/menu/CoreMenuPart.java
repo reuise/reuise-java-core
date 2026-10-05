@@ -8,7 +8,7 @@ public interface CoreMenuPart extends ComponentPart , CoreParentComponentPart , 
 
     void close();
 
-    void clearItems();
+    CoreMenuPart clearItems();
 
     CoreMenuPart addItem(CoreListItem item);
 

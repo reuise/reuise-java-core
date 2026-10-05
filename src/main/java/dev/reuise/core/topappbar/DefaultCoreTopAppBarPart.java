@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -71,6 +72,10 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
 
     protected List<CoreButton> actions;
 
+    private List<Object> actionData;
+
+    private Function<Object, CoreButton> actionDataMapper;
+
     protected DefaultCoreTopAppBarPart(O options) {
     }
 
@@ -96,6 +101,12 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -694,7 +705,7 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
 
     private boolean needsContainer(O options) {
         if (container != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -723,18 +734,15 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
 
     private boolean needsNavigationButton(O options) {
         if (navigationButton != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasNavigationButtonOptions())
-            return true;
-
         if (options.isHasNavigationButtonAnyState())
             return true;
 
-        return false;
+        return options.hasNavigationButtonOptions();
     }
 
     private CoreIconButton createNavigationButton(O options) {
@@ -759,7 +767,7 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
 
     private boolean needsTitleContainer(O options) {
         if (titleContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -792,6 +800,12 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        titleContainer.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         titleContainer.insertBefore(child, beforeChild);
     }
@@ -799,6 +813,12 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
     @Override
     public S addText(String text) {
         titleContainer.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        titleContainer.addLineBreak();
         return self();
     }
 
@@ -823,7 +843,7 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
 
     private boolean needsActionsContainer(O options) {
         if (actionsContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -854,6 +874,8 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
     }
 
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
+        actionData = options.getActionData();
+        actionDataMapper = options.getActionDataMapper();
         CoreTopAppBarPart component = ((CoreTopAppBarPart) (options.getComponent()));
         if (component == null)
             System.out.println("component is null");
@@ -943,6 +965,7 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
 
     @Override
     public S setActions(List<CoreButton> actions) {
+        actionsContainer.addAll(actions);
         // Create copy of
         this.actions = new ArrayList<CoreButton>(actions);
         return self();
@@ -957,8 +980,41 @@ public abstract class DefaultCoreTopAppBarPart<S extends DefaultCoreTopAppBarPar
 
     @Override
     public S removeAction(CoreButton action) {
+        actionsContainer.remove(action);
         this.actions.remove(action);
         return self();
+    }
+
+    @Override
+    public S clearActions() {
+        actionsContainer.clearChildren();
+        this.actions.clear();
+        return self();
+    }
+
+    @Override
+    public <T> S setActions(List<T> data, Function<T, CoreButton> mapper) {
+        if (data == null)
+            return self();
+
+        this.actionData = ((List<Object>) (data));
+        this.actionDataMapper = ((Function<Object, CoreButton>) (mapper));
+        refreshActions();
+        return self();
+    }
+
+    @Override
+    public void refreshActions() {
+        clearActions();
+        actionData.forEach(item -> addAction(actionDataMapper.apply(item)));
+    }
+
+    public List<Object> getActionData() {
+        return actionData;
+    }
+
+    public Function<Object, CoreButton> getActionDataMapper() {
+        return actionDataMapper;
     }
 
     @Override

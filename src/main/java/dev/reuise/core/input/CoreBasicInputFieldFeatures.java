@@ -45,6 +45,8 @@ public interface CoreBasicInputFieldFeatures {
 
     CoreBasicInputFieldFeatures removeValidator(InputValidator validator);
 
+    CoreBasicInputFieldFeatures clearValidators();
+
     boolean isRequired();
 
     CoreBasicInputFieldFeatures setRequired(Boolean required);

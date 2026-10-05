@@ -10,7 +10,12 @@ import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 public abstract class AbstractCoreTopAppBarOptions<S extends AbstractCoreTopAppBarOptions<S>> implements CoreTopAppBarOptions , CoreComponentOptions {
+    private List<Object> actionData;
+
+    private Function<Object, CoreButton> actionDataMapper;
+
     protected dev.reuise.core.layout.CoreContainerOptions containerOptions;
 
     protected dev.reuise.core.button.CoreIconButtonOptions navigationButtonOptions;
@@ -272,6 +277,31 @@ public abstract class AbstractCoreTopAppBarOptions<S extends AbstractCoreTopAppB
             return self();
         }
         list.remove(action);
+        return self();
+    }
+
+    @Override
+    public S clearActions() {
+        List<CoreButton> list = getActions();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
+    public List<Object> getActionData() {
+        return actionData;
+    }
+
+    public Function<Object, CoreButton> getActionDataMapper() {
+        return actionDataMapper;
+    }
+
+    @Override
+    public <T> S setActions(List<T> data, Function<T, CoreButton> mapper) {
+        this.actionData = ((List<Object>) (data));
+        this.actionDataMapper = ((Function<Object, CoreButton>) (mapper));
         return self();
     }
 

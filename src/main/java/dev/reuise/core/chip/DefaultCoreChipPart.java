@@ -97,6 +97,12 @@ public abstract class DefaultCoreChipPart<S extends DefaultCoreChipPart<S, O>, O
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -124,6 +130,12 @@ public abstract class DefaultCoreChipPart<S extends DefaultCoreChipPart<S, O>, O
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -131,6 +143,12 @@ public abstract class DefaultCoreChipPart<S extends DefaultCoreChipPart<S, O>, O
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -721,7 +739,7 @@ public abstract class DefaultCoreChipPart<S extends DefaultCoreChipPart<S, O>, O
 
     private boolean needsStartIcon(O options) {
         if (startIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -750,7 +768,7 @@ public abstract class DefaultCoreChipPart<S extends DefaultCoreChipPart<S, O>, O
 
     private boolean needsLabelContainer(O options) {
         if (labelContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -782,7 +800,7 @@ public abstract class DefaultCoreChipPart<S extends DefaultCoreChipPart<S, O>, O
 
     private boolean needsEndIcon(O options) {
         if (endIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

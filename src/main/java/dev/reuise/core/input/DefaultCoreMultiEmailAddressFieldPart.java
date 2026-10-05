@@ -137,6 +137,12 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
     }
 
     @Override
+    public S clearValues() {
+        chipFieldPart.clearValues();
+        return self();
+    }
+
+    @Override
     public boolean hasValue(String value) {
         return chipFieldPart.hasValue(value);
     }
@@ -161,6 +167,12 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
     @Override
     public S removeDelimiter(String delimiter) {
         chipFieldPart.removeDelimiter(delimiter);
+        return self();
+    }
+
+    @Override
+    public S clearDelimiters() {
+        chipFieldPart.clearDelimiters();
         return self();
     }
 
@@ -199,6 +211,12 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        chipFieldPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         chipFieldPart.insertBefore(child, beforeChild);
     }
@@ -206,6 +224,12 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
     @Override
     public S addText(String text) {
         chipFieldPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        chipFieldPart.addLineBreak();
         return self();
     }
 
@@ -302,6 +326,12 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -998,6 +1028,12 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
     @Override
     public S removeValidator(InputValidator validator) {
         input.removeValidator(validator);
+        return self();
+    }
+
+    @Override
+    public S clearValidators() {
+        input.clearValidators();
         return self();
     }
 

@@ -9,6 +9,12 @@ public interface CoreViewPartOptions {
 
     CoreViewPartOptions setTitle(String title);
 
+    boolean isRevealed();
+
+    ComponentOption<Boolean> getRevealedOption();
+
+    CoreViewPartOptions setRevealed(Boolean revealed);
+
     <T> void setDefaultOption(String option, T value);
 
     <T> void setDefaultOption(String option, T value, boolean force);

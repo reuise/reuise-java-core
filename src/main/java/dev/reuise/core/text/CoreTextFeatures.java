@@ -2,6 +2,7 @@ package dev.reuise.core.text;
 import dev.reuise.core.Html;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 public interface CoreTextFeatures {
     String getText();
 
@@ -31,9 +32,41 @@ public interface CoreTextFeatures {
 
     Object getLineHeight(State state);
 
+    Object getFontWeight();
+
+    CoreTextFeatures setFontWeight(Object fontWeight);
+
+    CoreTextFeatures setFontWeight(Object fontWeight, State state);
+
+    CoreTextFeatures setFontWeightAllStates(Object fontWeight);
+
+    CoreTextFeatures setFontWeight(ScreenSizeValues<Object> fontWeight);
+
+    Object getFontWeight(State state);
+
+    Object getFontStyle();
+
+    CoreTextFeatures setFontStyle(Object fontStyle);
+
+    CoreTextFeatures setFontStyle(Object fontStyle, State state);
+
+    CoreTextFeatures setFontStyleAllStates(Object fontStyle);
+
+    CoreTextFeatures setFontStyle(ScreenSizeValues<Object> fontStyle);
+
+    Object getFontStyle(State state);
+
     String getHighlightText();
 
     CoreTextFeatures setHighlightText(String highlightText);
+
+    boolean isLoading();
+
+    CoreTextFeatures setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    CoreTextFeatures setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 
     CoreTextFeatures setText(Html html);
 }

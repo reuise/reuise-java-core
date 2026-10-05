@@ -143,6 +143,12 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -755,7 +761,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     private boolean needsContainer(O options) {
         if (container != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -784,7 +790,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     private boolean needsHeader(O options) {
         if (header != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -814,7 +820,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     private boolean needsTitleHeading(O options) {
         if (titleHeading != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -844,7 +850,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     private boolean needsBody(O options) {
         if (body != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -877,6 +883,12 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        body.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         body.insertBefore(child, beforeChild);
     }
@@ -884,6 +896,12 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
     @Override
     public S addText(String text) {
         body.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        body.addLineBreak();
         return self();
     }
 
@@ -908,7 +926,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     private boolean needsFooter(O options) {
         if (footer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -938,7 +956,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     private boolean needsScrim(O options) {
         if (scrim != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -967,7 +985,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     private boolean needsAcceptButton(O options) {
         if (acceptButton != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1000,7 +1018,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     private boolean needsCancelButton(O options) {
         if (cancelButton != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

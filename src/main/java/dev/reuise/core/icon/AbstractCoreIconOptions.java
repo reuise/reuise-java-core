@@ -3,7 +3,23 @@ import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.image.CoreImageOptions;
 import dev.reuise.core.link.CoreLinkOptions;
 import dev.reuise.core.option.ComponentOption;
+import dev.reuise.core.theme.Color;
 public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<S>> implements CoreIconOptions , CoreComponentOptions {
+    @Override
+    public S setColor(String color) {
+        setColor(Color.parse(color));
+        return self();
+    }
+
+    @Override
+    public S setSize(IconSize size) {
+        if (size == null)
+            return self();
+
+        setSize(size.getSize());
+        return self();
+    }
+
     protected dev.reuise.core.link.CoreLinkOptions linkOptions;
 
     protected dev.reuise.core.image.CoreImageOptions imageOptions;
@@ -15,6 +31,7 @@ public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<
     }
 
     public boolean onPreInitialize() {
+        setDefaultSize(IconSize.SMALL);
         return true;
     }
 
@@ -22,26 +39,26 @@ public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<
     }
 
     @Override
-    public Integer getSize() {
-        return ((Integer) (getOptionValue("size")));
+    public Object getSize() {
+        return ((Object) (getOptionValue("size")));
     }
 
     @Override
-    public ComponentOption<Integer> getSizeOption() {
-        return ((ComponentOption<Integer>) (getOption("size")));
+    public ComponentOption<Object> getSizeOption() {
+        return ((ComponentOption<Object>) (getOption("size")));
     }
 
     @Override
-    public S setSize(Integer size) {
+    public S setSize(Object size) {
         setOption("size", size);
         setLayoutChildrenSize(size);
         return self();
     }
 
-    protected void setLayoutChildrenSize(Integer size) {
+    protected void setLayoutChildrenSize(Object size) {
     }
 
-    private void setDefaultSize(Integer size) {
+    private void setDefaultSize(Object size) {
         setDefaultOption("size", size);
         setLayoutChildrenSize(size);
     }
@@ -73,6 +90,31 @@ public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<
     private void setDefaultUrl(String url) {
         setDefaultOption("url", url);
         setLayoutChildrenUrl(url);
+    }
+
+    @Override
+    public Color getColor() {
+        return ((Color) (getOptionValue("color")));
+    }
+
+    @Override
+    public ComponentOption<Color> getColorOption() {
+        return ((ComponentOption<Color>) (getOption("color")));
+    }
+
+    @Override
+    public S setColor(Color color) {
+        setOption("color", color);
+        setLayoutChildrenColor(color);
+        return self();
+    }
+
+    protected void setLayoutChildrenColor(Color color) {
+    }
+
+    private void setDefaultColor(Color color) {
+        setDefaultOption("color", color);
+        setLayoutChildrenColor(color);
     }
 
     @Override

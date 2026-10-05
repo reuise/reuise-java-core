@@ -93,6 +93,12 @@ public abstract class DefaultCoreTabPart<S extends DefaultCoreTabPart<S, O>, O e
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -123,6 +129,12 @@ public abstract class DefaultCoreTabPart<S extends DefaultCoreTabPart<S, O>, O e
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -130,6 +142,12 @@ public abstract class DefaultCoreTabPart<S extends DefaultCoreTabPart<S, O>, O e
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -721,18 +739,15 @@ public abstract class DefaultCoreTabPart<S extends DefaultCoreTabPart<S, O>, O e
 
     private boolean needsLink(O options) {
         if (link != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasLinkOptions())
-            return true;
-
         if (options.getUrl() != null)
             return true;
 
-        return false;
+        return options.hasLinkOptions();
     }
 
     private CoreLink createLink(O options) {
@@ -756,7 +771,7 @@ public abstract class DefaultCoreTabPart<S extends DefaultCoreTabPart<S, O>, O e
 
     private boolean needsBadge(O options) {
         if (badge != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -786,7 +801,7 @@ public abstract class DefaultCoreTabPart<S extends DefaultCoreTabPart<S, O>, O e
 
     private boolean needsIcon(O options) {
         if (icon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -816,7 +831,7 @@ public abstract class DefaultCoreTabPart<S extends DefaultCoreTabPart<S, O>, O e
 
     private boolean needsLabelContainer(O options) {
         if (labelContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

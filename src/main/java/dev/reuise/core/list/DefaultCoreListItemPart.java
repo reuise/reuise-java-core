@@ -148,6 +148,12 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        basicListItemPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         basicListItemPart.insertBefore(child, beforeChild);
     }
@@ -155,6 +161,12 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
     @Override
     public S addText(String text) {
         basicListItemPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        basicListItemPart.addLineBreak();
         return self();
     }
 
@@ -188,6 +200,12 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -766,7 +784,7 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
 
     private boolean needsCheckbox(O options) {
         if (checkbox != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -800,7 +818,7 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
 
     private boolean needsStartIcon(O options) {
         if (startIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -831,7 +849,7 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
 
     private boolean needsTextContainer(O options) {
         if (textContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -862,7 +880,7 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
 
     private boolean needsLabelContainer(O options) {
         if (labelContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -893,7 +911,7 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
 
     private boolean needsSecondaryLabelContainer(O options) {
         if (secondaryLabelContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -924,7 +942,7 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
 
     private boolean needsEndIcon(O options) {
         if (endIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

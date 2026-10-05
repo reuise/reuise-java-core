@@ -15,6 +15,7 @@ import dev.reuise.core.theme.Theme;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -50,6 +51,10 @@ public abstract class DefaultCoreMediaPlayerPart<S extends DefaultCoreMediaPlaye
 
     protected List<CoreTextTrack> textTracks;
 
+    private List<Object> textTrackData;
+
+    private Function<Object, CoreTextTrack> textTrackDataMapper;
+
     protected DefaultCoreMediaPlayerPart(O options) {
     }
 
@@ -79,6 +84,12 @@ public abstract class DefaultCoreMediaPlayerPart<S extends DefaultCoreMediaPlaye
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -97,6 +108,12 @@ public abstract class DefaultCoreMediaPlayerPart<S extends DefaultCoreMediaPlaye
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -104,6 +121,12 @@ public abstract class DefaultCoreMediaPlayerPart<S extends DefaultCoreMediaPlaye
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -689,6 +712,8 @@ public abstract class DefaultCoreMediaPlayerPart<S extends DefaultCoreMediaPlaye
     }
 
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
+        textTrackData = options.getTextTrackData();
+        textTrackDataMapper = options.getTextTrackDataMapper();
         CoreMediaPlayerPart component = ((CoreMediaPlayerPart) (options.getComponent()));
         if (component == null)
             System.out.println("component is null");
@@ -715,6 +740,7 @@ public abstract class DefaultCoreMediaPlayerPart<S extends DefaultCoreMediaPlaye
 
     @Override
     public S setTextTracks(List<CoreTextTrack> textTracks) {
+        addAll(textTracks);
         // Create copy of
         this.textTracks = new ArrayList<CoreTextTrack>(textTracks);
         return self();
@@ -722,6 +748,7 @@ public abstract class DefaultCoreMediaPlayerPart<S extends DefaultCoreMediaPlaye
 
     @Override
     public S addTextTrack(CoreTextTrack textTrack) {
+        add(textTrack);
         if (this.textTracks == null) {
             setTextTracks(new ArrayList<CoreTextTrack>());
         }
@@ -731,7 +758,40 @@ public abstract class DefaultCoreMediaPlayerPart<S extends DefaultCoreMediaPlaye
 
     @Override
     public S removeTextTrack(CoreTextTrack textTrack) {
+        remove(textTrack);
         this.textTracks.remove(textTrack);
         return self();
+    }
+
+    @Override
+    public S clearTextTracks() {
+        clearChildren();
+        this.textTracks.clear();
+        return self();
+    }
+
+    @Override
+    public <T> S setTextTracks(List<T> data, Function<T, CoreTextTrack> mapper) {
+        if (data == null)
+            return self();
+
+        this.textTrackData = ((List<Object>) (data));
+        this.textTrackDataMapper = ((Function<Object, CoreTextTrack>) (mapper));
+        refreshTextTracks();
+        return self();
+    }
+
+    @Override
+    public void refreshTextTracks() {
+        clearTextTracks();
+        textTrackData.forEach(item -> addTextTrack(textTrackDataMapper.apply(item)));
+    }
+
+    public List<Object> getTextTrackData() {
+        return textTrackData;
+    }
+
+    public Function<Object, CoreTextTrack> getTextTrackDataMapper() {
+        return textTrackDataMapper;
     }
 }

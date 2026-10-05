@@ -116,6 +116,12 @@ public abstract class DefaultCoreNavigationLinkPart<S extends DefaultCoreNavigat
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        linkPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         linkPart.insertBefore(child, beforeChild);
     }
@@ -123,6 +129,12 @@ public abstract class DefaultCoreNavigationLinkPart<S extends DefaultCoreNavigat
     @Override
     public S addText(String text) {
         linkPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        linkPart.addLineBreak();
         return self();
     }
 
@@ -156,6 +168,12 @@ public abstract class DefaultCoreNavigationLinkPart<S extends DefaultCoreNavigat
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 

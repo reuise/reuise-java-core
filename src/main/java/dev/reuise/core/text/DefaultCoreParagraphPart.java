@@ -13,6 +13,7 @@ import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
@@ -57,6 +58,10 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
 
     private CoreBaseComponentPart baseComponentPart;
 
+    protected Boolean loading;
+
+    protected CoreSkeletonOptions skeletonOptions;
+
     protected DefaultCoreParagraphPart(O options) {
     }
 
@@ -86,6 +91,12 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -104,6 +115,12 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -111,6 +128,12 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -703,6 +726,8 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
         // Apply options for default state
         applicator.add(options.getTextOption(), component::setText);
         applicator.add(options.getFontSizeOption(), component::setFontSize);
+        applicator.add(options.getLoadingOption(), component::setLoading);
+        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
         if (states != null)
             states.stream().forEach((State state) -> {
                 // Apply options for each (non-default) state
@@ -730,6 +755,28 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
             return self();
 
         screenValues.iterate((ScreenSize s,Object v) -> setFontSize(v, s));
+        return self();
+    }
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(loading);
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.loading = loading;
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return skeletonOptions;
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.skeletonOptions = skeletonOptions;
         return self();
     }
 }

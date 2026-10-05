@@ -5,6 +5,7 @@ import dev.reuise.core.ScreenSize;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentOption;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import java.util.Collection;
 public abstract class AbstractCoreTextOptions<S extends AbstractCoreTextOptions<S>> implements CoreTextOptions , CoreComponentOptions {
     @Override
@@ -187,6 +188,144 @@ public abstract class AbstractCoreTextOptions<S extends AbstractCoreTextOptions<
     }
 
     @Override
+    public Object getFontWeight() {
+        return ((Object) (getOptionValue("fontWeight")));
+    }
+
+    @Override
+    public ComponentOption<Object> getFontWeightOption() {
+        return ((ComponentOption<Object>) (getOption("fontWeight")));
+    }
+
+    @Override
+    public S setFontWeight(Object fontWeight) {
+        setOption("fontWeight", fontWeight);
+        return self();
+    }
+
+    @Override
+    public S setFontWeight(Object fontWeight, State state) {
+        setOption("fontWeight", fontWeight, state);
+        return self();
+    }
+
+    @Override
+    public S setFontWeightAllStates(Object fontWeight) {
+        // HIMADDIE!!
+        clearOptionStates("fontWeight");
+        setFontWeight(fontWeight);
+        return self();
+    }
+
+    @Override
+    public S setFontWeight(ScreenSizeValues<Object> screenValues) {
+        clearOption("fontWeight", null);
+        if (screenValues == null)
+            return self();
+
+        screenValues.iterate((ScreenSize s,Object v) -> setFontWeight(v, s));
+        return self();
+    }
+
+    @Override
+    public Object getFontWeight(State state) {
+        return ((Object) (getOptionValue("fontWeight", state)));
+    }
+
+    @Override
+    public Collection<State> getFontWeightStates() {
+        return getOptionStates("fontWeight");
+    }
+
+    @Override
+    public ComponentOption<Object> getFontWeightOption(State state) {
+        return ((ComponentOption<Object>) (getOption("fontWeight", state)));
+    }
+
+    private void setDefaultFontWeight(Object fontWeight) {
+        setDefaultOption("fontWeight", fontWeight);
+    }
+
+    private void setDefaultFontWeight(Object fontWeight, State state) {
+        setDefaultOption("fontWeight", fontWeight, state);
+    }
+
+    private void setDefaultFontWeightAllStates(Object fontWeight) {
+        // HIMADDIE!!
+        clearOptionStates("fontWeight");
+        setFontWeight(fontWeight);
+    }
+
+    @Override
+    public Object getFontStyle() {
+        return ((Object) (getOptionValue("fontStyle")));
+    }
+
+    @Override
+    public ComponentOption<Object> getFontStyleOption() {
+        return ((ComponentOption<Object>) (getOption("fontStyle")));
+    }
+
+    @Override
+    public S setFontStyle(Object fontStyle) {
+        setOption("fontStyle", fontStyle);
+        return self();
+    }
+
+    @Override
+    public S setFontStyle(Object fontStyle, State state) {
+        setOption("fontStyle", fontStyle, state);
+        return self();
+    }
+
+    @Override
+    public S setFontStyleAllStates(Object fontStyle) {
+        // HIMADDIE!!
+        clearOptionStates("fontStyle");
+        setFontStyle(fontStyle);
+        return self();
+    }
+
+    @Override
+    public S setFontStyle(ScreenSizeValues<Object> screenValues) {
+        clearOption("fontStyle", null);
+        if (screenValues == null)
+            return self();
+
+        screenValues.iterate((ScreenSize s,Object v) -> setFontStyle(v, s));
+        return self();
+    }
+
+    @Override
+    public Object getFontStyle(State state) {
+        return ((Object) (getOptionValue("fontStyle", state)));
+    }
+
+    @Override
+    public Collection<State> getFontStyleStates() {
+        return getOptionStates("fontStyle");
+    }
+
+    @Override
+    public ComponentOption<Object> getFontStyleOption(State state) {
+        return ((ComponentOption<Object>) (getOption("fontStyle", state)));
+    }
+
+    private void setDefaultFontStyle(Object fontStyle) {
+        setDefaultOption("fontStyle", fontStyle);
+    }
+
+    private void setDefaultFontStyle(Object fontStyle, State state) {
+        setDefaultOption("fontStyle", fontStyle, state);
+    }
+
+    private void setDefaultFontStyleAllStates(Object fontStyle) {
+        // HIMADDIE!!
+        clearOptionStates("fontStyle");
+        setFontStyle(fontStyle);
+    }
+
+    @Override
     public String getHighlightText() {
         return ((String) (getOptionValue("highlightText")));
     }
@@ -204,6 +343,46 @@ public abstract class AbstractCoreTextOptions<S extends AbstractCoreTextOptions<
 
     private void setDefaultHighlightText(String highlightText) {
         setDefaultOption("highlightText", highlightText);
+    }
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(getOptionValue("loading"));
+    }
+
+    @Override
+    public ComponentOption<Boolean> getLoadingOption() {
+        return ((ComponentOption<Boolean>) (getOption("loading")));
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        setOption("loading", loading);
+        return self();
+    }
+
+    private void setDefaultLoading(Boolean loading) {
+        setDefaultOption("loading", loading);
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return ((CoreSkeletonOptions) (getOptionValue("skeletonOptions")));
+    }
+
+    @Override
+    public ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption() {
+        return ((ComponentOption<CoreSkeletonOptions>) (getOption("skeletonOptions")));
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        setOption("skeletonOptions", skeletonOptions);
+        return self();
+    }
+
+    private void setDefaultSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        setDefaultOption("skeletonOptions", skeletonOptions);
     }
 
     protected abstract S self();

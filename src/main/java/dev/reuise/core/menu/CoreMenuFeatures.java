@@ -17,6 +17,8 @@ public interface CoreMenuFeatures {
 
     CoreMenuFeatures removeItem(CoreMenuItem item);
 
+    CoreMenuFeatures clearItems();
+
     Position getAnchorPosition();
 
     CoreMenuFeatures setAnchorPosition(Position anchorPosition);

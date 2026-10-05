@@ -25,5 +25,7 @@ public interface CoreTextTrackFeatures {
 
     CoreTextTrackFeatures removeCue(TextTrackCue cue);
 
+    CoreTextTrackFeatures clearCues();
+
     CoreTextTrackFeatures addCue(double startTime, double endTime, String text);
 }

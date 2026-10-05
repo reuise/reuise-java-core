@@ -181,6 +181,12 @@ public abstract class DefaultCorePasswordFieldPart<S extends DefaultCorePassword
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        textFieldPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         textFieldPart.insertBefore(child, beforeChild);
     }
@@ -188,6 +194,12 @@ public abstract class DefaultCorePasswordFieldPart<S extends DefaultCorePassword
     @Override
     public S addText(String text) {
         textFieldPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        textFieldPart.addLineBreak();
         return self();
     }
 
@@ -221,6 +233,12 @@ public abstract class DefaultCorePasswordFieldPart<S extends DefaultCorePassword
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -923,6 +941,12 @@ public abstract class DefaultCorePasswordFieldPart<S extends DefaultCorePassword
     @Override
     public S removeValidator(InputValidator validator) {
         input.removeValidator(validator);
+        return self();
+    }
+
+    @Override
+    public S clearValidators() {
+        input.clearValidators();
         return self();
     }
 

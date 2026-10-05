@@ -93,6 +93,12 @@ public abstract class DefaultCoreScrollableContainerScrollAreaPart<S extends Def
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -697,7 +703,7 @@ public abstract class DefaultCoreScrollableContainerScrollAreaPart<S extends Def
 
     private boolean needsScrollAreaTopFade(O options) {
         if (scrollAreaTopFade != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -729,7 +735,7 @@ public abstract class DefaultCoreScrollableContainerScrollAreaPart<S extends Def
 
     private boolean needsScrollAreaLeftFade(O options) {
         if (scrollAreaLeftFade != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -761,7 +767,7 @@ public abstract class DefaultCoreScrollableContainerScrollAreaPart<S extends Def
 
     private boolean needsScrollAreaContent(O options) {
         if (scrollAreaContent != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -793,6 +799,12 @@ public abstract class DefaultCoreScrollableContainerScrollAreaPart<S extends Def
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        scrollAreaContent.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         scrollAreaContent.insertBefore(child, beforeChild);
     }
@@ -800,6 +812,12 @@ public abstract class DefaultCoreScrollableContainerScrollAreaPart<S extends Def
     @Override
     public S addText(String text) {
         scrollAreaContent.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        scrollAreaContent.addLineBreak();
         return self();
     }
 
@@ -824,7 +842,7 @@ public abstract class DefaultCoreScrollableContainerScrollAreaPart<S extends Def
 
     private boolean needsScrollAreaBottomFade(O options) {
         if (scrollAreaBottomFade != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -856,7 +874,7 @@ public abstract class DefaultCoreScrollableContainerScrollAreaPart<S extends Def
 
     private boolean needsScrollAreaRightFade(O options) {
         if (scrollAreaRightFade != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

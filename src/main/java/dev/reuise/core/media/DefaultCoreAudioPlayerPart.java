@@ -14,6 +14,7 @@ import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Autoplay - CORE
 // Option: Controls - CORE
 // Option: Loop - CORE
@@ -134,6 +135,25 @@ public abstract class DefaultCoreAudioPlayerPart<S extends DefaultCoreAudioPlaye
     }
 
     @Override
+    public <T> S setTextTracks(List<T> data, Function<T, CoreTextTrack> mapper) {
+        if (data == null)
+            return self();
+
+        this.mediaPlayerPart.setTextTracks(data, mapper);
+        return self();
+    }
+
+    @Override
+    public List<Object> getTextTrackData() {
+        return this.mediaPlayerPart.getTextTrackData();
+    }
+
+    @Override
+    public Function<Object, CoreTextTrack> getTextTrackDataMapper() {
+        return this.mediaPlayerPart.getTextTrackDataMapper();
+    }
+
+    @Override
     public S addTextTrack(CoreTextTrack textTrack) {
         this.mediaPlayerPart.addTextTrack(textTrack);
         return self();
@@ -143,6 +163,17 @@ public abstract class DefaultCoreAudioPlayerPart<S extends DefaultCoreAudioPlaye
     public S removeTextTrack(CoreTextTrack textTrack) {
         mediaPlayerPart.removeTextTrack(textTrack);
         return self();
+    }
+
+    @Override
+    public S clearTextTracks() {
+        mediaPlayerPart.clearTextTracks();
+        return self();
+    }
+
+    @Override
+    public void refreshTextTracks() {
+        this.mediaPlayerPart.refreshTextTracks();
     }
 
     @Override
@@ -164,6 +195,12 @@ public abstract class DefaultCoreAudioPlayerPart<S extends DefaultCoreAudioPlaye
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        mediaPlayerPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         mediaPlayerPart.insertBefore(child, beforeChild);
     }
@@ -171,6 +208,12 @@ public abstract class DefaultCoreAudioPlayerPart<S extends DefaultCoreAudioPlaye
     @Override
     public S addText(String text) {
         mediaPlayerPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        mediaPlayerPart.addLineBreak();
         return self();
     }
 
@@ -204,6 +247,12 @@ public abstract class DefaultCoreAudioPlayerPart<S extends DefaultCoreAudioPlaye
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 

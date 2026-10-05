@@ -3,6 +3,7 @@ import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentOption;
 import java.util.List;
+import java.util.function.Function;
 public interface CoreMediaPlayerPartOptions {
     boolean isAutoplay();
 
@@ -40,9 +41,17 @@ public interface CoreMediaPlayerPartOptions {
 
     CoreMediaPlayerPartOptions setTextTracks(List<CoreTextTrack> textTracks);
 
+    <T> CoreMediaPlayerPartOptions setTextTracks(List<T> data, Function<T, CoreTextTrack> mapper);
+
     CoreMediaPlayerPartOptions addTextTrack(CoreTextTrack textTrack);
 
     CoreMediaPlayerPartOptions removeTextTrack(CoreTextTrack textTrack);
+
+    CoreMediaPlayerPartOptions clearTextTracks();
+
+    List<Object> getTextTrackData();
+
+    Function<Object, CoreTextTrack> getTextTrackDataMapper();
 
     <T> void setDefaultOption(String option, T value);
 

@@ -3,6 +3,8 @@ import dev.reuise.core.ComponentPart;
 import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.layout.CoreContainerPart;
 public interface CoreTabBarPart extends ComponentPart , CoreTabBarFeatures , CoreContainerPart {
+    void refreshTabs();
+
     CoreTabBarPart setActiveTab(CoreTab tab);
 
     CoreTabBarPart setActiveTab(String text);

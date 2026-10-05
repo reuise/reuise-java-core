@@ -51,7 +51,7 @@ public abstract class DefaultCoreBasicListPart<S extends DefaultCoreBasicListPar
 
     @Override
     public S addItem(String text) {
-        CoreBasicListItemOptions listItemOpts = getComponentFactory().createListItemOptions();
+        CoreBasicListItemOptions listItemOpts = getComponentFactory().createBasicListItemOptions();
         CoreBasicListItem listItem = getComponentFactory().createBasicListItem(listItemOpts);
         return addItem(listItem);
     }
@@ -119,6 +119,12 @@ public abstract class DefaultCoreBasicListPart<S extends DefaultCoreBasicListPar
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -137,6 +143,12 @@ public abstract class DefaultCoreBasicListPart<S extends DefaultCoreBasicListPar
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -144,6 +156,12 @@ public abstract class DefaultCoreBasicListPart<S extends DefaultCoreBasicListPar
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -754,7 +772,7 @@ public abstract class DefaultCoreBasicListPart<S extends DefaultCoreBasicListPar
     }
 
     // Implementation
-    public void clearItems() {
-        removeAll();
+    public S clearItems() {
+        return self();
     }
 }

@@ -735,6 +735,12 @@ public abstract class DefaultCoreBasicInputFieldPart<S extends DefaultCoreBasicI
         return self();
     }
 
+    @Override
+    public S clearValidators() {
+        this.validators.clear();
+        return self();
+    }
+
     // Implementation
     public S addText(String text) {
         return self();

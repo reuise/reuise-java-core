@@ -9,6 +9,7 @@ public abstract class AbstractCoreViewOptions<S extends AbstractCoreViewOptions<
     }
 
     public boolean onPreInitialize() {
+        setDefaultRevealed(false);
         return true;
     }
 
@@ -33,6 +34,26 @@ public abstract class AbstractCoreViewOptions<S extends AbstractCoreViewOptions<
 
     private void setDefaultTitle(String title) {
         setDefaultOption("title", title);
+    }
+
+    @Override
+    public boolean isRevealed() {
+        return Boolean.TRUE.equals(getOptionValue("revealed"));
+    }
+
+    @Override
+    public ComponentOption<Boolean> getRevealedOption() {
+        return ((ComponentOption<Boolean>) (getOption("revealed")));
+    }
+
+    @Override
+    public S setRevealed(Boolean revealed) {
+        setOption("revealed", revealed);
+        return self();
+    }
+
+    private void setDefaultRevealed(Boolean revealed) {
+        setDefaultOption("revealed", revealed);
     }
 
     protected abstract S self();

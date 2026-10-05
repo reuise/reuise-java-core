@@ -6,6 +6,7 @@ import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.ComponentOption;
 import java.util.List;
+import java.util.function.Function;
 public interface CoreTabBarPartOptions {
     List<CoreTab> getTabs();
 
@@ -13,9 +14,17 @@ public interface CoreTabBarPartOptions {
 
     CoreTabBarPartOptions setTabs(List<CoreTab> tabs);
 
+    <T> CoreTabBarPartOptions setTabs(List<T> data, Function<T, CoreTab> mapper);
+
     CoreTabBarPartOptions addTab(CoreTab tab);
 
     CoreTabBarPartOptions removeTab(CoreTab tab);
+
+    CoreTabBarPartOptions clearTabs();
+
+    List<Object> getTabData();
+
+    Function<Object, CoreTab> getTabDataMapper();
 
     Integer getActiveTab();
 

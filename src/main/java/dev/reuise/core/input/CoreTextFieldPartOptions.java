@@ -95,6 +95,8 @@ public interface CoreTextFieldPartOptions {
 
     CoreTextFieldPartOptions removeValidator(InputValidator validator);
 
+    CoreTextFieldPartOptions clearValidators();
+
     List<InputValidator> getValidators(InputValidator.ValidationMode... modes);
 
     <T extends InputValidator> List<T> getValidators(Class<? extends T> type);

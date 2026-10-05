@@ -1,5 +1,6 @@
 package dev.reuise.core.media;
 import java.util.List;
+import java.util.function.Function;
 public interface CoreMediaPlayerFeatures {
     boolean isAutoplay();
 
@@ -25,7 +26,15 @@ public interface CoreMediaPlayerFeatures {
 
     CoreMediaPlayerFeatures setTextTracks(List<CoreTextTrack> textTracks);
 
+    <T> CoreMediaPlayerFeatures setTextTracks(List<T> data, Function<T, CoreTextTrack> mapper);
+
     CoreMediaPlayerFeatures addTextTrack(CoreTextTrack textTrack);
 
     CoreMediaPlayerFeatures removeTextTrack(CoreTextTrack textTrack);
+
+    CoreMediaPlayerFeatures clearTextTracks();
+
+    List<Object> getTextTrackData();
+
+    Function<Object, CoreTextTrack> getTextTrackDataMapper();
 }

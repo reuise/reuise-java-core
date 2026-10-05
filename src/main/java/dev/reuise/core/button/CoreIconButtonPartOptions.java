@@ -6,13 +6,8 @@ import dev.reuise.core.icon.CoreIconOptions;
 import dev.reuise.core.icon.IconSize;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.ComponentOption;
+// Size here??
 public interface CoreIconButtonPartOptions {
-    Object getSize();
-
-    ComponentOption<Object> getSizeOption();
-
-    CoreIconButtonPartOptions setSize(Object size);
-
     String getUrl();
 
     ComponentOption<String> getUrlOption();
@@ -25,6 +20,12 @@ public interface CoreIconButtonPartOptions {
 
     CoreIconButtonPartOptions setTarget(String target);
 
+    Object getSize();
+
+    CoreIconButtonPartOptions setSize(Object size);
+
+    CoreIconButtonPartOptions setSize(IconSize size);
+
     <T> void setDefaultOption(String option, T value);
 
     <T> void setDefaultOption(String option, T value, boolean force);
@@ -32,8 +33,6 @@ public interface CoreIconButtonPartOptions {
     <T> void setDefaultOption(String option, T value, State state);
 
     <T> void setDefaultOption(String option, T value, State state, boolean force);
-
-    CoreIconButtonPartOptions setSize(IconSize size);
 
     CoreIconOptions getIconOptions();
 

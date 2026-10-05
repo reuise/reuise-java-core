@@ -18,6 +18,8 @@ import java.util.List;
 // Option: Text - CORE
 // Option: FontSize - CORE
 // Option: LineHeight - CORE
+// Option: FontWeight - CORE
+// Option: FontStyle - CORE
 // Option: HighlightText - CORE
 // Option: Children - CORE
 // Option: Mounted - CORE
@@ -90,6 +92,12 @@ public abstract class DefaultCoreLabelPart<S extends DefaultCoreLabelPart<S, O>,
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        inlineTextPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         inlineTextPart.insertBefore(child, beforeChild);
     }
@@ -97,6 +105,12 @@ public abstract class DefaultCoreLabelPart<S extends DefaultCoreLabelPart<S, O>,
     @Override
     public S addText(String text) {
         inlineTextPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        inlineTextPart.addLineBreak();
         return self();
     }
 
@@ -192,6 +206,76 @@ public abstract class DefaultCoreLabelPart<S extends DefaultCoreLabelPart<S, O>,
     }
 
     @Override
+    public Object getFontWeight() {
+        return textPart.getFontWeight();
+    }
+
+    @Override
+    public S setFontWeight(Object fontWeight) {
+        this.textPart.setFontWeight(fontWeight);
+        return self();
+    }
+
+    @Override
+    public S setFontWeight(Object fontWeight, State state) {
+        this.textPart.setFontWeight(fontWeight, state);
+        return self();
+    }
+
+    @Override
+    public S setFontWeightAllStates(Object fontWeight) {
+        setFontWeight(ScreenSizeValues.of(fontWeight, fontWeight));
+        setFontWeight(fontWeight);
+        return self();
+    }
+
+    @Override
+    public S setFontWeight(ScreenSizeValues<Object> fontWeight) {
+        this.textPart.setFontWeight(fontWeight);
+        return self();
+    }
+
+    @Override
+    public Object getFontWeight(State state) {
+        return textPart.getFontWeight(state);
+    }
+
+    @Override
+    public Object getFontStyle() {
+        return textPart.getFontStyle();
+    }
+
+    @Override
+    public S setFontStyle(Object fontStyle) {
+        this.textPart.setFontStyle(fontStyle);
+        return self();
+    }
+
+    @Override
+    public S setFontStyle(Object fontStyle, State state) {
+        this.textPart.setFontStyle(fontStyle, state);
+        return self();
+    }
+
+    @Override
+    public S setFontStyleAllStates(Object fontStyle) {
+        setFontStyle(ScreenSizeValues.of(fontStyle, fontStyle));
+        setFontStyle(fontStyle);
+        return self();
+    }
+
+    @Override
+    public S setFontStyle(ScreenSizeValues<Object> fontStyle) {
+        this.textPart.setFontStyle(fontStyle);
+        return self();
+    }
+
+    @Override
+    public Object getFontStyle(State state) {
+        return textPart.getFontStyle(state);
+    }
+
+    @Override
     public String getHighlightText() {
         return textPart.getHighlightText();
     }
@@ -232,6 +316,12 @@ public abstract class DefaultCoreLabelPart<S extends DefaultCoreLabelPart<S, O>,
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 

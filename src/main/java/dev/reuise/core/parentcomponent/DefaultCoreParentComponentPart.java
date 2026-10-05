@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 // Option: Mounted - CORE
 // Option: Margin - CORE
 // Option: MarginTop - CORE
@@ -689,9 +690,24 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
         return self();
     }
 
+    @Override
+    public S clearChildren() {
+        this.children.clear();
+        return self();
+    }
+
     // Implementation
     public S add(CoreComponent child) {
         return addChild(child);
+    }
+
+    // Implementation
+    public S addAll(List<? extends CoreComponent> children) {
+        if (children == null)
+            return self();
+
+        children.forEach(this::add);
+        return self();
     }
 
     // Implementation

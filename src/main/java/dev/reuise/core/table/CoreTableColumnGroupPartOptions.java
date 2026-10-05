@@ -14,6 +14,8 @@ public interface CoreTableColumnGroupPartOptions {
 
     CoreTableColumnGroupPartOptions removeColumn(CoreTableColumnOptions column);
 
+    CoreTableColumnGroupPartOptions clearColumns();
+
     <T> void setDefaultOption(String option, T value);
 
     <T> void setDefaultOption(String option, T value, boolean force);

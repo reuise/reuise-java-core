@@ -4,6 +4,7 @@ import dev.reuise.core.Html;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentOption;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import java.util.Collection;
 public interface CoreTextPartOptions {
     String getText();
@@ -48,11 +49,59 @@ public interface CoreTextPartOptions {
 
     Collection<State> getLineHeightStates();
 
+    Object getFontWeight();
+
+    ComponentOption<Object> getFontWeightOption();
+
+    CoreTextPartOptions setFontWeight(Object fontWeight);
+
+    CoreTextPartOptions setFontWeight(Object fontWeight, State state);
+
+    CoreTextPartOptions setFontWeightAllStates(Object fontWeight);
+
+    CoreTextPartOptions setFontWeight(ScreenSizeValues<Object> fontWeight);
+
+    Object getFontWeight(State state);
+
+    ComponentOption<Object> getFontWeightOption(State state);
+
+    Collection<State> getFontWeightStates();
+
+    Object getFontStyle();
+
+    ComponentOption<Object> getFontStyleOption();
+
+    CoreTextPartOptions setFontStyle(Object fontStyle);
+
+    CoreTextPartOptions setFontStyle(Object fontStyle, State state);
+
+    CoreTextPartOptions setFontStyleAllStates(Object fontStyle);
+
+    CoreTextPartOptions setFontStyle(ScreenSizeValues<Object> fontStyle);
+
+    Object getFontStyle(State state);
+
+    ComponentOption<Object> getFontStyleOption(State state);
+
+    Collection<State> getFontStyleStates();
+
     String getHighlightText();
 
     ComponentOption<String> getHighlightTextOption();
 
     CoreTextPartOptions setHighlightText(String highlightText);
+
+    boolean isLoading();
+
+    ComponentOption<Boolean> getLoadingOption();
+
+    CoreTextPartOptions setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
+
+    CoreTextPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 
     <T> void setDefaultOption(String option, T value);
 

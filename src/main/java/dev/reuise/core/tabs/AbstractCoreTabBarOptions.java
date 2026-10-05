@@ -4,7 +4,12 @@ import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 public abstract class AbstractCoreTabBarOptions<S extends AbstractCoreTabBarOptions<S>> implements CoreTabBarOptions , CoreComponentOptions {
+    private List<Object> tabData;
+
+    private Function<Object, CoreTab> tabDataMapper;
+
     protected dev.reuise.core.layout.CoreContainerOptions containerOptions;
 
     protected dev.reuise.core.layout.CoreContainerOptions activeIndicatorOptions;
@@ -61,6 +66,31 @@ public abstract class AbstractCoreTabBarOptions<S extends AbstractCoreTabBarOpti
             return self();
         }
         list.remove(tab);
+        return self();
+    }
+
+    @Override
+    public S clearTabs() {
+        List<CoreTab> list = getTabs();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
+    public List<Object> getTabData() {
+        return tabData;
+    }
+
+    public Function<Object, CoreTab> getTabDataMapper() {
+        return tabDataMapper;
+    }
+
+    @Override
+    public <T> S setTabs(List<T> data, Function<T, CoreTab> mapper) {
+        this.tabData = ((List<Object>) (data));
+        this.tabDataMapper = ((Function<Object, CoreTab>) (mapper));
         return self();
     }
 

@@ -211,6 +211,12 @@ public abstract class DefaultCoreMessageDialogPart<S extends DefaultCoreMessageD
     }
 
     @Override
+    public S clearActions() {
+        dialogPart.clearActions();
+        return self();
+    }
+
+    @Override
     public boolean isHasAcceptButton() {
         return dialogPart.isHasAcceptButton();
     }
@@ -263,6 +269,12 @@ public abstract class DefaultCoreMessageDialogPart<S extends DefaultCoreMessageD
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        dialogPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         dialogPart.insertBefore(child, beforeChild);
     }
@@ -270,6 +282,12 @@ public abstract class DefaultCoreMessageDialogPart<S extends DefaultCoreMessageD
     @Override
     public S addText(String text) {
         dialogPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        dialogPart.addLineBreak();
         return self();
     }
 
@@ -303,6 +321,12 @@ public abstract class DefaultCoreMessageDialogPart<S extends DefaultCoreMessageD
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 

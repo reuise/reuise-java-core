@@ -3,6 +3,7 @@ import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentOption;
 import java.util.List;
+import java.util.function.Function;
 public interface CoreListViewPartOptions {
     List<CoreListItem> getItems();
 
@@ -10,11 +11,17 @@ public interface CoreListViewPartOptions {
 
     CoreListViewPartOptions setItems(List<CoreListItem> items);
 
+    <T> CoreListViewPartOptions setItems(List<T> data, Function<T, CoreListItem> mapper);
+
     CoreListViewPartOptions addItem(CoreListItem item);
 
-    CoreListViewPartOptions setItem(CoreListItem item);
-
     CoreListViewPartOptions removeItem(CoreListItem item);
+
+    CoreListViewPartOptions clearItems();
+
+    List<Object> getItemData();
+
+    Function<Object, CoreListItem> getItemDataMapper();
 
     boolean isOrdered();
 

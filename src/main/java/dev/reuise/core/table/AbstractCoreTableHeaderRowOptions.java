@@ -56,6 +56,16 @@ public abstract class AbstractCoreTableHeaderRowOptions<S extends AbstractCoreTa
         return self();
     }
 
+    @Override
+    public S clearColumns() {
+        List<CoreTableColumnOptions> list = getColumns();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
     private void setDefaultColumns(List<CoreTableColumnOptions> columns) {
         setDefaultOption("columns", columns, true);
     }

@@ -121,6 +121,12 @@ public abstract class DefaultCoreMenuDividerPart<S extends DefaultCoreMenuDivide
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        menuItemPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         menuItemPart.insertBefore(child, beforeChild);
     }
@@ -128,6 +134,12 @@ public abstract class DefaultCoreMenuDividerPart<S extends DefaultCoreMenuDivide
     @Override
     public S addText(String text) {
         menuItemPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        menuItemPart.addLineBreak();
         return self();
     }
 
@@ -231,6 +243,12 @@ public abstract class DefaultCoreMenuDividerPart<S extends DefaultCoreMenuDivide
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 

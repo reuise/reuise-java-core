@@ -11,4 +11,6 @@ public interface CoreSelectMenuFeatures {
     CoreSelectMenuFeatures setItem(CoreMenuItem item);
 
     CoreSelectMenuFeatures removeItem(CoreMenuItem item);
+
+    CoreSelectMenuFeatures clearItems();
 }

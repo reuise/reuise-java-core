@@ -52,6 +52,16 @@ public abstract class AbstractCoreParentComponentOptions<S extends AbstractCoreP
         return self();
     }
 
+    @Override
+    public S clearChildren() {
+        List<CoreComponent> list = getChildren();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
     private void setDefaultChildren(List<CoreComponent> children) {
         setDefaultOption("children", children);
     }

@@ -98,6 +98,12 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -694,7 +700,7 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
 
     private boolean needsDrawerScrim(O options) {
         if (drawerScrim != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -723,7 +729,7 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
 
     private boolean needsDrawerSplit(O options) {
         if (drawerSplit != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -756,7 +762,7 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
 
     private boolean needsTopAppBarSplit(O options) {
         if (topAppBarSplit != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -789,7 +795,7 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
 
     private boolean needsBody(O options) {
         if (body != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -821,6 +827,12 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        body.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         body.insertBefore(child, beforeChild);
     }
@@ -828,6 +840,12 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
     @Override
     public S addText(String text) {
         body.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        body.addLineBreak();
         return self();
     }
 

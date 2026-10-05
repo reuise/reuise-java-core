@@ -42,6 +42,8 @@ public interface CoreDialogFeatures {
 
     CoreDialogFeatures removeAction(CoreButton action);
 
+    CoreDialogFeatures clearActions();
+
     boolean isHasAcceptButton();
 
     CoreDialogFeatures setHasAcceptButton(Boolean hasAcceptButton);

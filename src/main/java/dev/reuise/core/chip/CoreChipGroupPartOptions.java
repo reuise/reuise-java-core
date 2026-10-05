@@ -4,12 +4,15 @@ import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.ComponentOption;
 import java.util.List;
+import java.util.function.Function;
 public interface CoreChipGroupPartOptions {
     List<String> getSelected();
 
     ComponentOption<List<String>> getSelectedOption();
 
     CoreChipGroupPartOptions setSelected(List<String> selected);
+
+    CoreChipGroupPartOptions clearSelected();
 
     boolean hasSelected(String selected);
 
@@ -25,9 +28,17 @@ public interface CoreChipGroupPartOptions {
 
     CoreChipGroupPartOptions setChips(List<CoreChip> chips);
 
+    <T> CoreChipGroupPartOptions setChips(List<T> data, Function<T, CoreChip> mapper);
+
     CoreChipGroupPartOptions addChip(CoreChip chip);
 
     CoreChipGroupPartOptions removeChip(CoreChip chip);
+
+    CoreChipGroupPartOptions clearChips();
+
+    List<Object> getChipData();
+
+    Function<Object, CoreChip> getChipDataMapper();
 
     <T> void setDefaultOption(String option, T value);
 

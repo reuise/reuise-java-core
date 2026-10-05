@@ -74,6 +74,17 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
         return self();
     }
 
+    @Override
+    public S clearColumns() {
+        if (this.columnGroup != null)
+            this.columnGroup.clearColumns();
+
+        if (this.header != null)
+            this.header.clearColumns();
+
+        return self();
+    }
+
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
@@ -117,6 +128,12 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -721,7 +738,7 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
 
     private boolean needsTable(O options) {
         if (table != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -750,7 +767,7 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
 
     private boolean needsColumnGroup(O options) {
         if (columnGroup != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -780,18 +797,15 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
 
     private boolean needsHeader(O options) {
         if (header != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasHeaderOptions())
-            return true;
-
         if (options.isHasHeader() || options.isFixedHeader())
             return true;
 
-        return false;
+        return options.hasHeaderOptions();
     }
 
     private CoreTableHeader createHeader(O options) {
@@ -816,7 +830,7 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
 
     private boolean needsBody(O options) {
         if (body != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -849,6 +863,12 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        body.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         body.insertBefore(child, beforeChild);
     }
@@ -856,6 +876,12 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
     @Override
     public S addText(String text) {
         body.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        body.addLineBreak();
         return self();
     }
 
@@ -880,18 +906,15 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
 
     private boolean needsFooter(O options) {
         if (footer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasFooterOptions())
-            return true;
-
         if (options.isHasFooter())
             return true;
 
-        return false;
+        return options.hasFooterOptions();
     }
 
     private CoreTableFooter createFooter(O options) {

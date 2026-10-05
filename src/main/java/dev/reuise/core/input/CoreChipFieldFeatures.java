@@ -13,6 +13,8 @@ public interface CoreChipFieldFeatures {
 
     CoreChipFieldFeatures removeValue(String value);
 
+    CoreChipFieldFeatures clearValues();
+
     boolean hasValue(String value);
 
     List<String> getDelimiters();
@@ -22,6 +24,8 @@ public interface CoreChipFieldFeatures {
     CoreChipFieldFeatures addDelimiter(String delimiter);
 
     CoreChipFieldFeatures removeDelimiter(String delimiter);
+
+    CoreChipFieldFeatures clearDelimiters();
 
     boolean hasDelimiter(String delimiter);
 

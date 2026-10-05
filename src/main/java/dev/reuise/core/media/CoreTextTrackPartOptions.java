@@ -38,6 +38,8 @@ public interface CoreTextTrackPartOptions {
 
     CoreTextTrackPartOptions removeCue(TextTrackCue cue);
 
+    CoreTextTrackPartOptions clearCues();
+
     <T> void setDefaultOption(String option, T value);
 
     <T> void setDefaultOption(String option, T value, boolean force);

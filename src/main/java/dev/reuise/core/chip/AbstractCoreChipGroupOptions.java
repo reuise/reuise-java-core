@@ -3,7 +3,12 @@ import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 public abstract class AbstractCoreChipGroupOptions<S extends AbstractCoreChipGroupOptions<S>> implements CoreComponentOptions , CoreChipGroupOptions {
+    private List<Object> chipData;
+
+    private Function<Object, CoreChip> chipDataMapper;
+
     protected dev.reuise.core.chip.CoreChipOptions addButtonOptions;
 
     protected AbstractCoreChipGroupOptions() {
@@ -36,6 +41,16 @@ public abstract class AbstractCoreChipGroupOptions<S extends AbstractCoreChipGro
     @Override
     public S setSelected(List<String> selected) {
         setOption("selected", selected);
+        return self();
+    }
+
+    @Override
+    public S clearSelected() {
+        List<String> list = getSelected();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
         return self();
     }
 
@@ -112,6 +127,31 @@ public abstract class AbstractCoreChipGroupOptions<S extends AbstractCoreChipGro
             return self();
         }
         list.remove(chip);
+        return self();
+    }
+
+    @Override
+    public S clearChips() {
+        List<CoreChip> list = getChips();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
+    public List<Object> getChipData() {
+        return chipData;
+    }
+
+    public Function<Object, CoreChip> getChipDataMapper() {
+        return chipDataMapper;
+    }
+
+    @Override
+    public <T> S setChips(List<T> data, Function<T, CoreChip> mapper) {
+        this.chipData = ((List<Object>) (data));
+        this.chipDataMapper = ((Function<Object, CoreChip>) (mapper));
         return self();
     }
 

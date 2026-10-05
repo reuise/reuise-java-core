@@ -107,6 +107,12 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -143,6 +149,12 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -151,6 +163,12 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
     @Override
     public S addText(String text) {
         this.input.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -742,7 +760,7 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
 
     private boolean needsLabelContainer(O options) {
         if (labelContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -778,7 +796,7 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
 
     private boolean needsInputContainer(O options) {
         if (inputContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -807,7 +825,7 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
 
     private boolean needsStartIcon(O options) {
         if (startIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -837,7 +855,7 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
 
     private boolean needsInput(O options) {
         if (input != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -867,7 +885,7 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
 
     private boolean needsEndIcon(O options) {
         if (endIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -897,7 +915,7 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
 
     private boolean needsSupportingTextContainer(O options) {
         if (supportingTextContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1079,6 +1097,12 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
     @Override
     public S removeValidator(InputValidator validator) {
         getInput().removeValidator(validator);
+        return self();
+    }
+
+    @Override
+    public S clearValidators() {
+        input.clearValidators();
         return self();
     }
 

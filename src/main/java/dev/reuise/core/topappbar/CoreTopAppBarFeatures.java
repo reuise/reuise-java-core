@@ -3,6 +3,7 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.button.CoreButton;
 import java.util.List;
+import java.util.function.Function;
 public interface CoreTopAppBarFeatures {
     boolean isFixed();
 
@@ -32,7 +33,15 @@ public interface CoreTopAppBarFeatures {
 
     CoreTopAppBarFeatures setActions(List<CoreButton> actions);
 
+    <T> CoreTopAppBarFeatures setActions(List<T> data, Function<T, CoreButton> mapper);
+
     CoreTopAppBarFeatures addAction(CoreButton action);
 
     CoreTopAppBarFeatures removeAction(CoreButton action);
+
+    CoreTopAppBarFeatures clearActions();
+
+    List<Object> getActionData();
+
+    Function<Object, CoreButton> getActionDataMapper();
 }

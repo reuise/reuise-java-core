@@ -15,6 +15,8 @@ public interface CoreParentComponentPartOptions {
 
     CoreParentComponentPartOptions removeChild(CoreComponent child);
 
+    CoreParentComponentPartOptions clearChildren();
+
     <T> void setDefaultOption(String option, T value);
 
     <T> void setDefaultOption(String option, T value, boolean force);

@@ -1,20 +1,30 @@
 package dev.reuise.core.theme;
 
 public class Color {
-    private final int r;
-    private final int g;
-    private final int b;
-    private final int a; // Alpha (0–255)
+    public static final Color BLACK      = new Color(0, 0, 0);
+    public static final Color WHITE      = new Color(255, 255, 255);
+    public static final Color RED        = new Color(255, 0, 0);
+    public static final Color GREEN      = new Color(0, 255, 0);
+    public static final Color BLUE       = new Color(0, 0, 255);
+    public static final Color YELLOW     = new Color(255, 255, 0);
+    public static final Color CYAN       = new Color(0, 255, 255);
+    public static final Color MAGENTA    = new Color(255, 0, 255);
+    public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+    public static final Color GRAY       = new Color(128, 128, 128);
+    public static final Color LIGHT_GRAY = new Color(211, 211, 211);
+    public static final Color DARK_GRAY  = new Color(64, 64, 64);
+
+    private int r;
+    private int g;
+    private int b;
+    private int a; // Alpha (0–255)
 
     public Color(int r, int g, int b) {
         this(r, g, b, 255);
     }
 
     public Color(int r, int g, int b, int a) {
-        this.r = clamp(r);
-        this.g = clamp(g);
-        this.b = clamp(b);
-        this.a = clamp(a);
+        setRgba(r, g, b, a);
     }
 
     public Color(String hex) {
@@ -27,9 +37,14 @@ public class Color {
             this.a = (hex.length() == 8)
                     ? Integer.parseInt(hex.substring(6, 8), 16)
                     : 255;
-        } else {
-            throw new IllegalArgumentException("Hex color must be 6 or 8 digits");
-        }
+        } else setRgba(0, 0, 0, 255);
+    }
+
+    private void setRgba(int r, int g, int b, int a) {
+        this.r = clamp(r);
+        this.g = clamp(g);
+        this.b = clamp(b);
+        this.a = clamp(a);
     }
 
     private int clamp(int value) {
@@ -92,5 +107,9 @@ public class Color {
 
     public int getAlpha() {
         return a;
+    }
+
+    public static Color parse(String hex) {
+        return new Color(hex);
     }
 }

@@ -241,6 +241,16 @@ public abstract class AbstractCoreBasicInputFieldOptions<S extends AbstractCoreB
         return self();
     }
 
+    @Override
+    public S clearValidators() {
+        List<InputValidator> list = getValidators();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
     private void setDefaultValidators(List<InputValidator> validators) {
         setDefaultOption("validators", validators, true);
     }

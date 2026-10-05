@@ -69,6 +69,8 @@ public interface CoreDialogPartOptions {
 
     CoreDialogPartOptions removeAction(CoreButton action);
 
+    CoreDialogPartOptions clearActions();
+
     boolean isHasAcceptButton();
 
     ComponentOption<Boolean> getHasAcceptButtonOption();

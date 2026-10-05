@@ -2,6 +2,8 @@ package dev.reuise.core.chip;
 import dev.reuise.core.ComponentPart;
 import dev.reuise.core.layout.CoreFieldSetPart;
 public interface CoreChipGroupPart extends ComponentPart , CoreChipGroupFeatures , CoreFieldSetPart {
+    void refreshChips();
+
     void removeLastChip();
 
     void clear();

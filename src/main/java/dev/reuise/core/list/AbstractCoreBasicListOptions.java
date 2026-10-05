@@ -72,6 +72,16 @@ public abstract class AbstractCoreBasicListOptions<S extends AbstractCoreBasicLi
         return self();
     }
 
+    @Override
+    public S clearItems() {
+        List<CoreBasicListItem> list = getItems();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
     private void setDefaultItems(List<CoreBasicListItem> items) {
         setDefaultOption("items", items);
     }

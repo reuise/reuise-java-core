@@ -4,6 +4,8 @@ import dev.reuise.core.button.CoreIconButton;
 import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 public interface CoreTopAppBarPart extends ComponentPart , CoreParentComponentPart , CoreTopAppBarFeatures {
+    void refreshActions();
+
     CoreContainer getContainer();
 
     CoreIconButton getNavigationButton();

@@ -12,8 +12,10 @@ import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -44,36 +46,10 @@ import java.util.List;
 // add composition for baseComponent: removeFromParent
 public abstract class DefaultCoreListViewPart<S extends DefaultCoreListViewPart<S, O>, O extends CoreListViewPartOptions> implements ComponentPart , CoreListView {
     @Override
-    public S addItem(CoreListItem item) {
-        add(item);
-        return self();
-    }
-
-    @Override
     public S addItem(String text) {
         CoreListItemOptions menuItemOpts = getComponentFactory().createListItemOptions();
         menuItemOpts.setLabel(text);
         return addItem(getComponentFactory().createListItem(menuItemOpts));
-    }
-
-    @Override
-    public List<CoreListItem> getItems() {
-        return null;
-    }
-
-    @Override
-    public S setItems(List<CoreListItem> items) {
-        removeAll();
-        if ((items == null) || items.isEmpty())
-            return self();
-
-        items.forEach(i -> addItem(i));
-        return self();
-    }
-
-    @Override
-    public S removeItem(CoreListItem item) {
-        return self();
     }
 
     @Override
@@ -89,6 +65,12 @@ public abstract class DefaultCoreListViewPart<S extends DefaultCoreListViewPart<
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
+
+    protected List<CoreListItem> items;
+
+    private List<Object> itemData;
+
+    private Function<Object, CoreListItem> itemDataMapper;
 
     protected DefaultCoreListViewPart(O options) {
     }
@@ -119,6 +101,12 @@ public abstract class DefaultCoreListViewPart<S extends DefaultCoreListViewPart<
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -137,6 +125,12 @@ public abstract class DefaultCoreListViewPart<S extends DefaultCoreListViewPart<
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -144,6 +138,12 @@ public abstract class DefaultCoreListViewPart<S extends DefaultCoreListViewPart<
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -732,6 +732,8 @@ public abstract class DefaultCoreListViewPart<S extends DefaultCoreListViewPart<
     }
 
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
+        itemData = options.getItemData();
+        itemDataMapper = options.getItemDataMapper();
         CoreListViewPart component = ((CoreListViewPart) (options.getComponent()));
         if (component == null)
             System.out.println("component is null");
@@ -747,14 +749,65 @@ public abstract class DefaultCoreListViewPart<S extends DefaultCoreListViewPart<
 
     protected abstract S self();
 
-    // Implementation
     @Override
-    public S setItem(CoreListItem item) {
+    public List<CoreListItem> getItems() {
+        return items;
+    }
+
+    @Override
+    public S setItems(List<CoreListItem> items) {
+        addAll(items);
+        // Create copy of
+        this.items = new ArrayList<CoreListItem>(items);
         return self();
     }
 
-    // Implementation
-    public void clearItems() {
-        removeAll();
+    @Override
+    public S addItem(CoreListItem item) {
+        add(item);
+        if (this.items == null) {
+            setItems(new ArrayList<CoreListItem>());
+        }
+        this.items.add(item);
+        return self();
+    }
+
+    @Override
+    public S removeItem(CoreListItem item) {
+        remove(item);
+        this.items.remove(item);
+        return self();
+    }
+
+    @Override
+    public S clearItems() {
+        clearChildren();
+        this.items.clear();
+        return self();
+    }
+
+    @Override
+    public <T> S setItems(List<T> data, Function<T, CoreListItem> mapper) {
+        if (data == null)
+            return self();
+
+        this.itemData = ((List<Object>) (data));
+        this.itemDataMapper = ((Function<Object, CoreListItem>) (mapper));
+        refreshItems();
+        return self();
+    }
+
+    @Override
+    public void refreshItems() {
+        clearItems();
+        itemData.forEach(item -> addItem(itemDataMapper.apply(item)));
+    }
+
+    public List<Object> getItemData() {
+        return itemData;
+    }
+
+    public Function<Object, CoreListItem> getItemDataMapper() {
+        return itemDataMapper;
     }
 }

@@ -14,6 +14,7 @@ import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 import dev.reuise.core.theme.Theme;
@@ -60,6 +61,10 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
 
     protected ButtonType type;
 
+    protected Boolean loading;
+
+    protected CoreSkeletonOptions skeletonOptions;
+
     protected DefaultCoreButtonPart(O options) {
     }
 
@@ -85,6 +90,12 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -116,6 +127,12 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -123,6 +140,12 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -711,7 +734,7 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
 
     private boolean needsStartIcon(O options) {
         if (startIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -740,7 +763,7 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
 
     private boolean needsLabelContainer(O options) {
         if (labelContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -769,7 +792,7 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
 
     private boolean needsEndIcon(O options) {
         if (endIcon != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -809,6 +832,8 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
         applicator.add(options.getTypeOption(), component::setType);
         applicator.add(options.getUrlOption(), component::setUrl);
         applicator.add(options.getTargetOption(), component::setTarget);
+        applicator.add(options.getLoadingOption(), component::setLoading);
+        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
     }
 
     public void onInitializeComponentType(RootComponent rootComponent) {
@@ -843,6 +868,28 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
     @Override
     public S setType(ButtonType type) {
         this.type = type;
+        return self();
+    }
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(loading);
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.loading = loading;
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return skeletonOptions;
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.skeletonOptions = skeletonOptions;
         return self();
     }
 

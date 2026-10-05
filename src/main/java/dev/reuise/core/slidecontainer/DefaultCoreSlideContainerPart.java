@@ -9,15 +9,21 @@ import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
+import dev.reuise.core.divider.CoreDivider;
+import dev.reuise.core.image.CoreImage;
 import dev.reuise.core.layout.BackdropFilter;
 import dev.reuise.core.layout.BackdropFilterSetting;
 import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.layout.CoreContainerPart;
+import dev.reuise.core.link.CoreLink;
+import dev.reuise.core.list.CoreBasicList;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.text.CoreHeading;
+import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
@@ -52,9 +58,7 @@ import java.util.List;
 // Option: Debug - CORE
 // Option: DebugId - CORE
 // base comp: container
-// add composition for container: addHeading
-// add composition for container: addDivider
-// add composition for container: addParagraph
+// add composition for container: addMarkdown
 // base comp: parentComponent
 // base comp: baseComponent
 // add composition for baseComponent: hasWrapper
@@ -373,6 +377,11 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
         return self();
     }
 
+    public S addMarkdown(String markdown) {
+        containerPart.addMarkdown(markdown);
+        return self();
+    }
+
     public S addHeading(int level, String text) {
         containerPart.addHeading(level, text);
         return self();
@@ -393,6 +402,22 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
         return self();
     }
 
+    public CoreHeading createHeading(int level, String text) {
+        return containerPart.createHeading(level, text);
+    }
+
+    public CoreHeading createHeading(String text) {
+        return containerPart.createHeading(text);
+    }
+
+    public CoreHeading createHeading(int level, Html html) {
+        return containerPart.createHeading(level, html);
+    }
+
+    public CoreHeading createHeading(Html html) {
+        return containerPart.createHeading(html);
+    }
+
     public S addDivider() {
         containerPart.addDivider();
         return self();
@@ -403,6 +428,32 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
         return self();
     }
 
+    public CoreDivider createDivider() {
+        return containerPart.createDivider();
+    }
+
+    public CoreDivider createDivider(String label) {
+        return containerPart.createDivider(label);
+    }
+
+    public S addImage(String altText, String url) {
+        containerPart.addImage(altText, url);
+        return self();
+    }
+
+    public CoreImage createImage(String altText, String url) {
+        return containerPart.createImage(altText, url);
+    }
+
+    public S addLink(String label, String url) {
+        containerPart.addLink(label, url);
+        return self();
+    }
+
+    public CoreLink createLink(String label, String url) {
+        return containerPart.createLink(label, url);
+    }
+
     public S addParagraph(String text) {
         containerPart.addParagraph(text);
         return self();
@@ -411,6 +462,50 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
     public S addParagraph(Html html) {
         containerPart.addParagraph(html);
         return self();
+    }
+
+    public CoreParagraph createParagraph(String text) {
+        return containerPart.createParagraph(text);
+    }
+
+    public CoreParagraph createParagraph(Html html) {
+        return containerPart.createParagraph(html);
+    }
+
+    public S addBasicList(boolean ordered, String... items) {
+        containerPart.addBasicList(ordered, items);
+        return self();
+    }
+
+    public S addBasicList(boolean ordered, List<String> items) {
+        containerPart.addBasicList(ordered, items);
+        return self();
+    }
+
+    public S addBasicList(String... items) {
+        containerPart.addBasicList(items);
+        return self();
+    }
+
+    public S addBasicList(List<String> items) {
+        containerPart.addBasicList(items);
+        return self();
+    }
+
+    public CoreBasicList createBasicList(boolean ordered, String... items) {
+        return containerPart.createBasicList(ordered, items);
+    }
+
+    public CoreBasicList createBasicList(boolean ordered, List<String> items) {
+        return containerPart.createBasicList(ordered, items);
+    }
+
+    public CoreBasicList createBasicList(String... items) {
+        return containerPart.createBasicList(items);
+    }
+
+    public CoreBasicList createBasicList(List<String> items) {
+        return containerPart.createBasicList(items);
     }
 
     @Override
@@ -447,6 +542,12 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -1020,7 +1121,7 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
 
     private boolean needsSlideAreaBefore(O options) {
         if (slideAreaBefore != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1049,7 +1150,7 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
 
     private boolean needsSlideArea(O options) {
         if (slideArea != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1081,6 +1182,12 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        slideArea.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         slideArea.insertBefore(child, beforeChild);
     }
@@ -1088,6 +1195,12 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
     @Override
     public S addText(String text) {
         slideArea.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        slideArea.addLineBreak();
         return self();
     }
 
@@ -1112,7 +1225,7 @@ public abstract class DefaultCoreSlideContainerPart<S extends DefaultCoreSlideCo
 
     private boolean needsSlideAreaAfter(O options) {
         if (slideAreaAfter != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

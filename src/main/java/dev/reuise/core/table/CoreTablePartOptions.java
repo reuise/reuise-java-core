@@ -41,6 +41,8 @@ public interface CoreTablePartOptions {
 
     CoreTablePartOptions removeColumn(CoreTableColumnOptions column);
 
+    CoreTablePartOptions clearColumns();
+
     <T> void setDefaultOption(String option, T value);
 
     <T> void setDefaultOption(String option, T value, boolean force);

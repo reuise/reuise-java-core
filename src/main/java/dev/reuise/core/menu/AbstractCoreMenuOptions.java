@@ -103,6 +103,16 @@ public abstract class AbstractCoreMenuOptions<S extends AbstractCoreMenuOptions<
         return self();
     }
 
+    @Override
+    public S clearItems() {
+        List<CoreMenuItem> list = getItems();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
     private void setDefaultItems(List<CoreMenuItem> items) {
         setDefaultOption("items", items);
     }

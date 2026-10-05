@@ -67,6 +67,11 @@ public abstract class DefaultCoreTableHeaderRowPart<S extends DefaultCoreTableHe
         return self();
     }
 
+    @Override
+    public S clearColumns() {
+        return self();
+    }
+
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
@@ -100,6 +105,12 @@ public abstract class DefaultCoreTableHeaderRowPart<S extends DefaultCoreTableHe
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -118,6 +129,12 @@ public abstract class DefaultCoreTableHeaderRowPart<S extends DefaultCoreTableHe
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -125,6 +142,12 @@ public abstract class DefaultCoreTableHeaderRowPart<S extends DefaultCoreTableHe
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 

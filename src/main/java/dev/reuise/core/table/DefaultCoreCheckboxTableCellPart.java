@@ -100,6 +100,12 @@ public abstract class DefaultCoreCheckboxTableCellPart<S extends DefaultCoreChec
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        tableCellPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         tableCellPart.insertBefore(child, beforeChild);
     }
@@ -107,6 +113,12 @@ public abstract class DefaultCoreCheckboxTableCellPart<S extends DefaultCoreChec
     @Override
     public S addText(String text) {
         tableCellPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        tableCellPart.addLineBreak();
         return self();
     }
 
@@ -140,6 +152,12 @@ public abstract class DefaultCoreCheckboxTableCellPart<S extends DefaultCoreChec
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -711,7 +729,7 @@ public abstract class DefaultCoreCheckboxTableCellPart<S extends DefaultCoreChec
 
     private boolean needsCheckbox(O options) {
         if (checkbox != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

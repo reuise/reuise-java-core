@@ -1,4 +1,5 @@
 package dev.reuise.core.button;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 public interface CoreButtonFeatures {
     String getLabel();
 
@@ -19,4 +20,12 @@ public interface CoreButtonFeatures {
     String getTarget();
 
     CoreButtonFeatures setTarget(String target);
+
+    boolean isLoading();
+
+    CoreButtonFeatures setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    CoreButtonFeatures setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 }

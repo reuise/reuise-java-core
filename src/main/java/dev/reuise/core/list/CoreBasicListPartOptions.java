@@ -16,6 +16,8 @@ public interface CoreBasicListPartOptions {
 
     CoreBasicListPartOptions removeItem(CoreBasicListItem item);
 
+    CoreBasicListPartOptions clearItems();
+
     boolean isOrdered();
 
     ComponentOption<Boolean> getOrderedOption();

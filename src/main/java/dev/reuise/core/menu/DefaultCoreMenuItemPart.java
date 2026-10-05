@@ -176,6 +176,12 @@ public abstract class DefaultCoreMenuItemPart<S extends DefaultCoreMenuItemPart<
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        listItemPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         listItemPart.insertBefore(child, beforeChild);
     }
@@ -183,6 +189,12 @@ public abstract class DefaultCoreMenuItemPart<S extends DefaultCoreMenuItemPart<
     @Override
     public S addText(String text) {
         listItemPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        listItemPart.addLineBreak();
         return self();
     }
 
@@ -227,6 +239,12 @@ public abstract class DefaultCoreMenuItemPart<S extends DefaultCoreMenuItemPart<
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 

@@ -1,4 +1,8 @@
 package dev.reuise.core;
+import dev.reuise.core.accordion.CoreAccordion;
+import dev.reuise.core.accordion.CoreAccordionItem;
+import dev.reuise.core.accordion.CoreAccordionItemOptions;
+import dev.reuise.core.accordion.CoreAccordionOptions;
 import dev.reuise.core.applayout.CoreAppLayout;
 import dev.reuise.core.applayout.CoreAppLayoutBody;
 import dev.reuise.core.applayout.CoreAppLayoutBodyOptions;
@@ -54,6 +58,8 @@ import dev.reuise.core.input.CorePasswordField;
 import dev.reuise.core.input.CorePasswordFieldOptions;
 import dev.reuise.core.input.CoreSearchField;
 import dev.reuise.core.input.CoreSearchFieldOptions;
+import dev.reuise.core.input.CoreSegmentedTextField;
+import dev.reuise.core.input.CoreSegmentedTextFieldOptions;
 import dev.reuise.core.input.CoreTextField;
 import dev.reuise.core.input.CoreTextFieldOptions;
 import dev.reuise.core.layout.CoreColumnLayout;
@@ -157,6 +163,8 @@ import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 import dev.reuise.core.text.CoreLabel;
 import dev.reuise.core.text.CoreLabelOptions;
+import dev.reuise.core.text.CoreLineBreak;
+import dev.reuise.core.text.CoreLineBreakOptions;
 import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.text.CoreParagraphOptions;
 import dev.reuise.core.text.CoreText;
@@ -170,213 +178,161 @@ import dev.reuise.core.view.CoreSheetViewOptions;
 import dev.reuise.core.view.CoreView;
 import dev.reuise.core.view.CoreViewOptions;
 public interface CoreComponentFactory {
-    CoreButton createButton(CoreButtonOptions options);
-
-    CoreButtonOptions createButtonOptions();
-
-    CoreMenuItem createMenuItem(CoreMenuItemOptions options);
-
-    CoreMenuItemOptions createMenuItemOptions();
-
-    CoreTextBlock createTextBlock(CoreTextBlockOptions options);
-
-    CoreTextBlockOptions createTextBlockOptions();
-
-    CoreRowLayout createRowLayout(CoreRowLayoutOptions options);
-
-    CoreRowLayoutOptions createRowLayoutOptions();
-
-    CoreBasicListItem createBasicListItem(CoreBasicListItemOptions options);
-
-    CoreBasicListItemOptions createBasicListItemOptions();
-
-    CoreSplitContainerDivider createSplitContainerDivider(CoreSplitContainerDividerOptions options);
-
-    CoreSplitContainerDividerOptions createSplitContainerDividerOptions();
-
-    CoreTableBody createTableBody(CoreTableBodyOptions options);
-
-    CoreTableBodyOptions createTableBodyOptions();
-
-    CoreParagraph createParagraph(CoreParagraphOptions options);
-
-    CoreParagraphOptions createParagraphOptions();
-
-    CoreSheetView createSheetView(CoreSheetViewOptions options);
-
-    CoreSheetViewOptions createSheetViewOptions();
-
-    CorePasswordField createPasswordField(CorePasswordFieldOptions options);
-
-    CorePasswordFieldOptions createPasswordFieldOptions();
-
-    CoreIconLabel createIconLabel(CoreIconLabelOptions options);
-
-    CoreIconLabelOptions createIconLabelOptions();
-
-    CoreBasicList createBasicList(CoreBasicListOptions options);
-
-    CoreBasicListOptions createBasicListOptions();
-
-    CoreAppLayout createAppLayout(CoreAppLayoutOptions options);
-
-    CoreAppLayoutOptions createAppLayoutOptions();
-
-    CoreHeading createHeading(CoreHeadingOptions options);
-
-    CoreHeadingOptions createHeadingOptions();
-
-    CoreListView createListView(CoreListViewOptions options);
-
-    CoreListViewOptions createListViewOptions();
-
-    CoreBadge createBadge(CoreBadgeOptions options);
-
-    CoreBadgeOptions createBadgeOptions();
-
-    CoreBottomAppBar createBottomAppBar(CoreBottomAppBarOptions options);
-
-    CoreBottomAppBarOptions createBottomAppBarOptions();
-
-    CoreScrollableContainer createScrollableContainer(CoreScrollableContainerOptions options);
-
-    CoreScrollableContainerOptions createScrollableContainerOptions();
-
-    CoreColumnLayout createColumnLayout(CoreColumnLayoutOptions options);
-
-    CoreColumnLayoutOptions createColumnLayoutOptions();
-
-    CoreMenuDivider createMenuDivider(CoreMenuDividerOptions options);
-
-    CoreMenuDividerOptions createMenuDividerOptions();
-
-    CoreParentComponent createParentComponent(CoreParentComponentPartOptions options);
-
-    CoreParentComponentOptions createParentComponentOptions();
-
-    CoreInlineText createInlineText(CoreInlineTextOptions options);
-
-    CoreInlineTextOptions createInlineTextOptions();
-
-    CoreTableHeader createTableHeader(CoreTableHeaderOptions options);
-
-    CoreTableHeaderOptions createTableHeaderOptions();
-
-    CoreTextField createTextField(CoreTextFieldOptions options);
-
-    CoreTextFieldOptions createTextFieldOptions();
-
-    CoreTable createTable(CoreTableOptions options);
-
-    CoreTableOptions createTableOptions();
-
-    CoreImage createImage(CoreImageOptions options);
-
-    CoreImageOptions createImageOptions();
-
-    CoreContainer createContainer(CoreContainerOptions options);
-
-    CoreContainerOptions createContainerOptions();
-
-    CoreSheetLayout createSheetLayout(CoreSheetLayoutOptions options);
-
-    CoreSheetLayoutOptions createSheetLayoutOptions();
-
     CoreListItem createListItem(CoreListItemOptions options);
 
     CoreListItemOptions createListItemOptions();
-
-    CoreMessageDialog createMessageDialog(CoreMessageDialogOptions options);
-
-    CoreMessageDialogOptions createMessageDialogOptions();
-
-    CoreSearchField createSearchField(CoreSearchFieldOptions options);
-
-    CoreSearchFieldOptions createSearchFieldOptions();
-
-    CoreFilterChip createFilterChip(CoreFilterChipOptions options);
-
-    CoreFilterChipOptions createFilterChipOptions();
-
-    CoreTableFooter createTableFooter(CoreTableFooterOptions options);
-
-    CoreTableFooterOptions createTableFooterOptions();
-
-    CoreCardGrid createCardGrid(CoreCardGridOptions options);
-
-    CoreCardGridOptions createCardGridOptions();
-
-    CoreMediaPlayer createMediaPlayer(CoreMediaPlayerOptions options);
-
-    CoreMediaPlayerOptions createMediaPlayerOptions();
-
-    CoreView createView(CoreViewOptions options);
-
-    CoreViewOptions createViewOptions();
-
-    CoreIconButton createIconButton(CoreIconButtonOptions options);
-
-    CoreIconButtonOptions createIconButtonOptions();
-
-    CoreSlideContainer createSlideContainer(CoreSlideContainerOptions options);
-
-    CoreSlideContainerOptions createSlideContainerOptions();
 
     CoreChipGroup createChipGroup(CoreChipGroupOptions options);
 
     CoreChipGroupOptions createChipGroupOptions();
 
-    CoreScrollableContainerScrollArea createScrollableContainerScrollArea(CoreScrollableContainerScrollAreaOptions options);
+    CoreCheckboxTableCell createCheckboxTableCell(CoreCheckboxTableCellOptions options);
 
-    CoreScrollableContainerScrollAreaOptions createScrollableContainerScrollAreaOptions();
+    CoreCheckboxTableCellOptions createCheckboxTableCellOptions();
 
-    CoreSlideContainerEdge createSlideContainerEdge(CoreSlideContainerEdgeOptions options);
+    CoreAppLayout createAppLayout(CoreAppLayoutOptions options);
 
-    CoreSlideContainerEdgeOptions createSlideContainerEdgeOptions();
-
-    CoreChipField createChipField(CoreChipFieldOptions options);
-
-    CoreChipFieldOptions createChipFieldOptions();
-
-    CoreNavigationLink createNavigationLink(CoreNavigationLinkOptions options);
-
-    CoreNavigationLinkOptions createNavigationLinkOptions();
-
-    CoreSelectMenu createSelectMenu(CoreSelectMenuOptions options);
-
-    CoreSelectMenuOptions createSelectMenuOptions();
-
-    CoreCheckboxTableColumn createCheckboxTableColumn(CoreCheckboxTableColumnOptions options);
-
-    CoreCheckboxTableColumnOptions createCheckboxTableColumnOptions();
-
-    CoreTableColumnGroup createTableColumnGroup(CoreTableColumnGroupOptions options);
-
-    CoreTableColumnGroupOptions createTableColumnGroupOptions();
-
-    CoreAppLayoutBody createAppLayoutBody(CoreAppLayoutBodyOptions options);
-
-    CoreAppLayoutBodyOptions createAppLayoutBodyOptions();
-
-    CoreMenu createMenu(CoreMenuOptions options);
-
-    CoreMenuOptions createMenuOptions();
-
-    CoreTableRow createTableRow(CoreTableRowOptions options);
-
-    CoreTableRowOptions createTableRowOptions();
-
-    CoreSkeleton createSkeleton(CoreSkeletonOptions options);
-
-    CoreSkeletonOptions createSkeletonOptions();
+    CoreAppLayoutOptions createAppLayoutOptions();
 
     CoreBasicInputField createBasicInputField(CoreBasicInputFieldOptions options);
 
     CoreBasicInputFieldOptions createBasicInputFieldOptions();
 
+    CoreAccordion createAccordion(CoreAccordionOptions options);
+
+    CoreAccordionOptions createAccordionOptions();
+
+    CoreTopAppBar createTopAppBar(CoreTopAppBarOptions options);
+
+    CoreTopAppBarOptions createTopAppBarOptions();
+
+    CoreColumnLayout createColumnLayout(CoreColumnLayoutOptions options);
+
+    CoreColumnLayoutOptions createColumnLayoutOptions();
+
+    CoreSheetView createSheetView(CoreSheetViewOptions options);
+
+    CoreSheetViewOptions createSheetViewOptions();
+
+    CoreScrollableContainer createScrollableContainer(CoreScrollableContainerOptions options);
+
+    CoreScrollableContainerOptions createScrollableContainerOptions();
+
+    CoreFlexContainer createFlexContainer(CoreFlexContainerOptions options);
+
+    CoreFlexContainerOptions createFlexContainerOptions();
+
+    CoreTableColumnGroup createTableColumnGroup(CoreTableColumnGroupOptions options);
+
+    CoreTableColumnGroupOptions createTableColumnGroupOptions();
+
+    CoreTableBody createTableBody(CoreTableBodyOptions options);
+
+    CoreTableBodyOptions createTableBodyOptions();
+
     CoreTab createTab(CoreTabOptions options);
 
     CoreTabOptions createTabOptions();
+
+    CoreSheetLayout createSheetLayout(CoreSheetLayoutOptions options);
+
+    CoreSheetLayoutOptions createSheetLayoutOptions();
+
+    CoreSearchField createSearchField(CoreSearchFieldOptions options);
+
+    CoreSearchFieldOptions createSearchFieldOptions();
+
+    CoreLabel createLabel(CoreLabelOptions options);
+
+    CoreLabelOptions createLabelOptions();
+
+    CoreMenu createMenu(CoreMenuOptions options);
+
+    CoreMenuOptions createMenuOptions();
+
+    CoreText createText(CoreTextOptions options);
+
+    CoreTextOptions createTextOptions();
+
+    CoreSplitContainerPanel createSplitContainerPanel(CoreSplitContainerPanelOptions options);
+
+    CoreSplitContainerPanelOptions createSplitContainerPanelOptions();
+
+    CoreTextTrack createTextTrack(CoreTextTrackOptions options);
+
+    CoreTextTrackOptions createTextTrackOptions();
+
+    CoreTableHeaderCell createTableHeaderCell(CoreTableHeaderCellOptions options);
+
+    CoreTableHeaderCellOptions createTableHeaderCellOptions();
+
+    CoreTableCell createTableCell(CoreTableCellOptions options);
+
+    CoreTableCellOptions createTableCellOptions();
+
+    CoreListView createListView(CoreListViewOptions options);
+
+    CoreListViewOptions createListViewOptions();
+
+    CoreTableFooter createTableFooter(CoreTableFooterOptions options);
+
+    CoreTableFooterOptions createTableFooterOptions();
+
+    CoreBottomAppBar createBottomAppBar(CoreBottomAppBarOptions options);
+
+    CoreBottomAppBarOptions createBottomAppBarOptions();
+
+    CoreBasicList createBasicList(CoreBasicListOptions options);
+
+    CoreBasicListOptions createBasicListOptions();
+
+    CoreMultiEmailAddressField createMultiEmailAddressField(CoreMultiEmailAddressFieldOptions options);
+
+    CoreMultiEmailAddressFieldOptions createMultiEmailAddressFieldOptions();
+
+    CoreMenuDivider createMenuDivider(CoreMenuDividerOptions options);
+
+    CoreMenuDividerOptions createMenuDividerOptions();
+
+    CoreAvatar createAvatar(CoreAvatarOptions options);
+
+    CoreAvatarOptions createAvatarOptions();
+
+    CoreIconButton createIconButton(CoreIconButtonOptions options);
+
+    CoreIconButtonOptions createIconButtonOptions();
+
+    CoreDivider createDivider(CoreDividerOptions options);
+
+    CoreDividerOptions createDividerOptions();
+
+    CoreDialog createDialog(CoreDialogOptions options);
+
+    CoreDialogOptions createDialogOptions();
+
+    CoreAppLayoutBody createAppLayoutBody(CoreAppLayoutBodyOptions options);
+
+    CoreAppLayoutBodyOptions createAppLayoutBodyOptions();
+
+    CoreTableRow createTableRow(CoreTableRowOptions options);
+
+    CoreTableRowOptions createTableRowOptions();
+
+    CoreDropZone createDropZone(CoreDropZoneOptions options);
+
+    CoreDropZoneOptions createDropZoneOptions();
+
+    CoreCheckbox createCheckbox(CoreCheckboxOptions options);
+
+    CoreCheckboxOptions createCheckboxOptions();
+
+    CoreChipField createChipField(CoreChipFieldOptions options);
+
+    CoreChipFieldOptions createChipFieldOptions();
+
+    CoreSurface createSurface(CoreSurfaceOptions options);
+
+    CoreSurfaceOptions createSurfaceOptions();
 
     CoreVideoPlayer createVideoPlayer(CoreVideoPlayerOptions options);
 
@@ -386,125 +342,193 @@ public interface CoreComponentFactory {
 
     CoreDrawerOptions createDrawerOptions();
 
-    CoreProgressIndicator createProgressIndicator(CoreProgressIndicatorOptions options);
+    CoreMediaPlayer createMediaPlayer(CoreMediaPlayerOptions options);
 
-    CoreProgressIndicatorOptions createProgressIndicatorOptions();
-
-    CoreSplitContainerPanel createSplitContainerPanel(CoreSplitContainerPanelOptions options);
-
-    CoreSplitContainerPanelOptions createSplitContainerPanelOptions();
-
-    CoreIcon createIcon(CoreIconOptions options);
-
-    CoreIconOptions createIconOptions();
-
-    CoreBaseComponent createBaseComponent(CoreBaseComponentPartOptions options);
-
-    CoreBaseComponentOptions createBaseComponentOptions();
-
-    CoreDivider createDivider(CoreDividerOptions options);
-
-    CoreDividerOptions createDividerOptions();
-
-    CoreCheckboxTableCell createCheckboxTableCell(CoreCheckboxTableCellOptions options);
-
-    CoreCheckboxTableCellOptions createCheckboxTableCellOptions();
-
-    CoreSurface createSurface(CoreSurfaceOptions options);
-
-    CoreSurfaceOptions createSurfaceOptions();
-
-    CoreText createText(CoreTextOptions options);
-
-    CoreTextOptions createTextOptions();
-
-    CoreLabel createLabel(CoreLabelOptions options);
-
-    CoreLabelOptions createLabelOptions();
-
-    CoreMultiEmailAddressField createMultiEmailAddressField(CoreMultiEmailAddressFieldOptions options);
-
-    CoreMultiEmailAddressFieldOptions createMultiEmailAddressFieldOptions();
-
-    CoreTableHeaderCell createTableHeaderCell(CoreTableHeaderCellOptions options);
-
-    CoreTableHeaderCellOptions createTableHeaderCellOptions();
-
-    CoreBasicCheckbox createBasicCheckbox(CoreBasicCheckboxOptions options);
-
-    CoreBasicCheckboxOptions createBasicCheckboxOptions();
-
-    CoreTableColumn createTableColumn(CoreTableColumnOptions options);
-
-    CoreTableColumnOptions createTableColumnOptions();
-
-    CoreDropZone createDropZone(CoreDropZoneOptions options);
-
-    CoreDropZoneOptions createDropZoneOptions();
-
-    CoreChip createChip(CoreChipOptions options);
-
-    CoreChipOptions createChipOptions();
-
-    CoreTextTrack createTextTrack(CoreTextTrackOptions options);
-
-    CoreTextTrackOptions createTextTrackOptions();
-
-    CoreAudioPlayer createAudioPlayer(CoreAudioPlayerOptions options);
-
-    CoreAudioPlayerOptions createAudioPlayerOptions();
-
-    CoreTableCell createTableCell(CoreTableCellOptions options);
-
-    CoreTableCellOptions createTableCellOptions();
-
-    CoreCheckbox createCheckbox(CoreCheckboxOptions options);
-
-    CoreCheckboxOptions createCheckboxOptions();
-
-    CoreCard createCard(CoreCardOptions options);
-
-    CoreCardOptions createCardOptions();
-
-    CoreSplitContainer createSplitContainer(CoreSplitContainerOptions options);
-
-    CoreSplitContainerOptions createSplitContainerOptions();
-
-    CoreDialog createDialog(CoreDialogOptions options);
-
-    CoreDialogOptions createDialogOptions();
-
-    CoreAvatar createAvatar(CoreAvatarOptions options);
-
-    CoreAvatarOptions createAvatarOptions();
-
-    CoreScrollableContainerEdge createScrollableContainerEdge(CoreScrollableContainerEdgeOptions options);
-
-    CoreScrollableContainerEdgeOptions createScrollableContainerEdgeOptions();
-
-    CoreTableHeaderRow createTableHeaderRow(CoreTableHeaderRowOptions options);
-
-    CoreTableHeaderRowOptions createTableHeaderRowOptions();
+    CoreMediaPlayerOptions createMediaPlayerOptions();
 
     CoreLink createLink(CoreLinkOptions options);
 
     CoreLinkOptions createLinkOptions();
 
-    CoreTopAppBar createTopAppBar(CoreTopAppBarOptions options);
+    CoreTextBlock createTextBlock(CoreTextBlockOptions options);
 
-    CoreTopAppBarOptions createTopAppBarOptions();
+    CoreTextBlockOptions createTextBlockOptions();
 
-    CoreFlexContainer createFlexContainer(CoreFlexContainerOptions options);
+    CoreIcon createIcon(CoreIconOptions options);
 
-    CoreFlexContainerOptions createFlexContainerOptions();
+    CoreIconOptions createIconOptions();
+
+    CorePasswordField createPasswordField(CorePasswordFieldOptions options);
+
+    CorePasswordFieldOptions createPasswordFieldOptions();
+
+    CoreSelectMenu createSelectMenu(CoreSelectMenuOptions options);
+
+    CoreSelectMenuOptions createSelectMenuOptions();
+
+    CoreBasicListItem createBasicListItem(CoreBasicListItemOptions options);
+
+    CoreBasicListItemOptions createBasicListItemOptions();
+
+    CoreIconLabel createIconLabel(CoreIconLabelOptions options);
+
+    CoreIconLabelOptions createIconLabelOptions();
+
+    CoreTable createTable(CoreTableOptions options);
+
+    CoreTableOptions createTableOptions();
+
+    CoreScrollableContainerScrollArea createScrollableContainerScrollArea(CoreScrollableContainerScrollAreaOptions options);
+
+    CoreScrollableContainerScrollAreaOptions createScrollableContainerScrollAreaOptions();
+
+    CoreParentComponent createParentComponent(CoreParentComponentPartOptions options);
+
+    CoreParentComponentOptions createParentComponentOptions();
+
+    CoreBaseComponent createBaseComponent(CoreBaseComponentPartOptions options);
+
+    CoreBaseComponentOptions createBaseComponentOptions();
+
+    CoreInlineText createInlineText(CoreInlineTextOptions options);
+
+    CoreInlineTextOptions createInlineTextOptions();
+
+    CoreView createView(CoreViewOptions options);
+
+    CoreViewOptions createViewOptions();
+
+    CoreHeading createHeading(CoreHeadingOptions options);
+
+    CoreHeadingOptions createHeadingOptions();
+
+    CoreScrollableContainerEdge createScrollableContainerEdge(CoreScrollableContainerEdgeOptions options);
+
+    CoreScrollableContainerEdgeOptions createScrollableContainerEdgeOptions();
+
+    CoreAudioPlayer createAudioPlayer(CoreAudioPlayerOptions options);
+
+    CoreAudioPlayerOptions createAudioPlayerOptions();
+
+    CoreNavigationLink createNavigationLink(CoreNavigationLinkOptions options);
+
+    CoreNavigationLinkOptions createNavigationLinkOptions();
+
+    CoreTableHeader createTableHeader(CoreTableHeaderOptions options);
+
+    CoreTableHeaderOptions createTableHeaderOptions();
+
+    CoreButton createButton(CoreButtonOptions options);
+
+    CoreButtonOptions createButtonOptions();
+
+    CoreRowLayout createRowLayout(CoreRowLayoutOptions options);
+
+    CoreRowLayoutOptions createRowLayoutOptions();
+
+    CoreBasicCheckbox createBasicCheckbox(CoreBasicCheckboxOptions options);
+
+    CoreBasicCheckboxOptions createBasicCheckboxOptions();
+
+    CoreCard createCard(CoreCardOptions options);
+
+    CoreCardOptions createCardOptions();
+
+    CoreLineBreak createLineBreak(CoreLineBreakOptions options);
+
+    CoreLineBreakOptions createLineBreakOptions();
+
+    CoreTableHeaderRow createTableHeaderRow(CoreTableHeaderRowOptions options);
+
+    CoreTableHeaderRowOptions createTableHeaderRowOptions();
+
+    CoreTextField createTextField(CoreTextFieldOptions options);
+
+    CoreTextFieldOptions createTextFieldOptions();
+
+    CoreSlideContainerEdge createSlideContainerEdge(CoreSlideContainerEdgeOptions options);
+
+    CoreSlideContainerEdgeOptions createSlideContainerEdgeOptions();
+
+    CoreTabBar createTabBar(CoreTabBarOptions options);
+
+    CoreTabBarOptions createTabBarOptions();
+
+    CoreMessageDialog createMessageDialog(CoreMessageDialogOptions options);
+
+    CoreMessageDialogOptions createMessageDialogOptions();
+
+    CoreSegmentedTextField createSegmentedTextField(CoreSegmentedTextFieldOptions options);
+
+    CoreSegmentedTextFieldOptions createSegmentedTextFieldOptions();
+
+    CoreCardGrid createCardGrid(CoreCardGridOptions options);
+
+    CoreCardGridOptions createCardGridOptions();
+
+    CoreImage createImage(CoreImageOptions options);
+
+    CoreImageOptions createImageOptions();
+
+    CoreSlideContainer createSlideContainer(CoreSlideContainerOptions options);
+
+    CoreSlideContainerOptions createSlideContainerOptions();
+
+    CoreBadge createBadge(CoreBadgeOptions options);
+
+    CoreBadgeOptions createBadgeOptions();
+
+    CoreMenuItem createMenuItem(CoreMenuItemOptions options);
+
+    CoreMenuItemOptions createMenuItemOptions();
+
+    CoreTableColumn createTableColumn(CoreTableColumnOptions options);
+
+    CoreTableColumnOptions createTableColumnOptions();
+
+    CoreProgressIndicator createProgressIndicator(CoreProgressIndicatorOptions options);
+
+    CoreProgressIndicatorOptions createProgressIndicatorOptions();
+
+    CoreSplitContainerDivider createSplitContainerDivider(CoreSplitContainerDividerOptions options);
+
+    CoreSplitContainerDividerOptions createSplitContainerDividerOptions();
+
+    CoreParagraph createParagraph(CoreParagraphOptions options);
+
+    CoreParagraphOptions createParagraphOptions();
+
+    CoreChip createChip(CoreChipOptions options);
+
+    CoreChipOptions createChipOptions();
+
+    CoreContainer createContainer(CoreContainerOptions options);
+
+    CoreContainerOptions createContainerOptions();
+
+    CoreSkeleton createSkeleton(CoreSkeletonOptions options);
+
+    CoreSkeletonOptions createSkeletonOptions();
+
+    CoreAccordionItem createAccordionItem(CoreAccordionItemOptions options);
+
+    CoreAccordionItemOptions createAccordionItemOptions();
 
     CoreFieldSet createFieldSet(CoreFieldSetOptions options);
 
     CoreFieldSetOptions createFieldSetOptions();
 
-    CoreTabBar createTabBar(CoreTabBarOptions options);
+    CoreFilterChip createFilterChip(CoreFilterChipOptions options);
 
-    CoreTabBarOptions createTabBarOptions();
+    CoreFilterChipOptions createFilterChipOptions();
+
+    CoreCheckboxTableColumn createCheckboxTableColumn(CoreCheckboxTableColumnOptions options);
+
+    CoreCheckboxTableColumnOptions createCheckboxTableColumnOptions();
+
+    CoreSplitContainer createSplitContainer(CoreSplitContainerOptions options);
+
+    CoreSplitContainerOptions createSplitContainerOptions();
 
     void setRootComponent(RootComponent rootComponent);
 

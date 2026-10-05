@@ -5,6 +5,7 @@ import dev.reuise.core.icon.CoreIcon;
 import dev.reuise.core.icon.CoreIconOptions;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.ComponentOption;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 public interface CoreButtonPartOptions {
@@ -37,6 +38,18 @@ public interface CoreButtonPartOptions {
     ComponentOption<String> getTargetOption();
 
     CoreButtonPartOptions setTarget(String target);
+
+    boolean isLoading();
+
+    ComponentOption<Boolean> getLoadingOption();
+
+    CoreButtonPartOptions setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
+
+    CoreButtonPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 
     <T> void setDefaultOption(String option, T value);
 

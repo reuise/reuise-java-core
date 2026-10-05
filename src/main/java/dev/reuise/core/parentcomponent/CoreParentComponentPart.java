@@ -6,9 +6,13 @@ import java.util.List;
 public interface CoreParentComponentPart extends ComponentPart , CoreBaseComponentPart , CoreParentComponentFeatures {
     CoreParentComponentPart add(CoreComponent child);
 
+    CoreParentComponentPart addAll(List<? extends CoreComponent> children);
+
     void insertBefore(CoreComponent child, CoreComponent beforeChild);
 
     CoreParentComponentPart addText(String text);
+
+    CoreParentComponentPart addLineBreak();
 
     void remove(CoreComponent child);
 

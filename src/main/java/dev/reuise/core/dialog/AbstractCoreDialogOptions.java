@@ -291,6 +291,16 @@ public abstract class AbstractCoreDialogOptions<S extends AbstractCoreDialogOpti
         return self();
     }
 
+    @Override
+    public S clearActions() {
+        List<CoreButton> list = getActions();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
     private void setDefaultActions(List<CoreButton> actions) {
         setDefaultOption("actions", actions);
     }

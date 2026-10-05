@@ -90,6 +90,11 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
     }
 
     @Override
+    public S clearValues() {
+        return self();
+    }
+
+    @Override
     public List<String> getValues() {
         return getChipGroup().getChips().stream().map(c -> c.getLabel()).collect(Collectors.toList());
     }
@@ -278,6 +283,12 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        textFieldPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         textFieldPart.insertBefore(child, beforeChild);
     }
@@ -285,6 +296,12 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
     @Override
     public S addText(String text) {
         textFieldPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        textFieldPart.addLineBreak();
         return self();
     }
 
@@ -318,6 +335,12 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -889,7 +912,7 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
 
     private boolean needsChipGroup(O options) {
         if (chipGroup != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1062,6 +1085,12 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
     }
 
     @Override
+    public S clearValidators() {
+        input.clearValidators();
+        return self();
+    }
+
+    @Override
     public List<InputValidator> getValidators(InputValidator.ValidationMode... modes) {
         return this.input.getValidators(modes);
     }
@@ -1131,6 +1160,12 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
     @Override
     public S removeDelimiter(String delimiter) {
         this.delimiters.remove(delimiter);
+        return self();
+    }
+
+    @Override
+    public S clearDelimiters() {
+        this.delimiters.clear();
         return self();
     }
 

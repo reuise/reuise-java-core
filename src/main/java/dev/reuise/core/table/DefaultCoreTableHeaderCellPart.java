@@ -91,6 +91,12 @@ public abstract class DefaultCoreTableHeaderCellPart<S extends DefaultCoreTableH
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -118,6 +124,12 @@ public abstract class DefaultCoreTableHeaderCellPart<S extends DefaultCoreTableH
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -125,6 +137,12 @@ public abstract class DefaultCoreTableHeaderCellPart<S extends DefaultCoreTableH
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -715,7 +733,7 @@ public abstract class DefaultCoreTableHeaderCellPart<S extends DefaultCoreTableH
 
     private boolean needsLabelContainer(O options) {
         if (labelContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -744,7 +762,7 @@ public abstract class DefaultCoreTableHeaderCellPart<S extends DefaultCoreTableH
 
     private boolean needsMenu(O options) {
         if (menu != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -773,7 +791,7 @@ public abstract class DefaultCoreTableHeaderCellPart<S extends DefaultCoreTableH
 
     private boolean needsMenuButton(O options) {
         if (menuButton != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

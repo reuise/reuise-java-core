@@ -16,6 +16,7 @@ import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.theme.Color;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
@@ -54,10 +55,34 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
     }
 
     @Override
-    public S setSize(Integer size) {
+    public S setSize(Object size) {
         setWidth(size);
         setHeight(size);
         return self();
+    }
+
+    @Override
+    public S setSize(IconSize size) {
+        if (size == null)
+            return self();
+
+        setSize(size.getSize());
+        return self();
+    }
+
+    @Override
+    public Color getColor() {
+        return null;
+    }
+
+    @Override
+    public S setColor(String color) {
+        return self();
+    }
+
+    @Override
+    public S setColor(Color color) {
+        return setColor(color.toHex());
     }
 
     private CoreParentComponentPart parentComponentPart;
@@ -67,8 +92,6 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
     protected CoreLink link;
 
     protected CoreImage image;
-
-    protected String linkUrl;
 
     protected DefaultCoreIconPart(O options) {
     }
@@ -99,6 +122,12 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -123,6 +152,12 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -130,6 +165,12 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -721,18 +762,15 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
 
     private boolean needsLink(O options) {
         if (link != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasLinkOptions())
-            return true;
-
         if (options.getLinkUrl() != null)
             return true;
 
-        return false;
+        return options.hasLinkOptions();
     }
 
     private CoreLink createLink(O options) {
@@ -756,18 +794,15 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
 
     private boolean needsImage(O options) {
         if (image != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasImageOptions())
+        if ((options.getUrl() != null) && (options.getColor() == null))
             return true;
 
-        if (options.getUrl() != null)
-            return true;
-
-        return false;
+        return options.hasImageOptions();
     }
 
     private CoreImage createImage(O options) {
@@ -800,11 +835,26 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
         // Apply options for default state
         applicator.add(options.getSizeOption(), component::setSize);
         applicator.add(options.getUrlOption(), component::setUrl);
+        applicator.add(options.getColorOption(), component::setColor);
         applicator.add(options.getLinkUrlOption(), component::setLinkUrl);
     }
 
     public void onInitializeComponentType(RootComponent rootComponent) {
         parentComponentPart.onInitializeComponentType(rootComponent);
+    }
+
+    public S setLinkUrl(String linkUrl) {
+        if (link != null)
+            link.setUrl(linkUrl);
+
+        return self();
+    }
+
+    public String getLinkUrl() {
+        if (link == null)
+            return null;
+
+        return link.getUrl();
     }
 
     // Implementation
@@ -824,15 +874,4 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
     }
 
     protected abstract S self();
-
-    @Override
-    public String getLinkUrl() {
-        return linkUrl;
-    }
-
-    @Override
-    public S setLinkUrl(String linkUrl) {
-        this.linkUrl = linkUrl;
-        return self();
-    }
 }

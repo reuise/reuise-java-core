@@ -2,6 +2,7 @@ package dev.reuise.core.text;
 import dev.reuise.core.Html;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 public interface CoreParagraphFeatures {
     String getText();
 
@@ -20,4 +21,12 @@ public interface CoreParagraphFeatures {
     Object getFontSize(State state);
 
     CoreParagraphFeatures setText(Html html);
+
+    boolean isLoading();
+
+    CoreParagraphFeatures setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    CoreParagraphFeatures setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 }

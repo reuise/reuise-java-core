@@ -12,4 +12,6 @@ public interface CoreTableHeaderFeatures {
     CoreTableHeaderFeatures addColumn(CoreTableColumnOptions column);
 
     CoreTableHeaderFeatures removeColumn(CoreTableColumnOptions column);
+
+    CoreTableHeaderFeatures clearColumns();
 }

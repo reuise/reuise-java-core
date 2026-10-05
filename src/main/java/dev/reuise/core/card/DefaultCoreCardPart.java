@@ -10,6 +10,7 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.divider.CoreDivider;
 import dev.reuise.core.image.CoreImage;
 import dev.reuise.core.image.CoreImageOptions;
 import dev.reuise.core.layout.AlignItems;
@@ -25,10 +26,13 @@ import dev.reuise.core.layout.JustifyContent;
 import dev.reuise.core.layout.SurfaceType;
 import dev.reuise.core.link.CoreLink;
 import dev.reuise.core.link.CoreLinkOptions;
+import dev.reuise.core.list.CoreBasicList;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.text.CoreHeading;
+import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.text.CoreTextBlock;
 import dev.reuise.core.text.CoreTextBlockOptions;
 import dev.reuise.core.theme.Theme;
@@ -75,9 +79,7 @@ import java.util.List;
 // base comp: surface
 // base comp: flexContainer
 // base comp: container
-// add composition for container: addHeading
-// add composition for container: addDivider
-// add composition for container: addParagraph
+// add composition for container: addMarkdown
 // base comp: parentComponent
 // base comp: baseComponent
 // add composition for baseComponent: hasWrapper
@@ -226,6 +228,12 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        surfacePart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         surfacePart.insertBefore(child, beforeChild);
     }
@@ -233,6 +241,12 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
     @Override
     public S addText(String text) {
         surfacePart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        surfacePart.addLineBreak();
         return self();
     }
 
@@ -777,44 +791,135 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
         return self();
     }
 
+    public S addMarkdown(String markdown) {
+        surfacePart.addMarkdown(markdown);
+        return self();
+    }
+
     public S addHeading(int level, String text) {
-        surfacePart.addHeading(level, text);
+        containerPart.addHeading(level, text);
         return self();
     }
 
     public S addHeading(String text) {
-        surfacePart.addHeading(text);
+        containerPart.addHeading(text);
         return self();
     }
 
     public S addHeading(int level, Html html) {
-        surfacePart.addHeading(level, html);
+        containerPart.addHeading(level, html);
         return self();
     }
 
     public S addHeading(Html html) {
-        surfacePart.addHeading(html);
+        containerPart.addHeading(html);
         return self();
     }
 
+    public CoreHeading createHeading(int level, String text) {
+        return containerPart.createHeading(level, text);
+    }
+
+    public CoreHeading createHeading(String text) {
+        return containerPart.createHeading(text);
+    }
+
+    public CoreHeading createHeading(int level, Html html) {
+        return containerPart.createHeading(level, html);
+    }
+
+    public CoreHeading createHeading(Html html) {
+        return containerPart.createHeading(html);
+    }
+
     public S addDivider() {
-        surfacePart.addDivider();
+        containerPart.addDivider();
         return self();
     }
 
     public S addDivider(String label) {
-        surfacePart.addDivider(label);
+        containerPart.addDivider(label);
         return self();
     }
 
+    public CoreDivider createDivider() {
+        return containerPart.createDivider();
+    }
+
+    public CoreDivider createDivider(String label) {
+        return containerPart.createDivider(label);
+    }
+
+    public S addImage(String altText, String url) {
+        containerPart.addImage(altText, url);
+        return self();
+    }
+
+    public CoreImage createImage(String altText, String url) {
+        return containerPart.createImage(altText, url);
+    }
+
+    public S addLink(String label, String url) {
+        containerPart.addLink(label, url);
+        return self();
+    }
+
+    public CoreLink createLink(String label, String url) {
+        return containerPart.createLink(label, url);
+    }
+
     public S addParagraph(String text) {
-        surfacePart.addParagraph(text);
+        containerPart.addParagraph(text);
         return self();
     }
 
     public S addParagraph(Html html) {
-        surfacePart.addParagraph(html);
+        containerPart.addParagraph(html);
         return self();
+    }
+
+    public CoreParagraph createParagraph(String text) {
+        return containerPart.createParagraph(text);
+    }
+
+    public CoreParagraph createParagraph(Html html) {
+        return containerPart.createParagraph(html);
+    }
+
+    public S addBasicList(boolean ordered, String... items) {
+        containerPart.addBasicList(ordered, items);
+        return self();
+    }
+
+    public S addBasicList(boolean ordered, List<String> items) {
+        containerPart.addBasicList(ordered, items);
+        return self();
+    }
+
+    public S addBasicList(String... items) {
+        containerPart.addBasicList(items);
+        return self();
+    }
+
+    public S addBasicList(List<String> items) {
+        containerPart.addBasicList(items);
+        return self();
+    }
+
+    public CoreBasicList createBasicList(boolean ordered, String... items) {
+        return containerPart.createBasicList(ordered, items);
+    }
+
+    public CoreBasicList createBasicList(boolean ordered, List<String> items) {
+        return containerPart.createBasicList(ordered, items);
+    }
+
+    public CoreBasicList createBasicList(String... items) {
+        return containerPart.createBasicList(items);
+    }
+
+    public CoreBasicList createBasicList(List<String> items) {
+        return containerPart.createBasicList(items);
     }
 
     @Override
@@ -837,6 +942,12 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
     @Override
     public S removeChild(CoreComponent child) {
         parentComponentPart.removeChild(child);
+        return self();
+    }
+
+    @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
         return self();
     }
 
@@ -1437,18 +1548,15 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsMediaLink(O options) {
         if (mediaLink != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasMediaLinkOptions())
-            return true;
-
         if (options.getUrl() != null)
             return true;
 
-        return false;
+        return options.hasMediaLinkOptions();
     }
 
     private CoreLink createMediaLink(O options) {
@@ -1472,7 +1580,7 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsMediaContainer(O options) {
         if (mediaContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1505,18 +1613,15 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsImage(O options) {
         if (image != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasImageOptions())
-            return true;
-
         if (options.getImageUrl() != null)
             return true;
 
-        return false;
+        return options.hasImageOptions();
     }
 
     private CoreImage createImage(O options) {
@@ -1541,7 +1646,7 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsTextContent(O options) {
         if (textContent != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1573,7 +1678,7 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsHeadline(O options) {
         if (headline != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
@@ -1606,18 +1711,15 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsHeadingLink(O options) {
         if (headingLink != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasHeadingLinkOptions())
-            return true;
-
         if (options.getUrl() != null)
             return true;
 
-        return false;
+        return options.hasHeadingLinkOptions();
     }
 
     private CoreLink createHeadingLink(O options) {
@@ -1642,18 +1744,15 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsHeadingContainer(O options) {
         if (headingContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasHeadingContainerOptions())
-            return true;
-
         if (options.getHeading() != null)
             return true;
 
-        return false;
+        return options.hasHeadingContainerOptions();
     }
 
     private CoreTextBlock createHeadingContainer(O options) {
@@ -1678,18 +1777,15 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsSubHeadingContainer(O options) {
         if (subHeadingContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasSubHeadingContainerOptions())
-            return true;
-
         if (options.getSubHeading() != null)
             return true;
 
-        return false;
+        return options.hasSubHeadingContainerOptions();
     }
 
     private CoreTextBlock createSubHeadingContainer(O options) {
@@ -1714,18 +1810,15 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsTextContainer(O options) {
         if (textContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasTextContainerOptions())
-            return true;
-
         if (options.getText() != null)
             return true;
 
-        return false;
+        return options.hasTextContainerOptions();
     }
 
     private CoreTextBlock createTextContainer(O options) {
@@ -1750,7 +1843,7 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     private boolean needsActionsContainer(O options) {
         if (actionsContainer != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;

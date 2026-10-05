@@ -28,6 +28,8 @@ public interface CoreSelectMenuPartOptions {
 
     CoreSelectMenuPartOptions removeItem(CoreMenuItem item);
 
+    CoreSelectMenuPartOptions clearItems();
+
     String getPlaceholder();
 
     CoreSelectMenuPartOptions setPlaceholder(String placeholder);

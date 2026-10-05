@@ -169,6 +169,12 @@ public abstract class AbstractCorePasswordFieldOptions<S extends AbstractCorePas
     }
 
     @Override
+    public S clearValidators() {
+        inputOptions.clearValidators();
+        return self();
+    }
+
+    @Override
     public List<InputValidator> getValidators(InputValidator.ValidationMode... modes) {
         return this.inputOptions.getValidators(modes);
     }

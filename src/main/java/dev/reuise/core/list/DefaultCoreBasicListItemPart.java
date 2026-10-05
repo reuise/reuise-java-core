@@ -81,6 +81,12 @@ public abstract class DefaultCoreBasicListItemPart<S extends DefaultCoreBasicLis
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -102,6 +108,12 @@ public abstract class DefaultCoreBasicListItemPart<S extends DefaultCoreBasicLis
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -109,6 +121,12 @@ public abstract class DefaultCoreBasicListItemPart<S extends DefaultCoreBasicLis
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -697,18 +715,15 @@ public abstract class DefaultCoreBasicListItemPart<S extends DefaultCoreBasicLis
 
     private boolean needsLink(O options) {
         if (link != null)
-            return true;
+            return false;
 
         if (options == null)
             return false;
 
-        if (options.hasLinkOptions())
-            return true;
-
         if (options.getUrl() != null)
             return true;
 
-        return false;
+        return options.hasLinkOptions();
     }
 
     private CoreLink createLink(O options) {

@@ -3,7 +3,12 @@ import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 public abstract class AbstractCoreMediaPlayerOptions<S extends AbstractCoreMediaPlayerOptions<S>> implements CoreMediaPlayerOptions , CoreComponentOptions {
+    private List<Object> textTrackData;
+
+    private Function<Object, CoreTextTrack> textTrackDataMapper;
+
     protected AbstractCoreMediaPlayerOptions() {
     }
 
@@ -153,6 +158,31 @@ public abstract class AbstractCoreMediaPlayerOptions<S extends AbstractCoreMedia
             return self();
         }
         list.remove(textTrack);
+        return self();
+    }
+
+    @Override
+    public S clearTextTracks() {
+        List<CoreTextTrack> list = getTextTracks();
+        if (list == null) {
+            return self();
+        }
+        list.clear();
+        return self();
+    }
+
+    public List<Object> getTextTrackData() {
+        return textTrackData;
+    }
+
+    public Function<Object, CoreTextTrack> getTextTrackDataMapper() {
+        return textTrackDataMapper;
+    }
+
+    @Override
+    public <T> S setTextTracks(List<T> data, Function<T, CoreTextTrack> mapper) {
+        this.textTrackData = ((List<Object>) (data));
+        this.textTrackDataMapper = ((Function<Object, CoreTextTrack>) (mapper));
         return self();
     }
 

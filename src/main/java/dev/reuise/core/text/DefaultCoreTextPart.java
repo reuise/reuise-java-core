@@ -13,6 +13,7 @@ import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
@@ -57,6 +58,10 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
 
     private CoreBaseComponentPart baseComponentPart;
 
+    protected Boolean loading;
+
+    protected CoreSkeletonOptions skeletonOptions;
+
     protected DefaultCoreTextPart(O options) {
     }
 
@@ -86,6 +91,12 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -104,6 +115,12 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -111,6 +128,12 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -695,6 +718,28 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     public void onCreate(O options) {
     }
 
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(loading);
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.loading = loading;
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return skeletonOptions;
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.skeletonOptions = skeletonOptions;
+        return self();
+    }
+
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
         CoreTextPart component = ((CoreTextPart) (options.getComponent()));
         if (component == null)
@@ -704,12 +749,18 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
         applicator.add(options.getTextOption(), component::setText);
         applicator.add(options.getFontSizeOption(), component::setFontSize);
         applicator.add(options.getLineHeightOption(), component::setLineHeight);
+        applicator.add(options.getFontWeightOption(), component::setFontWeight);
+        applicator.add(options.getFontStyleOption(), component::setFontStyle);
         applicator.add(options.getHighlightTextOption(), component::setHighlightText);
+        applicator.add(options.getLoadingOption(), component::setLoading);
+        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
         if (states != null)
             states.stream().forEach((State state) -> {
                 // Apply options for each (non-default) state
                 applicator.add(options.getFontSizeOption(state), state, component::setFontSize);
                 applicator.add(options.getLineHeightOption(state), state, component::setLineHeight);
+                applicator.add(options.getFontWeightOption(state), state, component::setFontWeight);
+                applicator.add(options.getFontStyleOption(state), state, component::setFontStyle);
             });
 
     }
@@ -735,6 +786,20 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     }
 
     @Override
+    public S setFontWeightAllStates(Object fontWeight) {
+        setFontWeight(ScreenSizeValues.of(fontWeight, fontWeight));
+        setFontWeight(fontWeight);
+        return self();
+    }
+
+    @Override
+    public S setFontStyleAllStates(Object fontStyle) {
+        setFontStyle(ScreenSizeValues.of(fontStyle, fontStyle));
+        setFontStyle(fontStyle);
+        return self();
+    }
+
+    @Override
     public S setFontSize(ScreenSizeValues<Object> screenValues) {
         if (screenValues == null)
             return self();
@@ -749,6 +814,24 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
             return self();
 
         screenValues.iterate((ScreenSize s,Object v) -> setLineHeight(v, s));
+        return self();
+    }
+
+    @Override
+    public S setFontWeight(ScreenSizeValues<Object> screenValues) {
+        if (screenValues == null)
+            return self();
+
+        screenValues.iterate((ScreenSize s,Object v) -> setFontWeight(v, s));
+        return self();
+    }
+
+    @Override
+    public S setFontStyle(ScreenSizeValues<Object> screenValues) {
+        if (screenValues == null)
+            return self();
+
+        screenValues.iterate((ScreenSize s,Object v) -> setFontStyle(v, s));
         return self();
     }
 

@@ -10,12 +10,27 @@ import dev.reuise.core.ScreenSize;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
+import dev.reuise.core.divider.CoreDivider;
 import dev.reuise.core.divider.CoreDividerOptions;
+import dev.reuise.core.image.CoreImage;
+import dev.reuise.core.image.CoreImageOptions;
+import dev.reuise.core.link.CoreLink;
+import dev.reuise.core.link.CoreLinkOptions;
+import dev.reuise.core.list.CoreBasicList;
+import dev.reuise.core.list.CoreBasicListItem;
+import dev.reuise.core.list.CoreBasicListItemOptions;
+import dev.reuise.core.list.CoreBasicListOptions;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.text.CoreHeading;
 import dev.reuise.core.text.CoreHeadingOptions;
+import dev.reuise.core.text.CoreInlineText;
+import dev.reuise.core.text.CoreInlineTextOptions;
+import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.text.CoreParagraphOptions;
+import dev.reuise.core.text.FontStyle;
+import dev.reuise.core.text.FontWeight;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
@@ -51,6 +66,151 @@ public abstract class DefaultCoreContainerPart<S extends DefaultCoreContainerPar
     @Override
     public Object getPadding(State state) {
         return null;
+    }
+
+    public CoreHeading createHeading(int level, String text) {
+        CoreHeadingOptions opts = getComponentFactory().createHeadingOptions();
+        opts.setLevel(level);
+        opts.setText(text);
+        CoreHeading heading = getComponentFactory().createHeading(opts);
+        getComponent().add(heading);
+        return heading;
+    }
+
+    public CoreHeading createHeading(String text) {
+        return createHeading(1, text);
+    }
+
+    public CoreHeading createHeading(Html html) {
+        return createHeading(1, html);
+    }
+
+    public CoreHeading createHeading(int level, Html html) {
+        return createHeading(1, html.toString());
+    }
+
+    public S addHeading(int level, String text) {
+        createHeading(level, text);
+        return self();
+    }
+
+    public S addHeading(String text) {
+        createHeading(1, text);
+        return self();
+    }
+
+    public S addHeading(Html html) {
+        return addHeading(1, html);
+    }
+
+    public S addHeading(int level, Html html) {
+        return addHeading(1, html.toString());
+    }
+
+    public CoreDivider createDivider(String label) {
+        CoreDividerOptions opts = getComponentFactory().createDividerOptions();
+        if (label != null)
+            opts.setLabel(label);
+
+        CoreDivider divider = getComponentFactory().createDivider(opts);
+        getComponent().add(divider);
+        return divider;
+    }
+
+    public CoreDivider createDivider() {
+        return createDivider(null);
+    }
+
+    public S addDivider(String label) {
+        createDivider(label);
+        return self();
+    }
+
+    public S addDivider() {
+        return addDivider(null);
+    }
+
+    public CoreParagraph createParagraph(String text) {
+        CoreParagraphOptions opts = getComponentFactory().createParagraphOptions();
+        opts.setText(text);
+        CoreParagraph paragraph = getComponentFactory().createParagraph(opts);
+        getComponent().add(paragraph);
+        return paragraph;
+    }
+
+    public CoreParagraph createParagraph(Html html) {
+        return createParagraph(html.toString());
+    }
+
+    public S addParagraph(String text) {
+        createParagraph(text);
+        return self();
+    }
+
+    public S addParagraph(Html html) {
+        return addParagraph(html.toString());
+    }
+
+    public CoreBasicList createBasicList(boolean ordered, List<String> items) {
+        CoreBasicListOptions listOpts = getComponentFactory().createBasicListOptions();
+        listOpts.setOrdered(ordered);
+        for (String item : items)
+            listOpts.addItem(item);
+
+        CoreBasicList list = getComponentFactory().createBasicList(listOpts);
+        getComponent().add(list);
+        return list;
+    }
+
+    public CoreBasicList createBasicList(boolean ordered, String... items) {
+        return createBasicList(ordered, List.of(items));
+    }
+
+    public CoreBasicList createBasicList(List<String> items) {
+        return createBasicList(false, items);
+    }
+
+    public CoreBasicList createBasicList(String... items) {
+        return createBasicList(false, items);
+    }
+
+    public S addBasicList(boolean ordered, List<String> items) {
+        createBasicList(ordered, items);
+        return self();
+    }
+
+    public S addBasicList(boolean ordered, String... items) {
+        return addBasicList(ordered, List.of(items));
+    }
+
+    public S addBasicList(List<String> items) {
+        return addBasicList(false, items);
+    }
+
+    public S addBasicList(String... items) {
+        return addBasicList(false, items);
+    }
+
+    public CoreLink createLink(String label, String url) {
+        CoreLinkOptions linkOpts = getComponentFactory().createLinkOptions();
+        linkOpts.setText(label);
+        linkOpts.setUrl(url);
+        CoreLink link = getComponentFactory().createLink(linkOpts);
+        getComponent().add(link);
+        return link;
+    }
+
+    public S addLink(String label, String url) {
+        createLink(label, url);
+        return self();
+    }
+
+    public CoreImage createImage(String altText, String url) {
+        return null;
+    }
+
+    public S addImage(String altText, String url) {
+        return self();
     }
 
     @Override
@@ -111,6 +271,12 @@ public abstract class DefaultCoreContainerPart<S extends DefaultCoreContainerPar
     }
 
     @Override
+    public S clearChildren() {
+        parentComponentPart.clearChildren();
+        return self();
+    }
+
+    @Override
     public RootComponent getRootComponent() {
         return parentComponentPart.getRootComponent();
     }
@@ -129,6 +295,12 @@ public abstract class DefaultCoreContainerPart<S extends DefaultCoreContainerPar
     }
 
     @Override
+    public S addAll(List<? extends CoreComponent> children) {
+        parentComponentPart.addAll(children);
+        return self();
+    }
+
+    @Override
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
         parentComponentPart.insertBefore(child, beforeChild);
     }
@@ -136,6 +308,12 @@ public abstract class DefaultCoreContainerPart<S extends DefaultCoreContainerPar
     @Override
     public S addText(String text) {
         parentComponentPart.addText(text);
+        return self();
+    }
+
+    @Override
+    public S addLineBreak() {
+        parentComponentPart.addLineBreak();
         return self();
     }
 
@@ -884,54 +1062,83 @@ public abstract class DefaultCoreContainerPart<S extends DefaultCoreContainerPar
     }
 
     // Implementation
-    public S addHeading(int level, String text) {
-        CoreHeadingOptions opts = getComponentFactory().createHeadingOptions();
-        opts.setLevel(level);
-        opts.setText(text);
-        getComponent().add(getComponentFactory().createHeading(opts));
+    public S addMarkdown(String markdown) {
+        CoreComponentFactory componentFactory = getComponentFactory();
+        MarkdownParser parser = MarkdownParser.newBuilder().onHeading((c, level) -> {
+            CoreHeadingOptions opts = componentFactory.createHeadingOptions();
+            opts.setLevel(level);
+            CoreHeading heading = componentFactory.createHeading(opts);
+            c.add(heading);
+            return heading;
+        }).onParagraph(c -> {
+            CoreParagraph paragraph = componentFactory.createParagraph(componentFactory.createParagraphOptions());
+            c.add(paragraph);
+            return paragraph;
+        }).onList((c, ordered) -> {
+            CoreBasicListOptions listOpts = componentFactory.createBasicListOptions();
+            listOpts.setOrdered(ordered);
+            CoreBasicList list = componentFactory.createBasicList(listOpts);
+            c.add(list);
+            return list;
+        }).onListItem(c -> {
+            CoreBasicListItemOptions listOpts = componentFactory.createBasicListItemOptions();
+            CoreBasicListItem listItem = componentFactory.createBasicListItem(listOpts);
+            c.add(listItem);
+            return listItem;
+        }).onDivider(c -> {
+            CoreDivider divider = componentFactory.createDivider(componentFactory.createDividerOptions());
+            c.add(divider);
+            return divider;
+        }).onBlockquote(c -> {
+            CoreContainer container = componentFactory.createContainer(componentFactory.createContainerOptions());
+            c.add(container);
+            return container;
+        }).onCodeBlock(c -> {
+            CoreContainer container = componentFactory.createContainer(componentFactory.createContainerOptions());
+            c.add(container);
+            return container;
+        }).onBold((c, text) -> {
+            CoreInlineTextOptions inlineTextOpts = componentFactory.createInlineTextOptions();
+            inlineTextOpts.setText(text);
+            inlineTextOpts.setFontWeight(FontWeight.BOLD);
+            CoreInlineText inlineText = componentFactory.createInlineText(inlineTextOpts);
+            c.add(inlineText);
+        }).onItalic((c, text) -> {
+            CoreInlineTextOptions inlineTextOpts = componentFactory.createInlineTextOptions();
+            inlineTextOpts.setText(text);
+            inlineTextOpts.setFontStyle(FontStyle.ITALIC);
+            CoreInlineText inlineText = componentFactory.createInlineText(inlineTextOpts);
+            c.add(inlineText);
+        }).onStrikethrough((c, text) -> {
+            CoreInlineTextOptions inlineTextOpts = componentFactory.createInlineTextOptions();
+            inlineTextOpts.setText(text);
+            CoreInlineText inlineText = componentFactory.createInlineText(inlineTextOpts);
+            c.add(inlineText);
+        }).onColor((c, text, color) -> {
+            CoreInlineTextOptions inlineTextOpts = componentFactory.createInlineTextOptions();
+            inlineTextOpts.setText(text);
+            CoreInlineText inlineText = componentFactory.createInlineText(inlineTextOpts);
+            c.add(inlineText);
+        }).onText((c, text) -> c.addText(text)).onLink((c, label, url) -> {
+            CoreLinkOptions linkOpts = componentFactory.createLinkOptions();
+            linkOpts.setText(label);
+            linkOpts.setUrl(url);
+            CoreLink link = componentFactory.createLink(linkOpts);
+            c.add(link);
+        }).onEmail((c, label, url) -> {
+            CoreLinkOptions linkOpts = componentFactory.createLinkOptions();
+            linkOpts.setText(label);
+            linkOpts.setUrl(url);
+            CoreLink link = componentFactory.createLink(linkOpts);
+            c.add(link);
+        }).onImage((c, alt, src) -> {
+            CoreImageOptions imgOpts = componentFactory.createImageOptions();
+            // imgOpts.setAltText(alt);
+            imgOpts.setUrl(src);
+            CoreImage img = componentFactory.createImage(imgOpts);
+            c.add(img);
+        }).onLineBreak(c -> c.addLineBreak()).build();
+        parser.parse(markdown, getComponent());
         return self();
-    }
-
-    // Implementation
-    public S addHeading(String text) {
-        return addHeading(1, text);
-    }
-
-    // Implementation
-    public S addHeading(int level, Html html) {
-        return addHeading(1, html.toString());
-    }
-
-    // Implementation
-    public S addHeading(Html html) {
-        return addHeading(1, html);
-    }
-
-    // Implementation
-    public S addDivider() {
-        return addDivider(null);
-    }
-
-    // Implementation
-    public S addDivider(String label) {
-        CoreDividerOptions opts = getComponentFactory().createDividerOptions();
-        if (label != null)
-            opts.setLabel(label);
-
-        getComponent().add(getComponentFactory().createDivider(opts));
-        return self();
-    }
-
-    // Implementation
-    public S addParagraph(String text) {
-        CoreParagraphOptions opts = getComponentFactory().createParagraphOptions();
-        opts.setText(text);
-        getComponent().add(getComponentFactory().createParagraph(opts));
-        return self();
-    }
-
-    // Implementation
-    public S addParagraph(Html html) {
-        return addParagraph(html.toString());
     }
 }

@@ -11,6 +11,7 @@ import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.ComponentOption;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 public interface CoreTopAppBarPartOptions {
     boolean isFixed();
 
@@ -58,9 +59,17 @@ public interface CoreTopAppBarPartOptions {
 
     CoreTopAppBarPartOptions setActions(List<CoreButton> actions);
 
+    <T> CoreTopAppBarPartOptions setActions(List<T> data, Function<T, CoreButton> mapper);
+
     CoreTopAppBarPartOptions addAction(CoreButton action);
 
     CoreTopAppBarPartOptions removeAction(CoreButton action);
+
+    CoreTopAppBarPartOptions clearActions();
+
+    List<Object> getActionData();
+
+    Function<Object, CoreButton> getActionDataMapper();
 
     <T> void setDefaultOption(String option, T value);
 

@@ -7,18 +7,25 @@ import dev.reuise.core.link.CoreLink;
 import dev.reuise.core.link.CoreLinkOptions;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.ComponentOption;
+import dev.reuise.core.theme.Color;
 public interface CoreIconPartOptions {
-    Integer getSize();
+    Object getSize();
 
-    ComponentOption<Integer> getSizeOption();
+    ComponentOption<Object> getSizeOption();
 
-    CoreIconPartOptions setSize(Integer size);
+    CoreIconPartOptions setSize(Object size);
 
     String getUrl();
 
     ComponentOption<String> getUrlOption();
 
     CoreIconPartOptions setUrl(String url);
+
+    Color getColor();
+
+    ComponentOption<Color> getColorOption();
+
+    CoreIconPartOptions setColor(Color color);
 
     String getLinkUrl();
 
@@ -33,6 +40,10 @@ public interface CoreIconPartOptions {
     <T> void setDefaultOption(String option, T value, State state);
 
     <T> void setDefaultOption(String option, T value, State state, boolean force);
+
+    CoreIconPartOptions setSize(IconSize size);
+
+    CoreIconPartOptions setColor(String color);
 
     CoreLinkOptions getLinkOptions();
 
