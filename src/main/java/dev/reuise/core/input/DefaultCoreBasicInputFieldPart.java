@@ -15,8 +15,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import static dev.reuise.core.input.DefaultCoreBasicInputFieldPartImpl.getComponent;
+import static dev.reuise.core.input.DefaultCoreBasicInputFieldPartImpl.self;
+import static dev.reuise.core.input.DefaultCoreBasicInputFieldPartImpl.setFocused;
+import static dev.reuise.core.input.DefaultCoreBasicInputFieldPartImpl.setValue;
 // Option: Mounted - CORE
 // Option: Margin - CORE
 // Option: MarginTop - CORE
@@ -80,13 +83,13 @@ public abstract class DefaultCoreBasicInputFieldPart<S extends DefaultCoreBasicI
     }
 
     @Override
-    public List<InputValidator> getValidators(InputValidator.ValidationMode... modes) {
-        return this.validators.stream().filter(v -> v.isMode(modes)).collect(Collectors.toList());
+    public List<InputValidator> getValidators(InputValidator... modes) {
+        return validators.stream().filter(v -> v.isMode(modes)).collect(Collectors.toList());
     }
 
     @Override
     public <T extends InputValidator> List<T> getValidators(Class<? extends T> type) {
-        return this.validators.stream().filter(validator -> type == validator.getClass()).map(validator -> ((T) (validator))).collect(Collectors.toList());
+        return validators.stream().filter(validator -> type == validator.getClass()).map(validator -> ((T) (validator))).collect(Collectors.toList());
     }
 
     private CoreBaseComponentPart baseComponentPart;
@@ -718,7 +721,7 @@ public abstract class DefaultCoreBasicInputFieldPart<S extends DefaultCoreBasicI
     // Implementation
     @Override
     public S addValidator(InputValidator validator) {
-        this.validators.add(validator);
+        validators.add(validator);
         return self();
     }
 
@@ -731,7 +734,7 @@ public abstract class DefaultCoreBasicInputFieldPart<S extends DefaultCoreBasicI
     // Implementation
     @Override
     public S removeValidator(InputValidator validator) {
-        this.validators.remove(validator);
+        validators.remove(validator);
         return self();
     }
 
@@ -753,10 +756,10 @@ public abstract class DefaultCoreBasicInputFieldPart<S extends DefaultCoreBasicI
 
     // Implementation
     public boolean validate() {
-        if ((this.validators == null) || this.validators.isEmpty())
+        if ((validators == null) || validators.isEmpty())
             return true;
 
-        for (InputValidator validator : this.validators) {
+        for (InputValidator validator : validators) {
             String errorMessage = validator.validate(getComponent().getValue());
             boolean error = errorMessage != null;
             setError(error);

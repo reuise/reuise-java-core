@@ -55,5 +55,6 @@ public enum AnchorPosition {
             return "br";
         }
     };
+
     public abstract String getShortName();
 }

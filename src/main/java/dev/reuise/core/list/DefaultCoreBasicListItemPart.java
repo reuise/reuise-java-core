@@ -17,6 +17,7 @@ import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.list.DefaultCoreBasicListItemPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -765,19 +766,19 @@ public abstract class DefaultCoreBasicListItemPart<S extends DefaultCoreBasicLis
 
     // Implementation
     public S setUrl(String url) {
-        if ((url == null) || (this.link == null))
+        if ((url == null) || (link == null))
             return self();
 
-        this.link.setUrl(url);
+        link.setUrl(url);
         return self();
     }
 
     // Implementation
     public String getUrl() {
-        if (this.link == null)
+        if (link == null)
             return null;
 
-        return this.link.getUrl();
+        return link.getUrl();
     }
 
     protected abstract S self();

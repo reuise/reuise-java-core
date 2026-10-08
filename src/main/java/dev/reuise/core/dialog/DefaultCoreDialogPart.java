@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.dialog.DefaultCoreDialogPartImpl.getFooter;
+import static dev.reuise.core.dialog.DefaultCoreDialogPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE

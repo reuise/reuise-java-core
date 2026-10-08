@@ -25,6 +25,8 @@ import dev.reuise.core.text.CoreInlineTextOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.list.DefaultCoreListItemPartImpl.containsText;
+import static dev.reuise.core.list.DefaultCoreListItemPartImpl.self;
 // Option: Url - CORE
 // Option: Children - CORE
 // Option: Mounted - CORE
@@ -997,13 +999,13 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
         if (label == null)
             return self();
 
-        this.labelContainer.setText(label);
+        labelContainer.setText(label);
         return self();
     }
 
     // Implementation
     public String getLabel() {
-        return this.labelContainer.getText();
+        return labelContainer.getText();
     }
 
     // Implementation

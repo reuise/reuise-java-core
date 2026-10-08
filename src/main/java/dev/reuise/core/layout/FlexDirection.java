@@ -25,5 +25,6 @@ public enum FlexDirection {
             return "column-reverse";
         }
     };
+
     public abstract String getCssValue();
 }

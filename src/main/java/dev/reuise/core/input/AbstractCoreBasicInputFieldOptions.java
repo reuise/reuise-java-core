@@ -4,8 +4,9 @@ import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import static dev.reuise.core.input.AbstractCoreBasicInputFieldOptionsImpl.self;
+import static dev.reuise.core.input.AbstractCoreBasicInputFieldOptionsImpl.setOption;
 public abstract class AbstractCoreBasicInputFieldOptions<S extends AbstractCoreBasicInputFieldOptions<S>> implements CoreComponentOptions , CoreBasicInputFieldOptions {
     @Override
     public S setAutocomplete(boolean autocomplete) {
@@ -13,7 +14,7 @@ public abstract class AbstractCoreBasicInputFieldOptions<S extends AbstractCoreB
     }
 
     @Override
-    public List<InputValidator> getValidators(InputValidator.ValidationMode... modes) {
+    public List<InputValidator> getValidators(InputValidator... modes) {
         return getValidators().stream().filter(v -> v.isMode(modes)).collect(Collectors.toList());
     }
 

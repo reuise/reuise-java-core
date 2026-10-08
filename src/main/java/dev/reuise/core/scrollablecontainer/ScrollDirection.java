@@ -5,4 +5,5 @@ public enum ScrollDirection {
     AUTO,
     BOTH,
     HORIZONTAL,
-    VERTICAL;}
+    VERTICAL;
+}

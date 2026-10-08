@@ -55,5 +55,6 @@ public enum BackdropFilter {
             return 0.0;
         }
     };
+
     public abstract Object getDefaultValue();
 }

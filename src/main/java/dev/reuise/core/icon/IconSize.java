@@ -56,6 +56,7 @@ public enum IconSize {
             return "xl";
         }
     };
+
     public abstract Integer getSize();
 
     public abstract String getShortName();

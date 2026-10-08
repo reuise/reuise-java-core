@@ -13,5 +13,6 @@ public enum CardGridPositionMode {
             return "absolute";
         }
     };
+
     public abstract String getShortName();
 }

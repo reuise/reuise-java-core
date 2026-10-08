@@ -21,7 +21,6 @@ import java.util.List;
 // ReadOnly here??
 // Autocomplete here??
 // Validators here??
-// GETTER OVERLAOD HERE
 // Required here??
 // Error here??
 public interface CoreTextFieldPartOptions {

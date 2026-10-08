@@ -29,11 +29,12 @@ import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.text.CoreParagraphOptions;
-import dev.reuise.core.text.FontStyle;
-import dev.reuise.core.text.FontWeight;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.layout.DefaultCoreContainerPartImpl.getComponent;
+import static dev.reuise.core.layout.DefaultCoreContainerPartImpl.getComponentFactory;
+import static dev.reuise.core.layout.DefaultCoreContainerPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE

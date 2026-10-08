@@ -31,5 +31,6 @@ public enum AlignItems {
             return "self-end";
         }
     };
+
     public abstract String getCssValue();
 }

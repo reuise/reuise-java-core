@@ -13,5 +13,6 @@ public enum SkeletonShape {
             return "rectangular";
         }
     };
+
     public abstract String getShortName();
 }

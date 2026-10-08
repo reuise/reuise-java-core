@@ -28,6 +28,7 @@ import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
+import static dev.reuise.core.tabs.DefaultCoreTabBarPartImpl.self;
 // Option: Padding - CORE
 // Option: PaddingTop - CORE
 // Option: PaddingRight - CORE
@@ -68,24 +69,24 @@ import java.util.function.Function;
 // add composition for baseComponent: removeFromParent
 public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O>, O extends CoreTabBarPartOptions> implements ComponentPart , CoreTabBar {
     protected CoreTab getTabByIndex(int index) {
-        if (((this.tabs == null) || (index < 0)) || (index >= this.tabs.size()))
+        if (((tabs == null) || (index < 0)) || (index >= tabs.size()))
             return null;
 
-        return this.tabs.get(index);
+        return tabs.get(index);
     }
 
     protected int getIndexOfTab(CoreTab tab) {
-        if ((this.tabs == null) || (tab == null))
+        if ((tabs == null) || (tab == null))
             return -1;
 
-        return this.tabs.indexOf(tab);
+        return tabs.indexOf(tab);
     }
 
     protected CoreTab getTabByLabel(String label) {
-        if (((this.tabs == null) || (label == null)) || this.tabs.isEmpty())
+        if (((tabs == null) || (label == null)) || tabs.isEmpty())
             return null;
 
-        return this.tabs.stream().filter(t -> t.getLabel().equals(label)).findFirst().orElse(null);
+        return tabs.stream().filter(t -> t.getLabel().equals(label)).findFirst().orElse(null);
     }
 
     private CoreContainerPart containerPart;
@@ -1275,8 +1276,8 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     @Override
     public S setTabs(List<CoreTab> tabs) {
         this.tabs = tabs;
-        if (this.activeTab != null)
-            setActiveTab(this.activeTab);
+        if (activeTab != null)
+            setActiveTab(activeTab);
 
         return self();
     }
@@ -1284,20 +1285,20 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     // Implementation
     @Override
     public S addTab(CoreTab tab) {
-        this.container.add(tab);
-        if (this.tabs != null)
-            this.tabs.add(tab);
+        container.add(tab);
+        if (tabs != null)
+            tabs.add(tab);
 
-        setActiveTab(this.activeTab);
+        setActiveTab(activeTab);
         return self();
     }
 
     // Implementation
     @Override
     public S removeTab(CoreTab tab) {
-        this.container.remove(tab);
-        if (this.tabs != null)
-            this.tabs.remove(tab);
+        container.remove(tab);
+        if (tabs != null)
+            tabs.remove(tab);
 
         return self();
     }
@@ -1342,7 +1343,7 @@ public abstract class DefaultCoreTabBarPart<S extends DefaultCoreTabBarPart<S, O
     // Implementation
     @Override
     public S setActiveTab(Integer activeTab) {
-        if ((((this.tabs == null) || (activeTab == null)) || (activeTab < 0)) || (activeTab >= this.tabs.size()))
+        if ((((tabs == null) || (activeTab == null)) || (activeTab < 0)) || (activeTab >= tabs.size()))
             return null;
 
         this.activeTab = activeTab;

@@ -15,8 +15,6 @@ import java.util.List;
 // ReadOnly here??
 // Autocomplete here??
 // Validators here??
-// GETTER OVERLAOD HERE
-// GETTER OVERLAOD HERE
 // Required here??
 // Error here??
 public interface CoreTextFieldPart extends ComponentPart , CoreTextFieldFeatures , CoreParentComponentPart {

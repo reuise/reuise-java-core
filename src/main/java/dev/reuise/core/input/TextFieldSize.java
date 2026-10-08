@@ -181,6 +181,7 @@ public enum TextFieldSize {
             return "xl";
         }
     };
+
     public abstract Integer getRadius();
 
     public abstract Integer getIconSize();

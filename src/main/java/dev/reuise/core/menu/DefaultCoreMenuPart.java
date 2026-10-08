@@ -19,6 +19,8 @@ import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.menu.DefaultCoreMenuPartImpl.getComponentFactory;
+import static dev.reuise.core.menu.DefaultCoreMenuPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -50,7 +52,7 @@ import java.util.List;
 public abstract class DefaultCoreMenuPart<S extends DefaultCoreMenuPart<S, O>, O extends CoreMenuPartOptions> implements ComponentPart , CoreMenu {
     @Override
     public S addItem(CoreMenuItem item) {
-        this.list.addItem(item);
+        list.addItem(item);
         return self();
     }
 
@@ -64,7 +66,7 @@ public abstract class DefaultCoreMenuPart<S extends DefaultCoreMenuPart<S, O>, O
         if ((items == null) || items.isEmpty())
             return self();
 
-        this.list.removeAll();
+        list.removeAll();
         items.forEach(i -> addItem(i));
         return self();
     }
@@ -842,7 +844,7 @@ public abstract class DefaultCoreMenuPart<S extends DefaultCoreMenuPart<S, O>, O
 
     // Implementation
     public S addItem(CoreListItem item) {
-        this.list.addItem(item);
+        list.addItem(item);
         return self();
     }
 
@@ -850,14 +852,14 @@ public abstract class DefaultCoreMenuPart<S extends DefaultCoreMenuPart<S, O>, O
     public S addItem(String text) {
         CoreMenuItemOptions menuItemOpts = getComponentFactory().createMenuItemOptions();
         menuItemOpts.setLabel(text);
-        this.list.addItem(getComponentFactory().createMenuItem(menuItemOpts));
+        list.addItem(getComponentFactory().createMenuItem(menuItemOpts));
         return self();
     }
 
     // Implementation
     public S addDivider() {
         CoreMenuDividerOptions menuDividerOpts = getComponentFactory().createMenuDividerOptions();
-        this.list.addItem(getComponentFactory().createMenuDivider(menuDividerOpts));
+        list.addItem(getComponentFactory().createMenuDivider(menuDividerOpts));
         return self();
     }
 }

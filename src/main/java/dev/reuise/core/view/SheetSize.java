@@ -97,6 +97,7 @@ public enum SheetSize {
             return "100%";
         }
     };
+
     public abstract Object getMinSize();
 
     public abstract Object getSize();

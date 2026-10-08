@@ -3,4 +3,5 @@ public enum TextTrackMode {
 
     DISABLED,
     HIDDEN,
-    SHOWING;}
+    SHOWING;
+}

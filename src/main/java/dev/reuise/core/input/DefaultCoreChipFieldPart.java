@@ -1,4 +1,5 @@
 package dev.reuise.core.input;
+import InputValidator.ValidationMode;
 import dev.reuise.core.ComponentPart;
 import dev.reuise.core.ComponentType;
 import dev.reuise.core.CoreComponent;
@@ -28,6 +29,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import static dev.reuise.core.input.DefaultCoreChipFieldPartImpl.getChipGroup;
+import static dev.reuise.core.input.DefaultCoreChipFieldPartImpl.getComponentFactory;
+import static dev.reuise.core.input.DefaultCoreChipFieldPartImpl.getInput;
+import static dev.reuise.core.input.DefaultCoreChipFieldPartImpl.isAllowDuplicates;
+import static dev.reuise.core.input.DefaultCoreChipFieldPartImpl.self;
+import static dev.reuise.core.input.DefaultCoreChipFieldPartImpl.setError;
 // Option: Size - CORE
 // Option: SupportingText - CORE
 // Option: Label - CORE
@@ -104,9 +111,9 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
             return false;
 
         boolean success = true;
-        List<InputValidator> validators = getValidators(InputValidator.ValidationMode.EACH_VALUE, InputValidator.ValidationMode.BOTH);
-        if ((this.delimiters != null) && (!this.delimiters.isEmpty())) {
-            String regex = this.delimiters.stream().map(delimiter -> ("\\Q" + delimiter) + "\\E").collect(Collectors.joining("|"));
+        List<InputValidator> validators = getValidators(ValidationMode.EACH_VALUE, ValidationMode.BOTH);
+        if ((delimiters != null) && (!delimiters.isEmpty())) {
+            String regex = delimiters.stream().map(delimiter -> ("\\Q" + delimiter) + "\\E").collect(Collectors.joining("|"));
             String[] splitParts = text.split(regex);
             List<String> parts = Arrays.stream(splitParts).map(String::trim).filter(part -> !part.isEmpty()).collect(Collectors.toList());
             for (String part : parts) {
@@ -134,7 +141,7 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
             }
         }
         if (!isAllowDuplicates()) {
-            if (this.chipGroup.getChips().stream().anyMatch(c -> c.getLabel().equalsIgnoreCase(part))) {
+            if (chipGroup.getChips().stream().anyMatch(c -> c.getLabel().equalsIgnoreCase(part))) {
                 setError("Cannot add duplicate item");
                 return false;
             }
@@ -148,7 +155,7 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
         newChipOpts.setLabel(label);
         newChipOpts.setHasRemoveIcon(true);
         CoreFilterChip newChip = getComponentFactory().createFilterChip(newChipOpts);
-        this.chipGroup.addChip(newChip);
+        chipGroup.addChip(newChip);
         return newChip;
     }
 
@@ -1159,7 +1166,7 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
     // Implementation
     @Override
     public S removeDelimiter(String delimiter) {
-        this.delimiters.remove(delimiter);
+        delimiters.remove(delimiter);
         return self();
     }
 
@@ -1172,7 +1179,7 @@ public abstract class DefaultCoreChipFieldPart<S extends DefaultCoreChipFieldPar
     // Implementation
     @Override
     public boolean hasDelimiter(String delimiter) {
-        return this.delimiters.contains(delimiter);
+        return delimiters.contains(delimiter);
     }
 
     @Override

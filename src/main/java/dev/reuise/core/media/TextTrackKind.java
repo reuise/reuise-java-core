@@ -5,4 +5,5 @@ public enum TextTrackKind {
     CAPTIONS,
     DESCRIPTIONS,
     CHAPTERS,
-    METADATA;}
+    METADATA;
+}

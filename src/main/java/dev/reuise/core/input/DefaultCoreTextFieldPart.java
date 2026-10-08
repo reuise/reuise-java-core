@@ -23,6 +23,12 @@ import dev.reuise.core.text.CoreLabelOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.input.DefaultCoreTextFieldPartImpl.getComponent;
+import static dev.reuise.core.input.DefaultCoreTextFieldPartImpl.getInput;
+import static dev.reuise.core.input.DefaultCoreTextFieldPartImpl.getValue;
+import static dev.reuise.core.input.DefaultCoreTextFieldPartImpl.self;
+import static dev.reuise.core.input.DefaultCoreTextFieldPartImpl.setError;
+import static dev.reuise.core.input.DefaultCoreTextFieldPartImpl.setFocused;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -162,7 +168,7 @@ public abstract class DefaultCoreTextFieldPart<S extends DefaultCoreTextFieldPar
     // Implementation
     @Override
     public S addText(String text) {
-        this.input.addText(text);
+        input.addText(text);
         return self();
     }
 

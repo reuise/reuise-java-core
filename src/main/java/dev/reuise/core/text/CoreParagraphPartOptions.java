@@ -7,6 +7,18 @@ import dev.reuise.core.option.ComponentOption;
 import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import java.util.Collection;
 public interface CoreParagraphPartOptions {
+    boolean isLoading();
+
+    ComponentOption<Boolean> getLoadingOption();
+
+    CoreParagraphPartOptions setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
+
+    CoreParagraphPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
+
     String getText();
 
     ComponentOption<String> getTextOption();
@@ -30,18 +42,6 @@ public interface CoreParagraphPartOptions {
     ComponentOption<Object> getFontSizeOption(State state);
 
     Collection<State> getFontSizeStates();
-
-    boolean isLoading();
-
-    ComponentOption<Boolean> getLoadingOption();
-
-    CoreParagraphPartOptions setLoading(Boolean loading);
-
-    CoreSkeletonOptions getSkeletonOptions();
-
-    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
-
-    CoreParagraphPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 
     <T> void setDefaultOption(String option, T value);
 

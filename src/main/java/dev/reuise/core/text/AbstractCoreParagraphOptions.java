@@ -7,6 +7,7 @@ import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentOption;
 import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import java.util.Collection;
+import static dev.reuise.core.text.AbstractCoreParagraphOptionsImpl.self;
 public abstract class AbstractCoreParagraphOptions<S extends AbstractCoreParagraphOptions<S>> implements CoreParagraphOptions , CoreComponentOptions {
     @Override
     public S setText(Html html) {
@@ -27,6 +28,46 @@ public abstract class AbstractCoreParagraphOptions<S extends AbstractCoreParagra
     }
 
     public void onInitialize() {
+    }
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(getOptionValue("loading"));
+    }
+
+    @Override
+    public ComponentOption<Boolean> getLoadingOption() {
+        return ((ComponentOption<Boolean>) (getOption("loading")));
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        setOption("loading", loading);
+        return self();
+    }
+
+    private void setDefaultLoading(Boolean loading) {
+        setDefaultOption("loading", loading);
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return ((CoreSkeletonOptions) (getOptionValue("skeletonOptions")));
+    }
+
+    @Override
+    public ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption() {
+        return ((ComponentOption<CoreSkeletonOptions>) (getOption("skeletonOptions")));
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        setOption("skeletonOptions", skeletonOptions);
+        return self();
+    }
+
+    private void setDefaultSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        setDefaultOption("skeletonOptions", skeletonOptions);
     }
 
     @Override
@@ -116,46 +157,6 @@ public abstract class AbstractCoreParagraphOptions<S extends AbstractCoreParagra
         // HIMADDIE!!
         clearOptionStates("fontSize");
         setFontSize(fontSize);
-    }
-
-    @Override
-    public boolean isLoading() {
-        return Boolean.TRUE.equals(getOptionValue("loading"));
-    }
-
-    @Override
-    public ComponentOption<Boolean> getLoadingOption() {
-        return ((ComponentOption<Boolean>) (getOption("loading")));
-    }
-
-    @Override
-    public S setLoading(Boolean loading) {
-        setOption("loading", loading);
-        return self();
-    }
-
-    private void setDefaultLoading(Boolean loading) {
-        setDefaultOption("loading", loading);
-    }
-
-    @Override
-    public CoreSkeletonOptions getSkeletonOptions() {
-        return ((CoreSkeletonOptions) (getOptionValue("skeletonOptions")));
-    }
-
-    @Override
-    public ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption() {
-        return ((ComponentOption<CoreSkeletonOptions>) (getOption("skeletonOptions")));
-    }
-
-    @Override
-    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
-        setOption("skeletonOptions", skeletonOptions);
-        return self();
-    }
-
-    private void setDefaultSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
-        setDefaultOption("skeletonOptions", skeletonOptions);
     }
 
     protected abstract S self();

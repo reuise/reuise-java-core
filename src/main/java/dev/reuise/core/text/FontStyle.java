@@ -19,5 +19,6 @@ public enum FontStyle {
             return "oblique";
         }
     };
+
     public abstract String getValue();
 }

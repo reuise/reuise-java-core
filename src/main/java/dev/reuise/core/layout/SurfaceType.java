@@ -19,5 +19,6 @@ public enum SurfaceType {
             return "outlined";
         }
     };
+
     public abstract String getStyleName();
 }

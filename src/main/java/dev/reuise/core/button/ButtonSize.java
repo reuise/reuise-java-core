@@ -181,6 +181,7 @@ public enum ButtonSize {
             return 64;
         }
     };
+
     public abstract Integer getRadius();
 
     public abstract Integer getIconSize();

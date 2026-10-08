@@ -7,6 +7,18 @@ import dev.reuise.core.option.ComponentOption;
 import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import java.util.Collection;
 public interface CoreTextPartOptions {
+    boolean isLoading();
+
+    ComponentOption<Boolean> getLoadingOption();
+
+    CoreTextPartOptions setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
+
+    CoreTextPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
+
     String getText();
 
     ComponentOption<String> getTextOption();
@@ -90,18 +102,6 @@ public interface CoreTextPartOptions {
     ComponentOption<String> getHighlightTextOption();
 
     CoreTextPartOptions setHighlightText(String highlightText);
-
-    boolean isLoading();
-
-    ComponentOption<Boolean> getLoadingOption();
-
-    CoreTextPartOptions setLoading(Boolean loading);
-
-    CoreSkeletonOptions getSkeletonOptions();
-
-    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
-
-    CoreTextPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 
     <T> void setDefaultOption(String option, T value);
 

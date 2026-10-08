@@ -14,7 +14,10 @@ import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Consumer;
+import static dev.reuise.core.table.DefaultCoreTableColumnGroupPartImpl.getComponentFactory;
+import static dev.reuise.core.table.DefaultCoreTableColumnGroupPartImpl.isInitialized;
+import static dev.reuise.core.table.DefaultCoreTableColumnGroupPartImpl.removeAll;
+import static dev.reuise.core.table.DefaultCoreTableColumnGroupPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE

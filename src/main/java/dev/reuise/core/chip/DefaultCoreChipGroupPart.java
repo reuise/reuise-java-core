@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
+import static dev.reuise.core.chip.DefaultCoreChipGroupPartImpl.getChips;
+import static dev.reuise.core.chip.DefaultCoreChipGroupPartImpl.removeAll;
+import static dev.reuise.core.chip.DefaultCoreChipGroupPartImpl.self;
 // Option: Label - CORE
 // Option: Padding - CORE
 // Option: PaddingTop - CORE

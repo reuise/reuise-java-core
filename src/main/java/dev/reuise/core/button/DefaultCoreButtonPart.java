@@ -14,12 +14,13 @@ import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
-import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.button.DefaultCoreButtonPartImpl.getLabelContainer;
+import static dev.reuise.core.button.DefaultCoreButtonPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -60,10 +61,6 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
     protected CoreIcon endIcon;
 
     protected ButtonType type;
-
-    protected Boolean loading;
-
-    protected CoreSkeletonOptions skeletonOptions;
 
     protected DefaultCoreButtonPart(O options) {
     }
@@ -827,13 +824,13 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
             System.out.println("component is null");
 
         // Apply options for default state
+        applicator.add(options.getLoadingOption(), component::setLoading);
+        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
         applicator.add(options.getLabelOption(), component::setLabel);
         applicator.add(options.getSizeOption(), component::setSize);
         applicator.add(options.getTypeOption(), component::setType);
         applicator.add(options.getUrlOption(), component::setUrl);
         applicator.add(options.getTargetOption(), component::setTarget);
-        applicator.add(options.getLoadingOption(), component::setLoading);
-        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
     }
 
     public void onInitializeComponentType(RootComponent rootComponent) {
@@ -868,28 +865,6 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
     @Override
     public S setType(ButtonType type) {
         this.type = type;
-        return self();
-    }
-
-    @Override
-    public boolean isLoading() {
-        return Boolean.TRUE.equals(loading);
-    }
-
-    @Override
-    public S setLoading(Boolean loading) {
-        this.loading = loading;
-        return self();
-    }
-
-    @Override
-    public CoreSkeletonOptions getSkeletonOptions() {
-        return skeletonOptions;
-    }
-
-    @Override
-    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
-        this.skeletonOptions = skeletonOptions;
         return self();
     }
 

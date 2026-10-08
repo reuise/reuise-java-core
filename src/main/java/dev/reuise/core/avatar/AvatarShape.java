@@ -19,5 +19,6 @@ public enum AvatarShape {
             return "rounded";
         }
     };
+
     public abstract String getShortName();
 }

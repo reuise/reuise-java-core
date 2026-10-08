@@ -4,6 +4,14 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.skeleton.CoreSkeletonOptions;
 public interface CoreTextFeatures {
+    boolean isLoading();
+
+    CoreTextFeatures setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    CoreTextFeatures setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
+
     String getText();
 
     CoreTextFeatures setText(String text);
@@ -59,14 +67,6 @@ public interface CoreTextFeatures {
     String getHighlightText();
 
     CoreTextFeatures setHighlightText(String highlightText);
-
-    boolean isLoading();
-
-    CoreTextFeatures setLoading(Boolean loading);
-
-    CoreSkeletonOptions getSkeletonOptions();
-
-    CoreTextFeatures setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 
     CoreTextFeatures setText(Html html);
 }

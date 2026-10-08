@@ -839,6 +839,6 @@ public abstract class DefaultCoreCheckboxPart<S extends DefaultCoreCheckboxPart<
 
     // Implementation
     public void toggle() {
-        this.checkbox.toggle();
+        checkbox.toggle();
     }
 }

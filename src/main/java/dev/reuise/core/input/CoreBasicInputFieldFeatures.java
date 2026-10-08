@@ -1,7 +1,5 @@
 package dev.reuise.core.input;
 import java.util.List;
-// GETTER OVERLAOD HERE
-// GETTER OVERLAOD HERE
 public interface CoreBasicInputFieldFeatures {
     String getValue();
 

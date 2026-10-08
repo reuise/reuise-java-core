@@ -12,9 +12,12 @@ import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+// Option: Loading - CORE
+// Option: SkeletonOptions - CORE
 // Option: Text - CORE
 // Option: FontSize - CORE
 // Option: LineHeight - CORE
@@ -67,6 +70,28 @@ public abstract class DefaultCoreTextBlockPart<S extends DefaultCoreTextBlockPar
         parentComponentPart = getParentComponentPart();
         baseComponentPart = getBaseComponentPart();
         // Layout children (indirect)
+    }
+
+    @Override
+    public boolean isLoading() {
+        return textPart.isLoading();
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.textPart.setLoading(loading);
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return textPart.getSkeletonOptions();
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.textPart.setSkeletonOptions(skeletonOptions);
+        return self();
     }
 
     @Override

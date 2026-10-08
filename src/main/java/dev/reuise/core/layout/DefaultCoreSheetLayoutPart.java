@@ -26,6 +26,11 @@ import dev.reuise.core.theme.Theme;
 import dev.reuise.core.view.SheetSize;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.layout.DefaultCoreSheetLayoutPartImpl.getStartPanel;
+import static dev.reuise.core.layout.DefaultCoreSheetLayoutPartImpl.self;
+import static dev.reuise.core.layout.DefaultCoreSheetLayoutPartImpl.setMaxSplitPosition;
+import static dev.reuise.core.layout.DefaultCoreSheetLayoutPartImpl.setMinSplitPosition;
+import static dev.reuise.core.layout.DefaultCoreSheetLayoutPartImpl.setSplitPosition;
 // Option: Direction - CORE
 // Option: ReverseDirection - CORE
 // Option: Resizable - CORE

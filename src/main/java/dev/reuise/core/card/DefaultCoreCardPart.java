@@ -38,6 +38,8 @@ import dev.reuise.core.text.CoreTextBlockOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.card.DefaultCoreCardPartImpl.containsText;
+import static dev.reuise.core.card.DefaultCoreCardPartImpl.self;
 // Option: Type - CORE
 // Option: Direction - CORE
 // Option: JustifyContent - CORE
@@ -103,14 +105,14 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
 
     @Override
     public CoreCardPart addAction(CoreButton action) {
-        this.actionsContainer.add(action);
+        actionsContainer.add(action);
         return self();
     }
 
     @Override
     public CoreCardPart removeAction(CoreButton action) {
-        if (this.actionsContainer != null)
-            this.actionsContainer.remove(action);
+        if (actionsContainer != null)
+            actionsContainer.remove(action);
 
         return self();
     }
@@ -1970,9 +1972,9 @@ public abstract class DefaultCoreCardPart<S extends DefaultCoreCardPart<S, O>, O
     // Implementation
     @Override
     public S setAction(CoreButton action) {
-        if (this.actionsContainer == null) {
+        if (actionsContainer == null) {
         } else
-            this.actionsContainer.removeAll();
+            actionsContainer.removeAll();
 
         addAction(action);
         return self();

@@ -4,4 +4,5 @@ public enum ButtonType {
     PRIMARY,
     SECONDARY,
     SUBTLE,
-    DANGER;}
+    DANGER;
+}

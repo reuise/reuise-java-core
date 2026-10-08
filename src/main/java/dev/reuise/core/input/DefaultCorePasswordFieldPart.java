@@ -18,6 +18,7 @@ import dev.reuise.core.text.CoreLabel;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.input.DefaultCorePasswordFieldPartImpl.self;
 // Option: Size - CORE
 // Option: SupportingText - CORE
 // Option: Label - CORE

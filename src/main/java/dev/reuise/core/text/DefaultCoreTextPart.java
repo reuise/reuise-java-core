@@ -13,10 +13,11 @@ import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
-import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.text.DefaultCoreTextPartImpl.getText;
+import static dev.reuise.core.text.DefaultCoreTextPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -57,10 +58,6 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
-
-    protected Boolean loading;
-
-    protected CoreSkeletonOptions skeletonOptions;
 
     protected DefaultCoreTextPart(O options) {
     }
@@ -718,42 +715,20 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     public void onCreate(O options) {
     }
 
-    @Override
-    public boolean isLoading() {
-        return Boolean.TRUE.equals(loading);
-    }
-
-    @Override
-    public S setLoading(Boolean loading) {
-        this.loading = loading;
-        return self();
-    }
-
-    @Override
-    public CoreSkeletonOptions getSkeletonOptions() {
-        return skeletonOptions;
-    }
-
-    @Override
-    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
-        this.skeletonOptions = skeletonOptions;
-        return self();
-    }
-
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
         CoreTextPart component = ((CoreTextPart) (options.getComponent()));
         if (component == null)
             System.out.println("component is null");
 
         // Apply options for default state
+        applicator.add(options.getLoadingOption(), component::setLoading);
+        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
         applicator.add(options.getTextOption(), component::setText);
         applicator.add(options.getFontSizeOption(), component::setFontSize);
         applicator.add(options.getLineHeightOption(), component::setLineHeight);
         applicator.add(options.getFontWeightOption(), component::setFontWeight);
         applicator.add(options.getFontStyleOption(), component::setFontStyle);
         applicator.add(options.getHighlightTextOption(), component::setHighlightText);
-        applicator.add(options.getLoadingOption(), component::setLoading);
-        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
         if (states != null)
             states.stream().forEach((State state) -> {
                 // Apply options for each (non-default) state

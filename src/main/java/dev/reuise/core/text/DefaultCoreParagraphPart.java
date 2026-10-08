@@ -13,10 +13,10 @@ import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
-import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.text.DefaultCoreParagraphPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -57,10 +57,6 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
-
-    protected Boolean loading;
-
-    protected CoreSkeletonOptions skeletonOptions;
 
     protected DefaultCoreParagraphPart(O options) {
     }
@@ -724,10 +720,10 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
             System.out.println("component is null");
 
         // Apply options for default state
-        applicator.add(options.getTextOption(), component::setText);
-        applicator.add(options.getFontSizeOption(), component::setFontSize);
         applicator.add(options.getLoadingOption(), component::setLoading);
         applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
+        applicator.add(options.getTextOption(), component::setText);
+        applicator.add(options.getFontSizeOption(), component::setFontSize);
         if (states != null)
             states.stream().forEach((State state) -> {
                 // Apply options for each (non-default) state
@@ -755,28 +751,6 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
             return self();
 
         screenValues.iterate((ScreenSize s,Object v) -> setFontSize(v, s));
-        return self();
-    }
-
-    @Override
-    public boolean isLoading() {
-        return Boolean.TRUE.equals(loading);
-    }
-
-    @Override
-    public S setLoading(Boolean loading) {
-        this.loading = loading;
-        return self();
-    }
-
-    @Override
-    public CoreSkeletonOptions getSkeletonOptions() {
-        return skeletonOptions;
-    }
-
-    @Override
-    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
-        this.skeletonOptions = skeletonOptions;
         return self();
     }
 }

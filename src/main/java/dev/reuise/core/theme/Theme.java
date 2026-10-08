@@ -2,17 +2,17 @@ package dev.reuise.core.theme;
 public class Theme {
     protected ComponentTheme globalTheme;
 
-    protected ComponentTheme tabTheme;
+    protected ComponentTheme textFieldTheme;
 
-    protected ComponentTheme dialogTheme;
+    protected ComponentTheme buttonTheme;
 
     protected ComponentTheme surfaceTheme;
 
     protected ComponentTheme headingTheme;
 
-    protected ComponentTheme buttonTheme;
+    protected ComponentTheme tabTheme;
 
-    protected ComponentTheme textFieldTheme;
+    protected ComponentTheme dialogTheme;
 
     public Theme() {
     }
@@ -26,21 +26,21 @@ public class Theme {
         return this;
     }
 
-    public ComponentTheme getTabTheme() {
-        return tabTheme;
+    public ComponentTheme getTextFieldTheme() {
+        return textFieldTheme;
     }
 
-    public Theme setTabTheme(ComponentTheme tabTheme) {
-        this.tabTheme = tabTheme;
+    public Theme setTextFieldTheme(ComponentTheme textFieldTheme) {
+        this.textFieldTheme = textFieldTheme;
         return this;
     }
 
-    public ComponentTheme getDialogTheme() {
-        return dialogTheme;
+    public ComponentTheme getButtonTheme() {
+        return buttonTheme;
     }
 
-    public Theme setDialogTheme(ComponentTheme dialogTheme) {
-        this.dialogTheme = dialogTheme;
+    public Theme setButtonTheme(ComponentTheme buttonTheme) {
+        this.buttonTheme = buttonTheme;
         return this;
     }
 
@@ -62,21 +62,21 @@ public class Theme {
         return this;
     }
 
-    public ComponentTheme getButtonTheme() {
-        return buttonTheme;
+    public ComponentTheme getTabTheme() {
+        return tabTheme;
     }
 
-    public Theme setButtonTheme(ComponentTheme buttonTheme) {
-        this.buttonTheme = buttonTheme;
+    public Theme setTabTheme(ComponentTheme tabTheme) {
+        this.tabTheme = tabTheme;
         return this;
     }
 
-    public ComponentTheme getTextFieldTheme() {
-        return textFieldTheme;
+    public ComponentTheme getDialogTheme() {
+        return dialogTheme;
     }
 
-    public Theme setTextFieldTheme(ComponentTheme textFieldTheme) {
-        this.textFieldTheme = textFieldTheme;
+    public Theme setDialogTheme(ComponentTheme dialogTheme) {
+        this.dialogTheme = dialogTheme;
         return this;
     }
 

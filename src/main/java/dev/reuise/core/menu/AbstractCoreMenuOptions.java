@@ -7,6 +7,8 @@ import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import static dev.reuise.core.menu.AbstractCoreMenuOptionsImpl.getComponentFactory;
+import static dev.reuise.core.menu.AbstractCoreMenuOptionsImpl.self;
 public abstract class AbstractCoreMenuOptions<S extends AbstractCoreMenuOptions<S>> implements CoreMenuOptions , CoreComponentOptions {
     @Override
     public S addDivider() {

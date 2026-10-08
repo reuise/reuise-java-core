@@ -13,5 +13,6 @@ public enum SplitDirection {
             return "horizontal";
         }
     };
+
     public abstract String getShortName();
 }

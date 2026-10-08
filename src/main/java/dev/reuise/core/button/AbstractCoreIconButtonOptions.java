@@ -3,6 +3,7 @@ import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.icon.CoreIconOptions;
 import dev.reuise.core.icon.IconSize;
 import dev.reuise.core.option.ComponentOption;
+import static dev.reuise.core.button.AbstractCoreIconButtonOptionsImpl.self;
 public abstract class AbstractCoreIconButtonOptions<S extends AbstractCoreIconButtonOptions<S>> implements CoreComponentOptions , CoreIconButtonOptions {
     protected dev.reuise.core.icon.CoreIconOptions iconOptions;
 

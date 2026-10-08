@@ -20,6 +20,9 @@ import dev.reuise.core.theme.Color;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.icon.DefaultCoreIconPartImpl.self;
+import static dev.reuise.core.icon.DefaultCoreIconPartImpl.setHeight;
+import static dev.reuise.core.icon.DefaultCoreIconPartImpl.setWidth;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -859,16 +862,16 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
 
     // Implementation
     public S setUrl(String url) {
-        if (this.image != null)
-            this.image.setUrl(url);
+        if (image != null)
+            image.setUrl(url);
 
         return self();
     }
 
     // Implementation
     public String getUrl() {
-        if (this.image != null)
-            return this.image.getUrl();
+        if (image != null)
+            return image.getUrl();
 
         return null;
     }

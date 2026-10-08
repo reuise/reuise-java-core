@@ -28,6 +28,9 @@ import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.view.DefaultCoreSheetViewPartImpl.self;
+import static dev.reuise.core.view.DefaultCoreSheetViewPartImpl.setMaxSize;
+import static dev.reuise.core.view.DefaultCoreSheetViewPartImpl.setMinSize;
 // Option: Title - CORE
 // Option: Revealed - CORE
 // Option: Direction - CORE

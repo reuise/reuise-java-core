@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.selectmenu.DefaultCoreSelectMenuPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -55,13 +56,13 @@ import java.util.List;
 public abstract class DefaultCoreSelectMenuPart<S extends DefaultCoreSelectMenuPart<S, O>, O extends CoreSelectMenuPartOptions> implements ComponentPart , CoreSelectMenu {
     @Override
     public S addItem(CoreMenuItem item) {
-        this.menu.addItem(item);
+        menu.addItem(item);
         return self();
     }
 
     @Override
     public S removeItem(CoreMenuItem item) {
-        this.menu.removeItem(item);
+        menu.removeItem(item);
         return self();
     }
 
@@ -899,13 +900,13 @@ public abstract class DefaultCoreSelectMenuPart<S extends DefaultCoreSelectMenuP
 
     // Implementation
     public S addItem(CoreListItem item) {
-        this.menu.addItem(item);
+        menu.addItem(item);
         return self();
     }
 
     // Implementation
     public S addItem(String text) {
-        this.menu.addItem(text);
+        menu.addItem(text);
         return self();
     }
 }

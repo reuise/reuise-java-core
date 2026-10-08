@@ -4,6 +4,7 @@ import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import static dev.reuise.core.list.AbstractCoreListViewOptionsImpl.getComponentFactory;
 public abstract class AbstractCoreListViewOptions<S extends AbstractCoreListViewOptions<S>> implements CoreListViewOptions , CoreComponentOptions {
     @Override
     public S addItem(String text) {

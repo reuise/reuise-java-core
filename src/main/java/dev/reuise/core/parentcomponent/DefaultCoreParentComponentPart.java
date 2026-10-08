@@ -14,7 +14,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Consumer;
+import static dev.reuise.core.parentcomponent.DefaultCoreParentComponentPartImpl.getComponent;
+import static dev.reuise.core.parentcomponent.DefaultCoreParentComponentPartImpl.getRootComponent;
+import static dev.reuise.core.parentcomponent.DefaultCoreParentComponentPartImpl.getTheme;
+import static dev.reuise.core.parentcomponent.DefaultCoreParentComponentPartImpl.self;
 // Option: Mounted - CORE
 // Option: Margin - CORE
 // Option: MarginTop - CORE
@@ -715,12 +718,12 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
         if ((child == null) || (beforeChild == null))
             return;
 
-        int beforeIndex = this.children.indexOf(beforeChild);
+        int beforeIndex = children.indexOf(beforeChild);
         if (beforeIndex == (-1)) {
             add(child);
             return;
         }
-        this.children.add(beforeIndex, child);
+        children.add(beforeIndex, child);
         child.setParent(this);
     }
 
@@ -729,17 +732,17 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
         if (child == null)
             return;
 
-        this.children.remove(child);
+        children.remove(child);
         child.setParent(null);
     }
 
     // Implementation
     public void removeAll() {
-        this.children.clear();
+        children.clear();
     }
 
     // Implementation
     public List<CoreComponent> getChildren() {
-        return this.children;
+        return children;
     }
 }

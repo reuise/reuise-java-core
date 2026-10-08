@@ -49,5 +49,6 @@ public enum JustifyContent {
             return "stretch";
         }
     };
+
     public abstract String getCssValue();
 }

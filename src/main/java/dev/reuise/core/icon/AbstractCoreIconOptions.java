@@ -4,6 +4,7 @@ import dev.reuise.core.image.CoreImageOptions;
 import dev.reuise.core.link.CoreLinkOptions;
 import dev.reuise.core.option.ComponentOption;
 import dev.reuise.core.theme.Color;
+import static dev.reuise.core.icon.AbstractCoreIconOptionsImpl.self;
 public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<S>> implements CoreIconOptions , CoreComponentOptions {
     @Override
     public S setColor(String color) {

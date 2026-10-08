@@ -6,6 +6,8 @@ import dev.reuise.core.option.ComponentOption;
 import dev.reuise.core.text.CoreInlineTextOptions;
 import dev.reuise.core.text.CoreLabelOptions;
 import java.util.List;
+import static dev.reuise.core.input.AbstractCoreTextFieldOptionsImpl.self;
+import static dev.reuise.core.input.AbstractCoreTextFieldOptionsImpl.setSupportingText;
 public abstract class AbstractCoreTextFieldOptions<S extends AbstractCoreTextFieldOptions<S>> implements CoreComponentOptions , CoreTextFieldOptions {
     @Override
     public S setError(String message) {

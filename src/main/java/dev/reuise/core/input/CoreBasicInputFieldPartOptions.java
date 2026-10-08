@@ -3,8 +3,6 @@ import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentOption;
 import java.util.List;
-// GETTER OVERLAOD HERE
-// GETTER OVERLAOD HERE
 public interface CoreBasicInputFieldPartOptions {
     String getValue();
 

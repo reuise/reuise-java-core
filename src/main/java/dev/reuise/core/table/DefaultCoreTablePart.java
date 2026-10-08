@@ -17,6 +17,8 @@ import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.table.DefaultCoreTablePartImpl.isInitialized;
+import static dev.reuise.core.table.DefaultCoreTablePartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -51,11 +53,11 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
         if (column == null)
             return self();
 
-        if (this.columnGroup != null)
-            this.columnGroup.addColumn(column);
+        if (columnGroup != null)
+            columnGroup.addColumn(column);
 
-        if (this.header != null)
-            this.header.addColumn(column);
+        if (header != null)
+            header.addColumn(column);
 
         return self();
     }
@@ -65,22 +67,22 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
         if (column == null)
             return self();
 
-        if (this.columnGroup != null)
-            this.columnGroup.removeColumn(column);
+        if (columnGroup != null)
+            columnGroup.removeColumn(column);
 
-        if (this.header != null)
-            this.header.removeColumn(column);
+        if (header != null)
+            header.removeColumn(column);
 
         return self();
     }
 
     @Override
     public S clearColumns() {
-        if (this.columnGroup != null)
-            this.columnGroup.clearColumns();
+        if (columnGroup != null)
+            columnGroup.clearColumns();
 
-        if (this.header != null)
-            this.header.clearColumns();
+        if (header != null)
+            header.clearColumns();
 
         return self();
     }
@@ -975,11 +977,11 @@ public abstract class DefaultCoreTablePart<S extends DefaultCoreTablePart<S, O>,
         if (isInitialized())
             return self();
 
-        if (this.columnGroup != null)
-            this.columnGroup.setColumns(columns);
+        if (columnGroup != null)
+            columnGroup.setColumns(columns);
 
-        if (this.header != null)
-            this.header.setColumns(columns);
+        if (header != null)
+            header.setColumns(columns);
 
         return self();
     }

@@ -49,6 +49,7 @@ public enum CheckboxSize {
             return "lg";
         }
     };
+
     public abstract Integer getFontSize();
 
     public abstract Integer getSize();

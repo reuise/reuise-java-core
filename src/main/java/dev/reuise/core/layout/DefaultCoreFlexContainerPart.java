@@ -22,6 +22,7 @@ import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.layout.DefaultCoreFlexContainerPartImpl.self;
 // Option: Padding - CORE
 // Option: PaddingTop - CORE
 // Option: PaddingRight - CORE

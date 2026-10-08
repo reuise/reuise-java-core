@@ -16,6 +16,7 @@ import dev.reuise.core.text.CoreLabel;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.chip.DefaultCoreFilterChipPartImpl.self;
 // Option: Label - CORE
 // Option: Value - CORE
 // Option: Size - CORE

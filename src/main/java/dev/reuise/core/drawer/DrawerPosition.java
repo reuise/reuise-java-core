@@ -25,5 +25,6 @@ public enum DrawerPosition {
             return "bottom";
         }
     };
+
     public abstract String getShortName();
 }

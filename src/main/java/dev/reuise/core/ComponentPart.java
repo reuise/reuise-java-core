@@ -3,5 +3,6 @@ public interface ComponentPart {
     public enum Type {
 
         BASE,
-        DESIGN;}
+        DESIGN;
+    }
 }

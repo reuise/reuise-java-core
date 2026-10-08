@@ -55,5 +55,6 @@ public enum FontWeight {
             return 900;
         }
     };
+
     public abstract Integer getValue();
 }

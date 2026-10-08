@@ -67,6 +67,7 @@ public enum DialogSize {
             return null;
         }
     };
+
     public abstract String getShortName();
 
     public abstract Integer getWidth();

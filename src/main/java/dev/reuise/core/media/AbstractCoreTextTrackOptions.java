@@ -3,6 +3,7 @@ import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.List;
+import static dev.reuise.core.media.AbstractCoreTextTrackOptionsImpl.self;
 public abstract class AbstractCoreTextTrackOptions<S extends AbstractCoreTextTrackOptions<S>> implements CoreTextTrackOptions , CoreComponentOptions {
     @Override
     public S addCue(double startTime, double endTime, String text) {

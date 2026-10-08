@@ -131,6 +131,7 @@ public enum ChipSize {
             return 64;
         }
     };
+
     public abstract Integer getRadius();
 
     public abstract Integer getPaddingX();

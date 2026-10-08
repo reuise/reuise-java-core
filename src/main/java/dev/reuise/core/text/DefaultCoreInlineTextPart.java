@@ -16,6 +16,8 @@ import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+// Option: Loading - CORE
+// Option: SkeletonOptions - CORE
 // Option: Text - CORE
 // Option: FontSize - CORE
 // Option: LineHeight - CORE
@@ -68,6 +70,28 @@ public abstract class DefaultCoreInlineTextPart<S extends DefaultCoreInlineTextP
         parentComponentPart = getParentComponentPart();
         baseComponentPart = getBaseComponentPart();
         // Layout children (indirect)
+    }
+
+    @Override
+    public boolean isLoading() {
+        return textPart.isLoading();
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.textPart.setLoading(loading);
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return textPart.getSkeletonOptions();
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.textPart.setSkeletonOptions(skeletonOptions);
+        return self();
     }
 
     @Override
@@ -229,28 +253,6 @@ public abstract class DefaultCoreInlineTextPart<S extends DefaultCoreInlineTextP
     @Override
     public S setHighlightText(String highlightText) {
         this.textPart.setHighlightText(highlightText);
-        return self();
-    }
-
-    @Override
-    public boolean isLoading() {
-        return textPart.isLoading();
-    }
-
-    @Override
-    public S setLoading(Boolean loading) {
-        this.textPart.setLoading(loading);
-        return self();
-    }
-
-    @Override
-    public CoreSkeletonOptions getSkeletonOptions() {
-        return textPart.getSkeletonOptions();
-    }
-
-    @Override
-    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
-        this.textPart.setSkeletonOptions(skeletonOptions);
         return self();
     }
 

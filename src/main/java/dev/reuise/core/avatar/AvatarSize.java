@@ -56,6 +56,7 @@ public enum AvatarSize {
             return "xl";
         }
     };
+
     public abstract Integer getSize();
 
     public abstract String getShortName();

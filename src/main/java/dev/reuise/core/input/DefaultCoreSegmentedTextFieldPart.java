@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
+import static dev.reuise.core.input.DefaultCoreSegmentedTextFieldPartImpl.clearFields;
+import static dev.reuise.core.input.DefaultCoreSegmentedTextFieldPartImpl.getComponentFactory;
+import static dev.reuise.core.input.DefaultCoreSegmentedTextFieldPartImpl.self;
 // Option: Direction - CORE
 // Option: JustifyContent - CORE
 // Option: AlignItems - CORE
@@ -81,10 +84,10 @@ import java.util.function.Function;
 public abstract class DefaultCoreSegmentedTextFieldPart<S extends DefaultCoreSegmentedTextFieldPart<S, O>, O extends CoreSegmentedTextFieldPartOptions> implements ComponentPart , CoreSegmentedTextField {
     @Override
     public Integer getSegments() {
-        if (this.fields == null)
+        if (fields == null)
             return 0;
 
-        return this.fields.size();
+        return fields.size();
     }
 
     @Override
@@ -92,7 +95,7 @@ public abstract class DefaultCoreSegmentedTextFieldPart<S extends DefaultCoreSeg
         if (getSegments().equals(segments))
             return self();
 
-        if (this.fields != null) {
+        if (fields != null) {
             clearFields();
         }
         CoreComponentFactory componentFactory = getComponentFactory();

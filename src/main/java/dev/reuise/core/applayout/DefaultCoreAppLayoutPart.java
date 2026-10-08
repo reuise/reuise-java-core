@@ -22,6 +22,7 @@ import dev.reuise.core.theme.Theme;
 import dev.reuise.core.topappbar.CoreTopAppBar;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.applayout.DefaultCoreAppLayoutPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -924,15 +925,15 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
 
     // Implementation
     public void openDrawer() {
-        if (this.drawer != null)
-            this.drawer.open();
+        if (drawer != null)
+            drawer.open();
 
     }
 
     // Implementation
     public void closeDrawer() {
-        if (this.drawer != null)
-            this.drawer.close();
+        if (drawer != null)
+            drawer.close();
 
     }
 }

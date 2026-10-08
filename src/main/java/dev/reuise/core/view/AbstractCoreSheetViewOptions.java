@@ -1,6 +1,9 @@
 package dev.reuise.core.view;
 import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.option.ComponentOption;
+import static dev.reuise.core.view.AbstractCoreSheetViewOptionsImpl.self;
+import static dev.reuise.core.view.AbstractCoreSheetViewOptionsImpl.setMaxSize;
+import static dev.reuise.core.view.AbstractCoreSheetViewOptionsImpl.setMinSize;
 public abstract class AbstractCoreSheetViewOptions<S extends AbstractCoreSheetViewOptions<S>> implements CoreSheetViewOptions , CoreComponentOptions {
     @Override
     public S setSize(SheetSize size) {

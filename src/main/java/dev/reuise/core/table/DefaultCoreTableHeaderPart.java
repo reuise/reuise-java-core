@@ -15,6 +15,7 @@ import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import static dev.reuise.core.table.DefaultCoreTableHeaderPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -56,10 +57,10 @@ public abstract class DefaultCoreTableHeaderPart<S extends DefaultCoreTableHeade
 
     @Override
     public S addColumn(CoreTableColumnOptions column) {
-        if ((column == null) || (this.row == null))
+        if ((column == null) || (row == null))
             return self();
 
-        this.row.addColumn(column);
+        row.addColumn(column);
         return self();
     }
 
@@ -788,10 +789,10 @@ public abstract class DefaultCoreTableHeaderPart<S extends DefaultCoreTableHeade
 
     // Implementation
     public S setColumns(List<CoreTableColumnOptions> columns) {
-        if (this.row == null)
+        if (row == null)
             return self();
 
-        this.row.setColumns(columns);
+        row.setColumns(columns);
         return self();
     }
 

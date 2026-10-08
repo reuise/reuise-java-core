@@ -12,6 +12,7 @@ import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
+import static dev.reuise.core.checkbox.DefaultCoreBasicCheckboxPartImpl.self;
 // Option: Mounted - CORE
 // Option: Margin - CORE
 // Option: MarginTop - CORE

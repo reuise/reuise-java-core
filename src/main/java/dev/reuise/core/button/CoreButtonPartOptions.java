@@ -9,6 +9,18 @@ import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 public interface CoreButtonPartOptions {
+    boolean isLoading();
+
+    ComponentOption<Boolean> getLoadingOption();
+
+    CoreButtonPartOptions setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
+
+    CoreButtonPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
+
     String getLabel();
 
     ComponentOption<String> getLabelOption();
@@ -38,18 +50,6 @@ public interface CoreButtonPartOptions {
     ComponentOption<String> getTargetOption();
 
     CoreButtonPartOptions setTarget(String target);
-
-    boolean isLoading();
-
-    ComponentOption<Boolean> getLoadingOption();
-
-    CoreButtonPartOptions setLoading(Boolean loading);
-
-    CoreSkeletonOptions getSkeletonOptions();
-
-    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
-
-    CoreButtonPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
 
     <T> void setDefaultOption(String option, T value);
 

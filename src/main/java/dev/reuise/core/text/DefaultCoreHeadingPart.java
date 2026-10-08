@@ -16,6 +16,8 @@ import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+// Option: Loading - CORE
+// Option: SkeletonOptions - CORE
 // Option: Text - CORE
 // Option: FontSize - CORE
 // Option: LineHeight - CORE
@@ -61,10 +63,6 @@ public abstract class DefaultCoreHeadingPart<S extends DefaultCoreHeadingPart<S,
 
     protected Integer level;
 
-    protected Boolean loading;
-
-    protected CoreSkeletonOptions skeletonOptions;
-
     protected DefaultCoreHeadingPart(O options) {
     }
 
@@ -74,6 +72,28 @@ public abstract class DefaultCoreHeadingPart<S extends DefaultCoreHeadingPart<S,
         parentComponentPart = getParentComponentPart();
         baseComponentPart = getBaseComponentPart();
         // Layout children (indirect)
+    }
+
+    @Override
+    public boolean isLoading() {
+        return textPart.isLoading();
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.textPart.setLoading(loading);
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return textPart.getSkeletonOptions();
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.textPart.setSkeletonOptions(skeletonOptions);
+        return self();
     }
 
     @Override
@@ -235,28 +255,6 @@ public abstract class DefaultCoreHeadingPart<S extends DefaultCoreHeadingPart<S,
     @Override
     public S setHighlightText(String highlightText) {
         this.textPart.setHighlightText(highlightText);
-        return self();
-    }
-
-    @Override
-    public boolean isLoading() {
-        return Boolean.TRUE.equals(loading);
-    }
-
-    @Override
-    public S setLoading(Boolean loading) {
-        this.loading = loading;
-        return self();
-    }
-
-    @Override
-    public CoreSkeletonOptions getSkeletonOptions() {
-        return skeletonOptions;
-    }
-
-    @Override
-    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
-        this.skeletonOptions = skeletonOptions;
         return self();
     }
 
@@ -918,14 +916,11 @@ public abstract class DefaultCoreHeadingPart<S extends DefaultCoreHeadingPart<S,
 
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
         CoreHeadingPart component = ((CoreHeadingPart) (options.getComponent()));
-        CoreTextPartOptions textOptions = ((CoreTextPartOptions) (options));
         if (component == null)
             System.out.println("component is null");
 
         // Apply options for default state
         applicator.add(options.getLevelOption(), component::setLevel);
-        applicator.add(textOptions.getLoadingOption(), component::setLoading);
-        applicator.add(textOptions.getSkeletonOptionsOption(), component::setSkeletonOptions);
     }
 
     public void onInitializeComponentType(RootComponent rootComponent) {
