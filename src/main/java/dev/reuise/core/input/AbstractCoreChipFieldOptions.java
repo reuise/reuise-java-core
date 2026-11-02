@@ -270,9 +270,9 @@ public abstract class AbstractCoreChipFieldOptions<S extends AbstractCoreChipFie
     @Override
     public S removeValue(String value) {
         List<String> list = getValues();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(value);
         return self();
     }
@@ -280,9 +280,9 @@ public abstract class AbstractCoreChipFieldOptions<S extends AbstractCoreChipFie
     @Override
     public S clearValues() {
         List<String> list = getValues();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }
@@ -290,9 +290,9 @@ public abstract class AbstractCoreChipFieldOptions<S extends AbstractCoreChipFie
     @Override
     public boolean hasValue(String value) {
         List<String> list = getValues();
-        if (list == null) {
+        if (list == null)
             return false;
-        }
+
         return list.contains(value);
     }
 
@@ -331,9 +331,9 @@ public abstract class AbstractCoreChipFieldOptions<S extends AbstractCoreChipFie
     @Override
     public S removeDelimiter(String delimiter) {
         List<String> list = getDelimiters();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(delimiter);
         return self();
     }
@@ -341,9 +341,9 @@ public abstract class AbstractCoreChipFieldOptions<S extends AbstractCoreChipFie
     @Override
     public S clearDelimiters() {
         List<String> list = getDelimiters();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }
@@ -351,9 +351,9 @@ public abstract class AbstractCoreChipFieldOptions<S extends AbstractCoreChipFie
     @Override
     public boolean hasDelimiter(String delimiter) {
         List<String> list = getDelimiters();
-        if (list == null) {
+        if (list == null)
             return false;
-        }
+
         return list.contains(delimiter);
     }
 

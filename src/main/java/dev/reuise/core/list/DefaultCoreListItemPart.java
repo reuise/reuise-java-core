@@ -20,13 +20,12 @@ import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.list.DefaultCoreListItemPartImpl.containsText;
-import static dev.reuise.core.list.DefaultCoreListItemPartImpl.self;
 // Option: Url - CORE
 // Option: Children - CORE
 // Option: Mounted - CORE
@@ -87,6 +86,10 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
     protected CoreInlineText secondaryLabelContainer;
 
     protected CoreIcon endIcon;
+
+    protected Boolean loading;
+
+    protected CoreSkeletonOptions skeletonOptions;
 
     protected Boolean hasCheckbox;
 
@@ -984,6 +987,8 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
             System.out.println("component is null");
 
         // Apply options for default state
+        applicator.add(options.getLoadingOption(), component::setLoading);
+        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
         applicator.add(options.getLabelOption(), component::setLabel);
         applicator.add(options.getSecondaryLabelOption(), component::setSecondaryLabel);
         applicator.add(options.getHasCheckboxOption(), component::setHasCheckbox);
@@ -1010,15 +1015,44 @@ public abstract class DefaultCoreListItemPart<S extends DefaultCoreListItemPart<
 
     // Implementation
     public S setSecondaryLabel(String secondaryLabel) {
+        if ((secondaryLabel == null) || (secondaryLabelContainer == null))
+            return self();
+
+        secondaryLabelContainer.setText(secondaryLabel);
         return self();
     }
 
     // Implementation
     public String getSecondaryLabel() {
-        return null;
+        if (secondaryLabelContainer == null)
+            return null;
+
+        return secondaryLabelContainer.getText();
     }
 
     protected abstract S self();
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(loading);
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.loading = loading;
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return skeletonOptions;
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.skeletonOptions = skeletonOptions;
+        return self();
+    }
 
     @Override
     public boolean isHasCheckbox() {

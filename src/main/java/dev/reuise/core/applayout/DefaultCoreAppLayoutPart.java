@@ -22,7 +22,6 @@ import dev.reuise.core.theme.Theme;
 import dev.reuise.core.topappbar.CoreTopAppBar;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.applayout.DefaultCoreAppLayoutPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -70,13 +69,7 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
 
     protected CoreDrawer drawer;
 
-    protected O lastAppliedOptions;
-
     protected DefaultCoreAppLayoutPart(O options) {
-    }
-
-    protected O getLastAppliedOptions() {
-        return lastAppliedOptions;
     }
 
     protected void setupReferences() {
@@ -878,7 +871,6 @@ public abstract class DefaultCoreAppLayoutPart<S extends DefaultCoreAppLayoutPar
     }
 
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
-        this.lastAppliedOptions = options;
         CoreAppLayoutPart component = ((CoreAppLayoutPart) (options.getComponent()));
         if (component == null)
             System.out.println("component is null");

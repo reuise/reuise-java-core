@@ -17,10 +17,13 @@ import dev.reuise.core.list.CoreListItemPart;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+// Option: Loading - CORE
+// Option: SkeletonOptions - CORE
 // Option: Label - CORE
 // Option: SecondaryLabel - CORE
 // Option: HasCheckbox - CORE
@@ -65,6 +68,8 @@ public abstract class DefaultCoreMenuItemPart<S extends DefaultCoreMenuItemPart<
 
     private CoreBaseComponentPart baseComponentPart;
 
+    private CoreLink link;
+
     private CoreCheckbox checkbox;
 
     private CoreIcon startIcon;
@@ -77,8 +82,6 @@ public abstract class DefaultCoreMenuItemPart<S extends DefaultCoreMenuItemPart<
 
     private CoreIcon endIcon;
 
-    private CoreLink link;
-
     protected DefaultCoreMenuItemPart(O options) {
     }
 
@@ -89,13 +92,35 @@ public abstract class DefaultCoreMenuItemPart<S extends DefaultCoreMenuItemPart<
         parentComponentPart = getParentComponentPart();
         baseComponentPart = getBaseComponentPart();
         // Layout children (indirect)
+        link = getLink();
         checkbox = getCheckbox();
         startIcon = getStartIcon();
         textContainer = getTextContainer();
         labelContainer = getLabelContainer();
         secondaryLabelContainer = getSecondaryLabelContainer();
         endIcon = getEndIcon();
-        link = getLink();
+    }
+
+    @Override
+    public boolean isLoading() {
+        return listItemPart.isLoading();
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.listItemPart.setLoading(loading);
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return listItemPart.getSkeletonOptions();
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.listItemPart.setSkeletonOptions(skeletonOptions);
+        return self();
     }
 
     @Override

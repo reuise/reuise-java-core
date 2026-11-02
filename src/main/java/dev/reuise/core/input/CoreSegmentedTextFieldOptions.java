@@ -6,7 +6,7 @@ import dev.reuise.core.layout.CoreFlexContainerPartOptions;
 import dev.reuise.core.layout.CoreRowLayoutOptions;
 import dev.reuise.core.layout.CoreRowLayoutPartOptions;
 import dev.reuise.core.parentcomponent.CoreParentComponentPartOptions;
-// Todo: Clean up uneeded interfaces
+// Todo: Clean up unneeded interfaces
 public interface CoreSegmentedTextFieldOptions extends CoreBaseComponentPartOptions , CoreContainerPartOptions , CoreFlexContainerPartOptions , CoreParentComponentPartOptions , CoreComponentOptions , CoreSegmentedTextFieldPartOptions , CoreRowLayoutOptions , CoreRowLayoutPartOptions {
     CoreRowLayoutPartOptions getRowLayoutPart();
 

@@ -47,9 +47,9 @@ public abstract class AbstractCoreChipGroupOptions<S extends AbstractCoreChipGro
     @Override
     public S clearSelected() {
         List<String> list = getSelected();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }
@@ -57,9 +57,9 @@ public abstract class AbstractCoreChipGroupOptions<S extends AbstractCoreChipGro
     @Override
     public boolean hasSelected(String selected) {
         List<String> list = getSelected();
-        if (list == null) {
+        if (list == null)
             return false;
-        }
+
         return list.contains(selected);
     }
 
@@ -123,9 +123,9 @@ public abstract class AbstractCoreChipGroupOptions<S extends AbstractCoreChipGro
     @Override
     public S removeChip(CoreChip chip) {
         List<CoreChip> list = getChips();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(chip);
         return self();
     }
@@ -133,9 +133,9 @@ public abstract class AbstractCoreChipGroupOptions<S extends AbstractCoreChipGro
     @Override
     public S clearChips() {
         List<CoreChip> list = getChips();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

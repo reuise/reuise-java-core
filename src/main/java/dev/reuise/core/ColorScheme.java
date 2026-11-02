@@ -9,7 +9,7 @@ public enum ColorScheme implements MediaQuery {
 
         @Override
         public String getQuery() {
-            return "@media (prefers-color-scheme: light)";
+            return "(prefers-color-scheme: light)";
         }
     },
     DARK() {
@@ -20,7 +20,7 @@ public enum ColorScheme implements MediaQuery {
 
         @Override
         public String getQuery() {
-            return "@media (prefers-color-scheme: dark)";
+            return "(prefers-color-scheme: dark)";
         }
     },;
 

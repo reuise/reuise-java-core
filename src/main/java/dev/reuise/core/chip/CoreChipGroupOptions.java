@@ -5,7 +5,7 @@ import dev.reuise.core.layout.CoreContainerPartOptions;
 import dev.reuise.core.layout.CoreFieldSetOptions;
 import dev.reuise.core.layout.CoreFieldSetPartOptions;
 import dev.reuise.core.parentcomponent.CoreParentComponentPartOptions;
-// Todo: Clean up uneeded interfaces
+// Todo: Clean up unneeded interfaces
 public interface CoreChipGroupOptions extends CoreFieldSetOptions , CoreFieldSetPartOptions , CoreBaseComponentPartOptions , CoreContainerPartOptions , CoreParentComponentPartOptions , CoreComponentOptions , CoreChipGroupPartOptions {
     CoreFieldSetPartOptions getFieldSetPart();
 

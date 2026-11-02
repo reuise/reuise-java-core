@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import static dev.reuise.core.input.AbstractCoreBasicInputFieldOptionsImpl.self;
-import static dev.reuise.core.input.AbstractCoreBasicInputFieldOptionsImpl.setOption;
 public abstract class AbstractCoreBasicInputFieldOptions<S extends AbstractCoreBasicInputFieldOptions<S>> implements CoreComponentOptions , CoreBasicInputFieldOptions {
     @Override
     public S setAutocomplete(boolean autocomplete) {
@@ -14,7 +12,7 @@ public abstract class AbstractCoreBasicInputFieldOptions<S extends AbstractCoreB
     }
 
     @Override
-    public List<InputValidator> getValidators(InputValidator... modes) {
+    public List<InputValidator> getValidators(InputValidator.ValidationMode... modes) {
         return getValidators().stream().filter(v -> v.isMode(modes)).collect(Collectors.toList());
     }
 
@@ -235,9 +233,9 @@ public abstract class AbstractCoreBasicInputFieldOptions<S extends AbstractCoreB
     @Override
     public S removeValidator(InputValidator validator) {
         List<InputValidator> list = getValidators();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(validator);
         return self();
     }
@@ -245,9 +243,9 @@ public abstract class AbstractCoreBasicInputFieldOptions<S extends AbstractCoreB
     @Override
     public S clearValidators() {
         List<InputValidator> list = getValidators();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

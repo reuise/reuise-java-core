@@ -3,8 +3,8 @@ import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.image.CoreImageOptions;
 import dev.reuise.core.link.CoreLinkOptions;
 import dev.reuise.core.option.ComponentOption;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Color;
-import static dev.reuise.core.icon.AbstractCoreIconOptionsImpl.self;
 public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<S>> implements CoreIconOptions , CoreComponentOptions {
     @Override
     public S setColor(String color) {
@@ -32,11 +32,61 @@ public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<
     }
 
     public boolean onPreInitialize() {
-        setDefaultSize(IconSize.SMALL);
+        setDefaultSize(16);
         return true;
     }
 
     public void onInitialize() {
+    }
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(getOptionValue("loading"));
+    }
+
+    @Override
+    public ComponentOption<Boolean> getLoadingOption() {
+        return ((ComponentOption<Boolean>) (getOption("loading")));
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        setOption("loading", loading);
+        setLayoutChildrenLoading(loading);
+        return self();
+    }
+
+    protected void setLayoutChildrenLoading(Boolean loading) {
+    }
+
+    private void setDefaultLoading(Boolean loading) {
+        setDefaultOption("loading", loading);
+        setLayoutChildrenLoading(loading);
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return ((CoreSkeletonOptions) (getOptionValue("skeletonOptions")));
+    }
+
+    @Override
+    public ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption() {
+        return ((ComponentOption<CoreSkeletonOptions>) (getOption("skeletonOptions")));
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        setOption("skeletonOptions", skeletonOptions);
+        setLayoutChildrenSkeletonOptions(skeletonOptions);
+        return self();
+    }
+
+    protected void setLayoutChildrenSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+    }
+
+    private void setDefaultSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        setDefaultOption("skeletonOptions", skeletonOptions);
+        setLayoutChildrenSkeletonOptions(skeletonOptions);
     }
 
     @Override

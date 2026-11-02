@@ -154,9 +154,9 @@ public abstract class AbstractCoreMediaPlayerOptions<S extends AbstractCoreMedia
     @Override
     public S removeTextTrack(CoreTextTrack textTrack) {
         List<CoreTextTrack> list = getTextTracks();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(textTrack);
         return self();
     }
@@ -164,9 +164,9 @@ public abstract class AbstractCoreMediaPlayerOptions<S extends AbstractCoreMedia
     @Override
     public S clearTextTracks() {
         List<CoreTextTrack> list = getTextTracks();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

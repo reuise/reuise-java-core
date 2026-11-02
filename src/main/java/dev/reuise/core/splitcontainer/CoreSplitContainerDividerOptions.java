@@ -4,7 +4,7 @@ import dev.reuise.core.basecomponent.CoreBaseComponentPartOptions;
 import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.layout.CoreContainerPartOptions;
 import dev.reuise.core.parentcomponent.CoreParentComponentPartOptions;
-// Todo: Clean up uneeded interfaces
+// Todo: Clean up unneeded interfaces
 public interface CoreSplitContainerDividerOptions extends CoreBaseComponentPartOptions , CoreContainerPartOptions , CoreContainerOptions , CoreSplitContainerDividerPartOptions , CoreParentComponentPartOptions , CoreComponentOptions {
     CoreContainerPartOptions getContainerPart();
 

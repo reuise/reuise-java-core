@@ -74,9 +74,9 @@ public abstract class AbstractCoreSegmentedTextFieldOptions<S extends AbstractCo
     @Override
     public S removeField(CoreTextField field) {
         List<CoreTextField> list = getFields();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(field);
         return self();
     }
@@ -84,9 +84,9 @@ public abstract class AbstractCoreSegmentedTextFieldOptions<S extends AbstractCo
     @Override
     public S clearFields() {
         List<CoreTextField> list = getFields();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

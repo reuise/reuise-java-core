@@ -6,7 +6,7 @@ import dev.reuise.core.layout.CoreFlexContainerPartOptions;
 import dev.reuise.core.layout.CoreSurfaceOptions;
 import dev.reuise.core.layout.CoreSurfacePartOptions;
 import dev.reuise.core.parentcomponent.CoreParentComponentPartOptions;
-// Todo: Clean up uneeded interfaces
+// Todo: Clean up unneeded interfaces
 public interface CoreCardOptions extends CoreCardPartOptions , CoreBaseComponentPartOptions , CoreSurfacePartOptions , CoreContainerPartOptions , CoreFlexContainerPartOptions , CoreParentComponentPartOptions , CoreComponentOptions , CoreSurfaceOptions {
     CoreSurfacePartOptions getSurfacePart();
 

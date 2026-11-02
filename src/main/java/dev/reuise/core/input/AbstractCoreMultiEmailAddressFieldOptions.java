@@ -6,13 +6,7 @@ import dev.reuise.core.layout.CoreContainerPartOptions;
 import dev.reuise.core.text.CoreInlineTextPartOptions;
 import dev.reuise.core.text.CoreLabelPartOptions;
 import java.util.List;
-import static dev.reuise.core.input.AbstractCoreMultiEmailAddressFieldOptionsImpl.getTextFieldPart;
-import static dev.reuise.core.input.AbstractCoreMultiEmailAddressFieldOptionsImpl.getValidators;
-import static dev.reuise.core.input.AbstractCoreMultiEmailAddressFieldOptionsImpl.self;
 public abstract class AbstractCoreMultiEmailAddressFieldOptions<S extends AbstractCoreMultiEmailAddressFieldOptions<S>> implements CoreComponentOptions , CoreMultiEmailAddressFieldOptions {
-    // Indirect layout child
-    private CoreChipGroupPartOptions chipGroupOptions;
-
     // Indirect layout child
     private CoreLabelPartOptions labelContainerOptions;
 
@@ -31,6 +25,9 @@ public abstract class AbstractCoreMultiEmailAddressFieldOptions<S extends Abstra
     // Indirect layout child
     private CoreInlineTextPartOptions supportingTextContainerOptions;
 
+    // Indirect layout child
+    private CoreChipGroupPartOptions chipGroupOptions;
+
     protected AbstractCoreMultiEmailAddressFieldOptions() {
     }
 
@@ -38,13 +35,13 @@ public abstract class AbstractCoreMultiEmailAddressFieldOptions<S extends Abstra
     }
 
     public boolean onPreInitialize() {
-        chipGroupOptions = getChipGroupOptions();
         labelContainerOptions = getLabelContainerOptions();
         inputContainerOptions = getInputContainerOptions();
         startIconOptions = getStartIconOptions();
         inputOptions = getInputOptions();
         endIconOptions = getEndIconOptions();
         supportingTextContainerOptions = getSupportingTextContainerOptions();
+        chipGroupOptions = getChipGroupOptions();
         return true;
     }
 

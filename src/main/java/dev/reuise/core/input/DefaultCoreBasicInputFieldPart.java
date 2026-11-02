@@ -15,11 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import static dev.reuise.core.input.DefaultCoreBasicInputFieldPartImpl.getComponent;
-import static dev.reuise.core.input.DefaultCoreBasicInputFieldPartImpl.self;
-import static dev.reuise.core.input.DefaultCoreBasicInputFieldPartImpl.setFocused;
-import static dev.reuise.core.input.DefaultCoreBasicInputFieldPartImpl.setValue;
 // Option: Mounted - CORE
 // Option: Margin - CORE
 // Option: MarginTop - CORE
@@ -83,7 +80,7 @@ public abstract class DefaultCoreBasicInputFieldPart<S extends DefaultCoreBasicI
     }
 
     @Override
-    public List<InputValidator> getValidators(InputValidator... modes) {
+    public List<InputValidator> getValidators(InputValidator.ValidationMode... modes) {
         return validators.stream().filter(v -> v.isMode(modes)).collect(Collectors.toList());
     }
 

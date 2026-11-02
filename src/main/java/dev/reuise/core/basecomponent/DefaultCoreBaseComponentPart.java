@@ -17,10 +17,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static dev.reuise.core.basecomponent.DefaultCoreBaseComponentPartImpl.getParent;
-import static dev.reuise.core.basecomponent.DefaultCoreBaseComponentPartImpl.self;
-import static dev.reuise.core.basecomponent.DefaultCoreBaseComponentPartImpl.setDebug;
-import static dev.reuise.core.basecomponent.DefaultCoreBaseComponentPartImpl.setupReferences;
 public abstract class DefaultCoreBaseComponentPart<S extends DefaultCoreBaseComponentPart<S, O>, O extends CoreBaseComponentPartOptions> implements ComponentPart , CoreBaseComponent {
     private boolean mounted = false;
 

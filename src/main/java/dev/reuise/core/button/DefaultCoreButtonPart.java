@@ -14,13 +14,12 @@ import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.button.DefaultCoreButtonPartImpl.getLabelContainer;
-import static dev.reuise.core.button.DefaultCoreButtonPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -59,6 +58,10 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
     protected CoreInlineText labelContainer;
 
     protected CoreIcon endIcon;
+
+    protected Boolean loading;
+
+    protected CoreSkeletonOptions skeletonOptions;
 
     protected ButtonType type;
 
@@ -856,6 +859,28 @@ public abstract class DefaultCoreButtonPart<S extends DefaultCoreButtonPart<S, O
     }
 
     protected abstract S self();
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(loading);
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.loading = loading;
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return skeletonOptions;
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.skeletonOptions = skeletonOptions;
+        return self();
+    }
 
     @Override
     public ButtonType getType() {

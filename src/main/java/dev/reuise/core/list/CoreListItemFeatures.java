@@ -1,5 +1,14 @@
 package dev.reuise.core.list;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 public interface CoreListItemFeatures {
+    boolean isLoading();
+
+    CoreListItemFeatures setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    CoreListItemFeatures setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
+
     String getLabel();
 
     CoreListItemFeatures setLabel(String label);

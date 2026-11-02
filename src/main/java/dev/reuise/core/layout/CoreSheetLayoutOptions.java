@@ -4,7 +4,7 @@ import dev.reuise.core.basecomponent.CoreBaseComponentPartOptions;
 import dev.reuise.core.parentcomponent.CoreParentComponentPartOptions;
 import dev.reuise.core.splitcontainer.CoreSplitContainerOptions;
 import dev.reuise.core.splitcontainer.CoreSplitContainerPartOptions;
-// Todo: Clean up uneeded interfaces
+// Todo: Clean up unneeded interfaces
 public interface CoreSheetLayoutOptions extends CoreSplitContainerPartOptions , CoreBaseComponentPartOptions , CoreContainerPartOptions , CoreParentComponentPartOptions , CoreSheetLayoutPartOptions , CoreComponentOptions , CoreSplitContainerOptions {
     CoreSplitContainerPartOptions getSplitContainerPart();
 

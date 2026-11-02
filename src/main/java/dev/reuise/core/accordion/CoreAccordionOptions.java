@@ -5,7 +5,7 @@ import dev.reuise.core.layout.CoreContainerPartOptions;
 import dev.reuise.core.layout.CoreFlexContainerOptions;
 import dev.reuise.core.layout.CoreFlexContainerPartOptions;
 import dev.reuise.core.parentcomponent.CoreParentComponentPartOptions;
-// Todo: Clean up uneeded interfaces
+// Todo: Clean up unneeded interfaces
 public interface CoreAccordionOptions extends CoreAccordionPartOptions , CoreBaseComponentPartOptions , CoreContainerPartOptions , CoreFlexContainerPartOptions , CoreParentComponentPartOptions , CoreComponentOptions , CoreFlexContainerOptions {
     CoreFlexContainerPartOptions getFlexContainerPart();
 

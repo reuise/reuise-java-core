@@ -5,7 +5,7 @@ import dev.reuise.core.list.CoreBasicListItemPartOptions;
 import dev.reuise.core.list.CoreListItemOptions;
 import dev.reuise.core.list.CoreListItemPartOptions;
 import dev.reuise.core.parentcomponent.CoreParentComponentPartOptions;
-// Todo: Clean up uneeded interfaces
+// Todo: Clean up unneeded interfaces
 public interface CoreMenuItemOptions extends CoreMenuItemPartOptions , CoreBasicListItemPartOptions , CoreListItemOptions , CoreBaseComponentPartOptions , CoreParentComponentPartOptions , CoreComponentOptions , CoreListItemPartOptions {
     CoreListItemPartOptions getListItemPart();
 

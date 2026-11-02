@@ -28,7 +28,6 @@ import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
-import static dev.reuise.core.tabs.DefaultCoreTabBarPartImpl.self;
 // Option: Padding - CORE
 // Option: PaddingTop - CORE
 // Option: PaddingRight - CORE

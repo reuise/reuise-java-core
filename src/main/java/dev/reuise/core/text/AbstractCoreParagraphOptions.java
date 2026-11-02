@@ -7,7 +7,6 @@ import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentOption;
 import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import java.util.Collection;
-import static dev.reuise.core.text.AbstractCoreParagraphOptionsImpl.self;
 public abstract class AbstractCoreParagraphOptions<S extends AbstractCoreParagraphOptions<S>> implements CoreParagraphOptions , CoreComponentOptions {
     @Override
     public S setText(Html html) {

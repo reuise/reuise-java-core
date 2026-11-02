@@ -7,8 +7,21 @@ import dev.reuise.core.link.CoreLink;
 import dev.reuise.core.link.CoreLinkOptions;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.ComponentOption;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Color;
 public interface CoreIconPartOptions {
+    boolean isLoading();
+
+    ComponentOption<Boolean> getLoadingOption();
+
+    CoreIconPartOptions setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
+
+    CoreIconPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
+
     Object getSize();
 
     ComponentOption<Object> getSizeOption();

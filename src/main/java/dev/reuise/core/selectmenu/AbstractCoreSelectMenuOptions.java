@@ -4,12 +4,23 @@ import dev.reuise.core.Position;
 import dev.reuise.core.input.CoreTextFieldOptions;
 import dev.reuise.core.input.TextFieldSize;
 import dev.reuise.core.menu.CoreMenuItem;
+import dev.reuise.core.menu.CoreMenuItemOptions;
 import dev.reuise.core.menu.CoreMenuOptions;
 import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 public abstract class AbstractCoreSelectMenuOptions<S extends AbstractCoreSelectMenuOptions<S>> implements CoreSelectMenuOptions , CoreComponentOptions {
+    // Convenience overload mirroring the runtime SelectMenu/Menu's addItem(String); the
+    // generated Items ComponentOption only produces an addItem(MenuItem) overload, so callers
+    // building options (e.g. for rehydration) had no way to add a plain-text item.
+    public S addItem(String text) {
+        CoreMenuItemOptions menuItemOpts = getComponentFactory().createMenuItemOptions();
+        menuItemOpts.setLabel(text);
+        addItem(getComponentFactory().createMenuItem(menuItemOpts));
+        return self();
+    }
+
     protected dev.reuise.core.input.CoreTextFieldOptions textFieldOptions;
 
     protected dev.reuise.core.menu.CoreMenuOptions menuOptions;
@@ -128,9 +139,9 @@ public abstract class AbstractCoreSelectMenuOptions<S extends AbstractCoreSelect
     @Override
     public S removeItem(CoreMenuItem item) {
         List<CoreMenuItem> list = getItems();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(item);
         return self();
     }
@@ -138,9 +149,9 @@ public abstract class AbstractCoreSelectMenuOptions<S extends AbstractCoreSelect
     @Override
     public S clearItems() {
         List<CoreMenuItem> list = getItems();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

@@ -62,9 +62,9 @@ public abstract class AbstractCoreTabBarOptions<S extends AbstractCoreTabBarOpti
     @Override
     public S removeTab(CoreTab tab) {
         List<CoreTab> list = getTabs();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(tab);
         return self();
     }
@@ -72,9 +72,9 @@ public abstract class AbstractCoreTabBarOptions<S extends AbstractCoreTabBarOpti
     @Override
     public S clearTabs() {
         List<CoreTab> list = getTabs();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

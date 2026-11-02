@@ -9,9 +9,22 @@ import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.ComponentOption;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.text.CoreInlineText;
 import dev.reuise.core.text.CoreInlineTextOptions;
 public interface CoreListItemPartOptions {
+    boolean isLoading();
+
+    ComponentOption<Boolean> getLoadingOption();
+
+    CoreListItemPartOptions setLoading(Boolean loading);
+
+    CoreSkeletonOptions getSkeletonOptions();
+
+    ComponentOption<CoreSkeletonOptions> getSkeletonOptionsOption();
+
+    CoreListItemPartOptions setSkeletonOptions(CoreSkeletonOptions skeletonOptions);
+
     String getLabel();
 
     ComponentOption<String> getLabelOption();

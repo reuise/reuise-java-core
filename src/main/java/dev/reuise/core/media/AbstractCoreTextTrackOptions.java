@@ -3,7 +3,6 @@ import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.List;
-import static dev.reuise.core.media.AbstractCoreTextTrackOptionsImpl.self;
 public abstract class AbstractCoreTextTrackOptions<S extends AbstractCoreTextTrackOptions<S>> implements CoreTextTrackOptions , CoreComponentOptions {
     @Override
     public S addCue(double startTime, double endTime, String text) {
@@ -137,9 +136,9 @@ public abstract class AbstractCoreTextTrackOptions<S extends AbstractCoreTextTra
     @Override
     public S removeCue(TextTrackCue cue) {
         List<TextTrackCue> list = getCues();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(cue);
         return self();
     }
@@ -147,9 +146,9 @@ public abstract class AbstractCoreTextTrackOptions<S extends AbstractCoreTextTra
     @Override
     public S clearCues() {
         List<TextTrackCue> list = getCues();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

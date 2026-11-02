@@ -18,9 +18,6 @@ import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.button.DefaultCoreIconButtonPartImpl.self;
-import static dev.reuise.core.button.DefaultCoreIconButtonPartImpl.setHeight;
-import static dev.reuise.core.button.DefaultCoreIconButtonPartImpl.setWidth;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE

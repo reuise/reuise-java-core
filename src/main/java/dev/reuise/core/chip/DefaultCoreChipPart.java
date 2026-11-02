@@ -19,7 +19,6 @@ import dev.reuise.core.text.CoreLabelOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.chip.DefaultCoreChipPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE

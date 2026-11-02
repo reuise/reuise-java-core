@@ -45,9 +45,9 @@ public abstract class AbstractCoreParentComponentOptions<S extends AbstractCoreP
     @Override
     public S removeChild(CoreComponent child) {
         List<CoreComponent> list = getChildren();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(child);
         return self();
     }
@@ -55,9 +55,9 @@ public abstract class AbstractCoreParentComponentOptions<S extends AbstractCoreP
     @Override
     public S clearChildren() {
         List<CoreComponent> list = getChildren();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

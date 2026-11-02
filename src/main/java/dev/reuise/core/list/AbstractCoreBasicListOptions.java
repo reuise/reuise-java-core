@@ -4,7 +4,6 @@ import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import static dev.reuise.core.list.AbstractCoreBasicListOptionsImpl.getComponentFactory;
 public abstract class AbstractCoreBasicListOptions<S extends AbstractCoreBasicListOptions<S>> implements CoreBasicListOptions , CoreComponentOptions {
     @Override
     public S addItem(String text) {
@@ -66,9 +65,9 @@ public abstract class AbstractCoreBasicListOptions<S extends AbstractCoreBasicLi
     @Override
     public S removeItem(CoreBasicListItem item) {
         List<CoreBasicListItem> list = getItems();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(item);
         return self();
     }
@@ -76,9 +75,9 @@ public abstract class AbstractCoreBasicListOptions<S extends AbstractCoreBasicLi
     @Override
     public S clearItems() {
         List<CoreBasicListItem> list = getItems();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

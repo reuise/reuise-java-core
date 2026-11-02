@@ -260,9 +260,9 @@ public abstract class AbstractCoreCardOptions<S extends AbstractCoreCardOptions<
     @Override
     public S removeAction(CoreButton action) {
         List<CoreButton> list = getActions();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(action);
         return self();
     }

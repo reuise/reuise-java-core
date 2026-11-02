@@ -19,10 +19,6 @@ import dev.reuise.core.text.CoreLabel;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.input.DefaultCoreMultiEmailAddressFieldPartImpl.getChipFieldPart;
-import static dev.reuise.core.input.DefaultCoreMultiEmailAddressFieldPartImpl.getTextFieldPart;
-import static dev.reuise.core.input.DefaultCoreMultiEmailAddressFieldPartImpl.getValidators;
-import static dev.reuise.core.input.DefaultCoreMultiEmailAddressFieldPartImpl.self;
 // Option: Multiple - CORE
 // Option: Values - CORE
 // Option: Delimiters - CORE
@@ -73,8 +69,6 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
 
     private CoreBaseComponentPart baseComponentPart;
 
-    private CoreChipGroup chipGroup;
-
     private CoreLabel labelContainer;
 
     private CoreContainer inputContainer;
@@ -87,6 +81,8 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
 
     private CoreInlineText supportingTextContainer;
 
+    private CoreChipGroup chipGroup;
+
     protected DefaultCoreMultiEmailAddressFieldPart(O options) {
     }
 
@@ -97,13 +93,13 @@ public abstract class DefaultCoreMultiEmailAddressFieldPart<S extends DefaultCor
         parentComponentPart = getParentComponentPart();
         baseComponentPart = getBaseComponentPart();
         // Layout children (indirect)
-        chipGroup = getChipGroup();
         labelContainer = getLabelContainer();
         inputContainer = getInputContainer();
         startIcon = getStartIcon();
         input = getInput();
         endIcon = getEndIcon();
         supportingTextContainer = getSupportingTextContainer();
+        chipGroup = getChipGroup();
     }
 
     @Override

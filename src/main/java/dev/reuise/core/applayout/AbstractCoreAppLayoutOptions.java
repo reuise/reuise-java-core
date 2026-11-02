@@ -4,7 +4,6 @@ import dev.reuise.core.bottomappbar.CoreBottomAppBar;
 import dev.reuise.core.drawer.CoreDrawer;
 import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.option.ComponentOption;
-import dev.reuise.core.option.DefaultComponentOption;
 import dev.reuise.core.splitcontainer.CoreSplitContainerOptions;
 import dev.reuise.core.splitcontainer.SplitDirection;
 import dev.reuise.core.topappbar.CoreTopAppBar;
@@ -16,8 +15,6 @@ public abstract class AbstractCoreAppLayoutOptions<S extends AbstractCoreAppLayo
     protected dev.reuise.core.splitcontainer.CoreSplitContainerOptions topAppBarSplitOptions;
 
     protected dev.reuise.core.applayout.CoreAppLayoutBodyOptions bodyOptions;
-
-    private boolean drawerResizableExplicitlySet;
 
     protected AbstractCoreAppLayoutOptions() {
         drawerScrimOptions = createDefaultDrawerScrimOptions();
@@ -57,12 +54,7 @@ public abstract class AbstractCoreAppLayoutOptions<S extends AbstractCoreAppLayo
         if (topAppBarSplitOptions == null)
             topAppBarSplitOptions = createDefaultTopAppBarSplitOptions();
 
-        if (!isExplicitOption(topAppBarSplitOptions.getSplitPositionOption()))
-            topAppBarSplitOptions.setSplitPosition(topAppBar.getHeight());
-    }
-
-    private boolean isExplicitOption(ComponentOption<?> option) {
-        return (option != null) && !(option instanceof DefaultComponentOption);
+        topAppBarSplitOptions.setSplitPosition(topAppBar.getHeight());
     }
 
     private void setDefaultTopAppBar(CoreTopAppBar topAppBar) {
@@ -116,8 +108,7 @@ public abstract class AbstractCoreAppLayoutOptions<S extends AbstractCoreAppLayo
         if (drawerSplitOptions == null)
             drawerSplitOptions = createDefaultDrawerSplitOptions();
 
-        if (!drawerResizableExplicitlySet)
-            drawerSplitOptions.setResizable(drawer.isResizable());
+        drawerSplitOptions.setResizable(drawer.isResizable());
     }
 
     private void setDefaultDrawer(CoreDrawer drawer) {
@@ -159,9 +150,6 @@ public abstract class AbstractCoreAppLayoutOptions<S extends AbstractCoreAppLayo
     public S setDrawerSplitOptions(dev.reuise.core.splitcontainer.CoreSplitContainerOptions drawerSplitOptions) {
         if (!hasDrawerSplitOptions())
             this.drawerSplitOptions = createDefaultDrawerSplitOptions();
-
-        if (isExplicitOption(drawerSplitOptions.getResizableOption()))
-            drawerResizableExplicitlySet = true;
 
         // Merge with default options
         this.drawerSplitOptions.merge(drawerSplitOptions);

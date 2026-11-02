@@ -78,9 +78,9 @@ public abstract class AbstractCoreTableHeaderOptions<S extends AbstractCoreTable
     @Override
     public S removeColumn(CoreTableColumnOptions column) {
         List<CoreTableColumnOptions> list = getColumns();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(column);
         return self();
     }
@@ -88,9 +88,9 @@ public abstract class AbstractCoreTableHeaderOptions<S extends AbstractCoreTable
     @Override
     public S clearColumns() {
         List<CoreTableColumnOptions> list = getColumns();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

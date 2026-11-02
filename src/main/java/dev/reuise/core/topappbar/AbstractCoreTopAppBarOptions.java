@@ -273,9 +273,9 @@ public abstract class AbstractCoreTopAppBarOptions<S extends AbstractCoreTopAppB
     @Override
     public S removeAction(CoreButton action) {
         List<CoreButton> list = getActions();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(action);
         return self();
     }
@@ -283,9 +283,9 @@ public abstract class AbstractCoreTopAppBarOptions<S extends AbstractCoreTopAppB
     @Override
     public S clearActions() {
         List<CoreButton> list = getActions();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

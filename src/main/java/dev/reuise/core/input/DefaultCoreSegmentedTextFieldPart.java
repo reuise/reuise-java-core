@@ -31,9 +31,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
-import static dev.reuise.core.input.DefaultCoreSegmentedTextFieldPartImpl.clearFields;
-import static dev.reuise.core.input.DefaultCoreSegmentedTextFieldPartImpl.getComponentFactory;
-import static dev.reuise.core.input.DefaultCoreSegmentedTextFieldPartImpl.self;
 // Option: Direction - CORE
 // Option: JustifyContent - CORE
 // Option: AlignItems - CORE

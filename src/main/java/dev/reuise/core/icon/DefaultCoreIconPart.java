@@ -16,13 +16,11 @@ import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Color;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.icon.DefaultCoreIconPartImpl.self;
-import static dev.reuise.core.icon.DefaultCoreIconPartImpl.setHeight;
-import static dev.reuise.core.icon.DefaultCoreIconPartImpl.setWidth;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -95,6 +93,10 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
     protected CoreLink link;
 
     protected CoreImage image;
+
+    protected Boolean loading;
+
+    protected CoreSkeletonOptions skeletonOptions;
 
     protected DefaultCoreIconPart(O options) {
     }
@@ -836,6 +838,8 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
             System.out.println("component is null");
 
         // Apply options for default state
+        applicator.add(options.getLoadingOption(), component::setLoading);
+        applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
         applicator.add(options.getSizeOption(), component::setSize);
         applicator.add(options.getUrlOption(), component::setUrl);
         applicator.add(options.getColorOption(), component::setColor);
@@ -877,4 +881,26 @@ public abstract class DefaultCoreIconPart<S extends DefaultCoreIconPart<S, O>, O
     }
 
     protected abstract S self();
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(loading);
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.loading = loading;
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return skeletonOptions;
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.skeletonOptions = skeletonOptions;
+        return self();
+    }
 }

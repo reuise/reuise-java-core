@@ -14,10 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.parentcomponent.DefaultCoreParentComponentPartImpl.getComponent;
-import static dev.reuise.core.parentcomponent.DefaultCoreParentComponentPartImpl.getRootComponent;
-import static dev.reuise.core.parentcomponent.DefaultCoreParentComponentPartImpl.getTheme;
-import static dev.reuise.core.parentcomponent.DefaultCoreParentComponentPartImpl.self;
 // Option: Mounted - CORE
 // Option: Margin - CORE
 // Option: MarginTop - CORE
@@ -738,6 +734,12 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
 
     // Implementation
     public void removeAll() {
+        // Mirror remove(child)'s lifecycle contract: unlink each child's parent
+        // reference before clearing, so removeAll() fully tears down the
+        // container (model + parent links), not just the backing list.
+        for (CoreComponent child : children) {
+            child.setParent(null);
+        }
         children.clear();
     }
 

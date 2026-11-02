@@ -60,6 +60,8 @@ public interface CoreSelectMenuPartOptions {
 
     <T> void setDefaultOption(String option, T value, State state, boolean force);
 
+    CoreSelectMenuPartOptions addItem(String text);
+
     CoreTextFieldOptions getTextFieldOptions();
 
     CoreSelectMenuPartOptions setTextFieldOptions(CoreTextFieldOptions textFieldOptions);

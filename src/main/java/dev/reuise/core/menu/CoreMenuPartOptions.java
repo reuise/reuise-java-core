@@ -49,6 +49,8 @@ public interface CoreMenuPartOptions {
 
     <T> void setDefaultOption(String option, T value, State state, boolean force);
 
+    CoreMenuPartOptions addItem(String text);
+
     CoreMenuPartOptions addDivider();
 
     CoreListViewOptions getListOptions();

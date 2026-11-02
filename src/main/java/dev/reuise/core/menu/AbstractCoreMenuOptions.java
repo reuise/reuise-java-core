@@ -7,9 +7,17 @@ import dev.reuise.core.option.ComponentOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import static dev.reuise.core.menu.AbstractCoreMenuOptionsImpl.getComponentFactory;
-import static dev.reuise.core.menu.AbstractCoreMenuOptionsImpl.self;
 public abstract class AbstractCoreMenuOptions<S extends AbstractCoreMenuOptions<S>> implements CoreMenuOptions , CoreComponentOptions {
+    // Convenience overload mirroring the runtime Menu's addItem(String); the generated Items
+    // ComponentOption only produces an addItem(MenuItem) overload, so callers building options
+    // (e.g. for rehydration) had no way to add a plain-text item.
+    public S addItem(String text) {
+        CoreMenuItemOptions menuItemOpts = getComponentFactory().createMenuItemOptions();
+        menuItemOpts.setLabel(text);
+        addItem(getComponentFactory().createMenuItem(menuItemOpts));
+        return self();
+    }
+
     @Override
     public S addDivider() {
         CoreMenuDividerOptions menuDividerOpts = getComponentFactory().createMenuDividerOptions();
@@ -98,9 +106,9 @@ public abstract class AbstractCoreMenuOptions<S extends AbstractCoreMenuOptions<
     @Override
     public S removeItem(CoreMenuItem item) {
         List<CoreMenuItem> list = getItems();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.remove(item);
         return self();
     }
@@ -108,9 +116,9 @@ public abstract class AbstractCoreMenuOptions<S extends AbstractCoreMenuOptions<
     @Override
     public S clearItems() {
         List<CoreMenuItem> list = getItems();
-        if (list == null) {
+        if (list == null)
             return self();
-        }
+
         list.clear();
         return self();
     }

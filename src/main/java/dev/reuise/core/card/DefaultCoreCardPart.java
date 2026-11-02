@@ -38,8 +38,6 @@ import dev.reuise.core.text.CoreTextBlockOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.card.DefaultCoreCardPartImpl.containsText;
-import static dev.reuise.core.card.DefaultCoreCardPartImpl.self;
 // Option: Type - CORE
 // Option: Direction - CORE
 // Option: JustifyContent - CORE

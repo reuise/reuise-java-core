@@ -13,11 +13,10 @@ import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
+import dev.reuise.core.skeleton.CoreSkeletonOptions;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
-import static dev.reuise.core.text.DefaultCoreTextPartImpl.getText;
-import static dev.reuise.core.text.DefaultCoreTextPartImpl.self;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -58,6 +57,12 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
+
+    protected Boolean loading;
+
+    protected CoreSkeletonOptions skeletonOptions;
+
+    protected String text;
 
     protected DefaultCoreTextPart(O options) {
     }
@@ -745,6 +750,39 @@ public abstract class DefaultCoreTextPart<S extends DefaultCoreTextPart<S, O>, O
     }
 
     protected abstract S self();
+
+    @Override
+    public boolean isLoading() {
+        return Boolean.TRUE.equals(loading);
+    }
+
+    @Override
+    public S setLoading(Boolean loading) {
+        this.loading = loading;
+        return self();
+    }
+
+    @Override
+    public CoreSkeletonOptions getSkeletonOptions() {
+        return skeletonOptions;
+    }
+
+    @Override
+    public S setSkeletonOptions(CoreSkeletonOptions skeletonOptions) {
+        this.skeletonOptions = skeletonOptions;
+        return self();
+    }
+
+    @Override
+    public String getText() {
+        return text;
+    }
+
+    @Override
+    public S setText(String text) {
+        this.text = text;
+        return self();
+    }
 
     @Override
     public S setFontSizeAllStates(Object fontSize) {

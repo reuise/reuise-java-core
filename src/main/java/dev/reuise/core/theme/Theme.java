@@ -2,17 +2,17 @@ package dev.reuise.core.theme;
 public class Theme {
     protected ComponentTheme globalTheme;
 
-    protected ComponentTheme textFieldTheme;
-
     protected ComponentTheme buttonTheme;
 
-    protected ComponentTheme surfaceTheme;
+    protected ComponentTheme textFieldTheme;
 
     protected ComponentTheme headingTheme;
 
-    protected ComponentTheme tabTheme;
-
     protected ComponentTheme dialogTheme;
+
+    protected ComponentTheme surfaceTheme;
+
+    protected ComponentTheme tabTheme;
 
     public Theme() {
     }
@@ -26,15 +26,6 @@ public class Theme {
         return this;
     }
 
-    public ComponentTheme getTextFieldTheme() {
-        return textFieldTheme;
-    }
-
-    public Theme setTextFieldTheme(ComponentTheme textFieldTheme) {
-        this.textFieldTheme = textFieldTheme;
-        return this;
-    }
-
     public ComponentTheme getButtonTheme() {
         return buttonTheme;
     }
@@ -44,12 +35,12 @@ public class Theme {
         return this;
     }
 
-    public ComponentTheme getSurfaceTheme() {
-        return surfaceTheme;
+    public ComponentTheme getTextFieldTheme() {
+        return textFieldTheme;
     }
 
-    public Theme setSurfaceTheme(ComponentTheme surfaceTheme) {
-        this.surfaceTheme = surfaceTheme;
+    public Theme setTextFieldTheme(ComponentTheme textFieldTheme) {
+        this.textFieldTheme = textFieldTheme;
         return this;
     }
 
@@ -62,21 +53,30 @@ public class Theme {
         return this;
     }
 
-    public ComponentTheme getTabTheme() {
-        return tabTheme;
-    }
-
-    public Theme setTabTheme(ComponentTheme tabTheme) {
-        this.tabTheme = tabTheme;
-        return this;
-    }
-
     public ComponentTheme getDialogTheme() {
         return dialogTheme;
     }
 
     public Theme setDialogTheme(ComponentTheme dialogTheme) {
         this.dialogTheme = dialogTheme;
+        return this;
+    }
+
+    public ComponentTheme getSurfaceTheme() {
+        return surfaceTheme;
+    }
+
+    public Theme setSurfaceTheme(ComponentTheme surfaceTheme) {
+        this.surfaceTheme = surfaceTheme;
+        return this;
+    }
+
+    public ComponentTheme getTabTheme() {
+        return tabTheme;
+    }
+
+    public Theme setTabTheme(ComponentTheme tabTheme) {
+        this.tabTheme = tabTheme;
         return this;
     }
 
