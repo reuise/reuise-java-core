@@ -25,6 +25,12 @@ public interface CoreTextPartOptions {
 
     CoreTextPartOptions setText(String text);
 
+    Html getHtmlContent();
+
+    ComponentOption<Html> getHtmlContentOption();
+
+    CoreTextPartOptions setHtmlContent(Html htmlContent);
+
     Object getFontSize();
 
     ComponentOption<Object> getFontSizeOption();

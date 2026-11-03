@@ -16,6 +16,10 @@ public interface CoreTextFeatures {
 
     CoreTextFeatures setText(String text);
 
+    Html getHtmlContent();
+
+    CoreTextFeatures setHtmlContent(Html htmlContent);
+
     Object getFontSize();
 
     CoreTextFeatures setFontSize(Object fontSize);

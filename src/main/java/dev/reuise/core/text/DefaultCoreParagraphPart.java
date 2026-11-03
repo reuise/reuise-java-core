@@ -48,9 +48,8 @@ import java.util.List;
 public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPart<S, O>, O extends CoreParagraphPartOptions> implements ComponentPart , CoreParagraph {
     @Override
     public S setText(Html html) {
-        if (html != null)
-            setText(html.toString());
-
+        setText(html == null ? null : html.toString());
+        setHtmlContent(html);
         return self();
     }
 
@@ -63,6 +62,8 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
     protected CoreSkeletonOptions skeletonOptions;
 
     protected String text;
+
+    protected Html htmlContent;
 
     protected DefaultCoreParagraphPart(O options) {
     }
@@ -729,6 +730,7 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
         applicator.add(options.getLoadingOption(), component::setLoading);
         applicator.add(options.getSkeletonOptionsOption(), component::setSkeletonOptions);
         applicator.add(options.getTextOption(), component::setText);
+        applicator.add(options.getHtmlContentOption(), component::setHtmlContent);
         applicator.add(options.getFontSizeOption(), component::setFontSize);
         if (states != null)
             states.stream().forEach((State state) -> {
@@ -771,9 +773,22 @@ public abstract class DefaultCoreParagraphPart<S extends DefaultCoreParagraphPar
         return text;
     }
 
+    // Implementation
     @Override
     public S setText(String text) {
         this.text = text;
+        setHtmlContent(null);
+        return self();
+    }
+
+    @Override
+    public Html getHtmlContent() {
+        return htmlContent;
+    }
+
+    @Override
+    public S setHtmlContent(Html htmlContent) {
+        this.htmlContent = htmlContent;
         return self();
     }
 

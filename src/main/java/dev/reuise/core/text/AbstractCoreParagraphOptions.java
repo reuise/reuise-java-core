@@ -10,9 +10,8 @@ import java.util.Collection;
 public abstract class AbstractCoreParagraphOptions<S extends AbstractCoreParagraphOptions<S>> implements CoreParagraphOptions , CoreComponentOptions {
     @Override
     public S setText(Html html) {
-        if (html != null)
-            setText(html.toString());
-
+        setText(html == null ? null : html.toString());
+        setHtmlContent(html);
         return self();
     }
 
@@ -79,14 +78,36 @@ public abstract class AbstractCoreParagraphOptions<S extends AbstractCoreParagra
         return ((ComponentOption<String>) (getOption("text")));
     }
 
+    // Implementation
     @Override
     public S setText(String text) {
         setOption("text", text);
+        setHtmlContent(null);
         return self();
     }
 
     private void setDefaultText(String text) {
         setDefaultOption("text", text);
+    }
+
+    @Override
+    public Html getHtmlContent() {
+        return ((Html) (getOptionValue("htmlContent")));
+    }
+
+    @Override
+    public ComponentOption<Html> getHtmlContentOption() {
+        return ((ComponentOption<Html>) (getOption("htmlContent")));
+    }
+
+    @Override
+    public S setHtmlContent(Html htmlContent) {
+        setOption("htmlContent", htmlContent);
+        return self();
+    }
+
+    private void setDefaultHtmlContent(Html htmlContent) {
+        setDefaultOption("htmlContent", htmlContent);
     }
 
     @Override

@@ -16,6 +16,10 @@ public interface CoreParagraphFeatures {
 
     CoreParagraphFeatures setText(String text);
 
+    Html getHtmlContent();
+
+    CoreParagraphFeatures setHtmlContent(Html htmlContent);
+
     Object getFontSize();
 
     CoreParagraphFeatures setFontSize(Object fontSize);

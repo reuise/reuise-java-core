@@ -11,6 +11,7 @@ public class Html {
         return new Html("");
     }
 
+    /** Inserts trusted markup verbatim. Never pass untrusted input. */
     public static Html of(String initialContent) {
         return new Html(initialContent);
     }
@@ -18,12 +19,12 @@ public class Html {
     private Html addTag(String tagName, String innerContent, boolean selfClosing, String... attributes) {
         content.append("<").append(tagName);
         for (int i = 0; i < attributes.length; i += 2) {
-            content.append(" ").append(attributes[i]).append("=\"").append(attributes[i + 1]).append("\"");
+            content.append(" ").append(attributes[i]).append("=\"").append(HtmlEscaper.attribute(attributes[i + 1])).append("\"");
         }
         if (selfClosing) {
             content.append(" />");
         } else {
-            content.append(">").append(innerContent).append("</").append(tagName).append(">");
+            content.append(">").append(HtmlEscaper.text(innerContent)).append("</").append(tagName).append(">");
         }
         return this;
     }
@@ -50,19 +51,25 @@ public class Html {
     }
 
     public Html link(String href, String text) {
-        return addTag("a", text, false, "href", href);
+        return addTag("a", text, false, "href", HtmlEscaper.url(href));
     }
 
     public Html image(String src, String alt) {
-        return addTag("img", "", true, "src", src, "alt", alt);
+        return addTag("img", "", true, "src", HtmlEscaper.url(src), "alt", alt);
     }
 
     public Html lineBreak() {
         return addTag("br", "", true);
     }
 
+    /** Appends trusted markup verbatim. Prefer plainText for untrusted strings. */
     public Html text(String html) {
         content.append(html);
+        return this;
+    }
+
+    public Html plainText(String text) {
+        content.append(HtmlEscaper.text(text));
         return this;
     }
 
