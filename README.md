@@ -47,3 +47,13 @@ Regression tests live in the 0.8.2-beta implementation-template repository:
 `mvn test` runs helper/backend cases; `mvn -f src/test/browser/pom.xml package`
 builds the GWT browser assertions. Serve the resulting webapp and load
 `index.html`; success is reported as `PASS` with the assertion count.
+
+## CSS priority
+
+Style append operations preserve each property's `important` flag and parse typed
+values using the property's normal rules (for example, width `24` becomes
+`24px`). Appending a normal declaration for the same property replaces an
+existing important declaration and clears its priority, matching backend style
+merging. This applies to inline styles and existing stylesheet rules, including
+responsive and nested rules. Values read from browser CSS declarations remain
+browser-normalized strings.
