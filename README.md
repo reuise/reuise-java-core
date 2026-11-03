@@ -57,3 +57,16 @@ existing important declaration and clears its priority, matching backend style
 merging. This applies to inline styles and existing stylesheet rules, including
 responsive and nested rules. Values read from browser CSS declarations remain
 browser-normalized strings.
+
+## Frontend DOM accessors
+
+Frontend `getTooltip()` / `setTooltip()` read and write the element's `title`
+attribute, including on SVG elements. A null tooltip removes the attribute;
+an empty tooltip keeps an explicitly empty attribute.
+
+Frontend `getStyleClasses()` and `getAttributes()` return non-null, detached
+snapshots of the current DOM. Class snapshots include framework-generated and
+externally added classes, not just classes supplied in component options.
+Attribute values are decoded DOM strings, not HTML-encoded strings. Mutating a
+snapshot does not change the element; use the component setters for updates.
+These accessors also read existing values on hydrated components.
