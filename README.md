@@ -106,3 +106,22 @@ not remove it. Use `removeAttribute("data-user-id")` to remove an entry.
 `getData(key)` returns null for a missing attribute and `hasData(key)` reports
 presence, including empty attributes. Prefer lowercase keys for backend/frontend
 parity (HTML attribute names are case-insensitive; SVG names are case-sensitive).
+
+## Frontend element binding
+
+Configure element providers and rehydration on **options before component
+creation**. `getElementProvider()` retains the provider used to obtain the
+element. `getRehydration()` retains the construction selector, or null when
+hydrating a direct element or creating a fresh element; use `getElement()` and
+`isRehydrated()` for the resolved node and hydration status.
+
+An existing component cannot be rebound to another provider, element or
+selector: these setter calls throw `UnsupportedOperationException` without
+moving children, changing parent references, or replacing listeners and styles.
+Setting the identical provider, current element, or unchanged selector is
+idempotent. Scoped/optional rehydration overloads are construction-only and
+reject calls after element acquisition, even with an unchanged selector.
+
+On options, switching between selector and direct-element rehydration clears
+stale binding metadata. Setting a null element or null/empty selector restores
+normal fresh-element creation. Backend rehydration configuration is unchanged.
