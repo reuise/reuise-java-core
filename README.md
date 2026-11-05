@@ -70,3 +70,24 @@ externally added classes, not just classes supplied in component options.
 Attribute values are decoded DOM strings, not HTML-encoded strings. Mutating a
 snapshot does not change the element; use the component setters for updates.
 These accessors also read existing values on hydrated components.
+
+## Parent-component lifecycle
+
+Adding a child registers it once, preserves the order on repeated adds, and
+detaches it from its previous parent when moved. Hydrated children are registered
+without duplicating or unnecessarily moving their existing DOM nodes.
+`insertBefore` moves an existing entry rather than duplicating it; a reference
+not owned by the parent falls back to `add`. Null or self references do nothing.
+
+Wrappers, including nested wrappers, are owned as outer child entries. Inserting
+or removing a wrapped child through the outer parent moves or detaches that
+whole wrapper unit, preserving its internal children. `removeFromParent` instead
+removes a child from its immediate model parent. Removing a foreign or already
+removed child does nothing.
+
+`setChildren` / `setChild` replace registered children, unlinking old ownership
+and updating the frontend DOM. Replacement accepts the parent's own live list
+and ignores duplicate entries. Unregistered server-rendered nodes are preserved
+during replacement and option initialization; explicit `removeAll` /
+`clearChildren` also clear residual frontend DOM. Self/ancestor insertion and
+wrapper cycles throw `IllegalArgumentException`.

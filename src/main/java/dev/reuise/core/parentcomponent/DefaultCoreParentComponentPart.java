@@ -13,7 +13,9 @@ import dev.reuise.core.theme.Theme;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 // Option: Mounted - CORE
 // Option: Margin - CORE
 // Option: MarginTop - CORE
@@ -45,17 +47,61 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
         if ((child == null) || this.children.contains(child))
             return self();
 
+        validateChild(child);
         CoreParentComponent childWrapper = child.getWrapper();
         if ((childWrapper != null) && (childWrapper != getComponent())) {
+            if (childWrapper == child)
+                throw new IllegalArgumentException("A component cannot wrap itself");
+
+            validateChild(childWrapper);
             add(childWrapper);
             childWrapper.add(child);
         } else {
+            CoreComponent previousParent = child.getParent();
+            if (previousParent instanceof CoreParentComponent)
+                ((CoreParentComponent) (previousParent)).remove(child);
+
             this.children.add(child);
             child.setParent(this);
             child.setRootComponent(getRootComponent());
             child.setTheme(getTheme());
         }
         return self();
+    }
+
+    protected CoreComponent getDirectChild(CoreComponent child) {
+        Set<CoreComponent> visited = new HashSet<>();
+        while ((child != null) && visited.add(child)) {
+            if (children.contains(child))
+                return child;
+
+            CoreParentComponent wrapper = child.getWrapper();
+            if ((wrapper == null) || (!wrapper.getChildren().contains(child)))
+                return null;
+
+            child = wrapper;
+        } 
+        return null;
+    }
+
+    private void validateChild(CoreComponent child) {
+        Set<CoreComponent> wrappers = new HashSet<>();
+        while (child != null) {
+            if (!wrappers.add(child))
+                throw new IllegalArgumentException("Component wrappers cannot form a cycle");
+
+            CoreComponent ancestor = this;
+            while (ancestor != null) {
+                if ((ancestor == child) || ((ancestor instanceof CoreParentComponentPart) && (((CoreParentComponentPart) (ancestor)).getComponent() == child)))
+                    throw new IllegalArgumentException("A component cannot contain itself or an ancestor");
+
+                ancestor = ancestor.getParent();
+            } 
+            child = child.getWrapper();
+            if (child == getComponent())
+                return;
+
+        } 
     }
 
     private CoreBaseComponentPart baseComponentPart;
@@ -670,10 +716,20 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
 
     protected abstract S self();
 
+    // Implementation
     @Override
     public S setChildren(List<CoreComponent> children) {
-        // Create copy of
-        this.children = new ArrayList<CoreComponent>(children);
+        List<CoreComponent> replacement = (children == null) ? new ArrayList<>() : new ArrayList<>(children);
+        for (CoreComponent child : replacement) {
+            if (child != null)
+                validateChild(child);
+
+        }
+        // Option initialization must not erase unregistered server-rendered DOM nodes.
+        for (CoreComponent child : new ArrayList<>(this.children))
+            remove(child);
+
+        addAll(replacement);
         return self();
     }
 
@@ -683,15 +739,17 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
         return self();
     }
 
+    // Implementation
     @Override
     public S removeChild(CoreComponent child) {
-        this.children.remove(child);
+        remove(child);
         return self();
     }
 
+    // Implementation
     @Override
     public S clearChildren() {
-        this.children.clear();
+        removeAll();
         return self();
     }
 
@@ -705,42 +763,44 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
         if (children == null)
             return self();
 
-        children.forEach(this::add);
+        new ArrayList<>(children).forEach(this::add);
         return self();
     }
 
     // Implementation
     public void insertBefore(CoreComponent child, CoreComponent beforeChild) {
-        if ((child == null) || (beforeChild == null))
+        if (((child == null) || (beforeChild == null)) || (child == beforeChild))
             return;
 
-        int beforeIndex = children.indexOf(beforeChild);
-        if (beforeIndex == (-1)) {
+        CoreComponent reference = getDirectChild(beforeChild);
+        if (reference == null) {
             add(child);
             return;
         }
-        children.add(beforeIndex, child);
-        child.setParent(this);
+        add(child);
+        CoreComponent directChild = getDirectChild(child);
+        if (directChild == reference)
+            return;
+
+        children.remove(directChild);
+        children.add(children.indexOf(reference), directChild);
     }
 
     // Implementation
     public void remove(CoreComponent child) {
-        if (child == null)
+        CoreComponent directChild = getDirectChild(child);
+        if (directChild == null)
             return;
 
-        children.remove(child);
-        child.setParent(null);
+        children.remove(directChild);
+        directChild.setParent(null);
     }
 
     // Implementation
     public void removeAll() {
-        // Mirror remove(child)'s lifecycle contract: unlink each child's parent
-        // reference before clearing, so removeAll() fully tears down the
-        // container (model + parent links), not just the backing list.
-        for (CoreComponent child : children) {
-            child.setParent(null);
-        }
-        children.clear();
+        for (CoreComponent child : new ArrayList<>(children))
+            remove(child);
+
     }
 
     // Implementation

@@ -10,7 +10,6 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
-import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -466,8 +465,8 @@ public abstract class DefaultCoreBaseComponentPart<S extends DefaultCoreBaseComp
     // Implementation
     public void removeFromParent() {
         CoreComponent parent = getParent();
-        if (parent instanceof CoreParentComponentPart)
-            ((CoreParentComponentPart) (parent)).remove(component);
+        if (parent instanceof CoreParentComponent)
+            ((CoreParentComponent) (parent)).remove(component);
 
     }
 
