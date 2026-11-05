@@ -91,3 +91,18 @@ and ignores duplicate entries. Unregistered server-rendered nodes are preserved
 during replacement and option initialization; explicit `removeAll` /
 `clearChildren` also clear residual frontend DOM. Self/ancestor insertion and
 wrapper cycles throw `IllegalArgumentException`.
+
+## Data attributes
+
+On both web platforms, `setData(Map<String, String>)` merges entries using the
+single-key setter. An empty map leaves existing data unchanged, including
+server-rendered and framework attributes. `getData()` returns a non-null,
+detached snapshot of the current `data-*` attributes, excluding other attributes.
+Keys are literal attribute suffixes: `"user-id"` means `data-user-id`, not the
+JavaScript dataset key `userId`. This also works on SVG elements.
+
+A null value passed to either data setter creates an empty attribute; it does
+not remove it. Use `removeAttribute("data-user-id")` to remove an entry.
+`getData(key)` returns null for a missing attribute and `hasData(key)` reports
+presence, including empty attributes. Prefer lowercase keys for backend/frontend
+parity (HTML attribute names are case-insensitive; SVG names are case-sensitive).
