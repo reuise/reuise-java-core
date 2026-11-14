@@ -59,6 +59,10 @@ public class Color {
         return "#" + toHexComponent(r) + toHexComponent(g) + toHexComponent(b) + toHexComponent(a);
     }
 
+    public String toCss() {
+        return a == 255 ? toHex() : toHexWithAlpha();
+    }
+
     private String toHexComponent(int value) {
         String hex = Integer.toHexString(value & 0xFF).toUpperCase();
         return hex.length() == 1 ? "0" + hex : hex;

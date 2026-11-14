@@ -70,7 +70,9 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
             this.children.add(child);
             child.setParent(this);
             child.setRootComponent(getRootComponent());
-            child.setTheme(getTheme());
+            if ((child.getTheme() == null) || ((previousParent != null) && (child.getTheme() == previousParent.getTheme())))
+                child.setTheme(getTheme());
+
         }
         return self();
     }

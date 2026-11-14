@@ -10,6 +10,7 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.button.CoreButtonBar;
 import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.layout.CoreFlexContainer;
 import dev.reuise.core.option.OptionApplicator;
@@ -77,7 +78,7 @@ public abstract class DefaultCoreMessageDialogPart<S extends DefaultCoreMessageD
 
     private CoreFlexContainer body;
 
-    private CoreFlexContainer footer;
+    private CoreButtonBar footer;
 
     private CoreContainer scrim;
 

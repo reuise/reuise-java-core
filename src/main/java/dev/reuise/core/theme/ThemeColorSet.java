@@ -4,10 +4,15 @@ import dev.reuise.core.Interaction;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 public class ThemeColorSet {
     private final EnumMap<Interaction, Color> colors = new EnumMap<>(Interaction.class);
+    private final EnumMap<Interaction, ColorVariation> variations = new EnumMap<>(Interaction.class);
 
     public ThemeColorSet() {
+        for (Interaction interaction : Interaction.values())
+            if (interaction != Interaction.NORMAL)
+                variations.put(interaction, ColorVariation.defaultFor(interaction));
     }
 
     public ThemeColorSet(Color normal, Color hover, Color active, Color focus, Color disabled) {
@@ -19,11 +24,8 @@ public class ThemeColorSet {
     }
 
     public ThemeColorSet(Color base) {
+        this();
         colors.put(Interaction.NORMAL, base);
-        colors.put(Interaction.HOVER, base.darken(0.2));
-        colors.put(Interaction.ACTIVE, base.darken(0.3));
-        colors.put(Interaction.FOCUS, base.darken(0.3));
-        colors.put(Interaction.DISABLED, base.withAlpha(128));
     }
 
     public ThemeColorSet(String hex) {
@@ -31,7 +33,12 @@ public class ThemeColorSet {
     }
 
     public Color getColor(Interaction interaction) {
-        return colors.get(interaction);
+        Objects.requireNonNull(interaction, "interaction");
+        ColorVariation variation = variations.get(interaction);
+        Color base = colors.get(Interaction.NORMAL);
+        if (variation != null) return base == null ? null : variation.apply(base);
+        Color color = colors.get(interaction);
+        return color == null ? base : color;
     }
 
     public Color getNormal() {
@@ -43,27 +50,38 @@ public class ThemeColorSet {
     }
 
     public Color getHover() {
-        return colors.get(Interaction.HOVER);
+        return getColor(Interaction.HOVER);
     }
 
     public Color getActive() {
-        return colors.get(Interaction.ACTIVE);
+        return getColor(Interaction.ACTIVE);
     }
 
     public Color getFocus() {
-        return colors.get(Interaction.FOCUS);
+        return getColor(Interaction.FOCUS);
     }
 
     public Color getDisabled() {
-        return colors.get(Interaction.DISABLED);
+        return getColor(Interaction.DISABLED);
     }
 
     public Map<Interaction, Color> getAllColors() {
+        for (Interaction interaction : variations.keySet())
+            colors.put(interaction, getColor(interaction));
         return colors;
     }
 
     public ThemeColorSet setColor(Interaction interaction, Color color) {
+        variations.remove(Objects.requireNonNull(interaction, "interaction"));
         colors.put(interaction, color);
+        return this;
+    }
+
+    public ThemeColorSet setVariation(Interaction interaction, ColorVariation variation) {
+        Objects.requireNonNull(interaction, "interaction");
+        if (interaction == Interaction.NORMAL)
+            throw new IllegalArgumentException("A variation needs a normal base color");
+        variations.put(interaction, Objects.requireNonNull(variation, "variation"));
         return this;
     }
 

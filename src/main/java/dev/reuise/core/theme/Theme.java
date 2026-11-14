@@ -2,17 +2,17 @@ package dev.reuise.core.theme;
 public class Theme {
     protected ComponentTheme globalTheme;
 
+    protected ComponentTheme buttonTheme;
+
     protected ComponentTheme tabTheme;
 
     protected ComponentTheme textFieldTheme;
 
-    protected ComponentTheme buttonTheme;
-
-    protected ComponentTheme surfaceTheme;
+    protected ComponentTheme headingTheme;
 
     protected ComponentTheme dialogTheme;
 
-    protected ComponentTheme headingTheme;
+    protected ComponentTheme surfaceTheme;
 
     public Theme() {
     }
@@ -23,6 +23,15 @@ public class Theme {
 
     public Theme setGlobalTheme(ComponentTheme globalTheme) {
         this.globalTheme = globalTheme;
+        return this;
+    }
+
+    public ComponentTheme getButtonTheme() {
+        return buttonTheme;
+    }
+
+    public Theme setButtonTheme(ComponentTheme buttonTheme) {
+        this.buttonTheme = buttonTheme;
         return this;
     }
 
@@ -44,21 +53,12 @@ public class Theme {
         return this;
     }
 
-    public ComponentTheme getButtonTheme() {
-        return buttonTheme;
+    public ComponentTheme getHeadingTheme() {
+        return headingTheme;
     }
 
-    public Theme setButtonTheme(ComponentTheme buttonTheme) {
-        this.buttonTheme = buttonTheme;
-        return this;
-    }
-
-    public ComponentTheme getSurfaceTheme() {
-        return surfaceTheme;
-    }
-
-    public Theme setSurfaceTheme(ComponentTheme surfaceTheme) {
-        this.surfaceTheme = surfaceTheme;
+    public Theme setHeadingTheme(ComponentTheme headingTheme) {
+        this.headingTheme = headingTheme;
         return this;
     }
 
@@ -71,12 +71,12 @@ public class Theme {
         return this;
     }
 
-    public ComponentTheme getHeadingTheme() {
-        return headingTheme;
+    public ComponentTheme getSurfaceTheme() {
+        return surfaceTheme;
     }
 
-    public Theme setHeadingTheme(ComponentTheme headingTheme) {
-        this.headingTheme = headingTheme;
+    public Theme setSurfaceTheme(ComponentTheme surfaceTheme) {
+        this.surfaceTheme = surfaceTheme;
         return this;
     }
 

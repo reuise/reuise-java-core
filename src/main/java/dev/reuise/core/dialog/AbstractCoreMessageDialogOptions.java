@@ -1,5 +1,6 @@
 package dev.reuise.core.dialog;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.button.CoreButtonBarPartOptions;
 import dev.reuise.core.button.CoreButtonPartOptions;
 import dev.reuise.core.layout.CoreContainerPartOptions;
 import dev.reuise.core.layout.CoreFlexContainerPartOptions;
@@ -19,7 +20,7 @@ public abstract class AbstractCoreMessageDialogOptions<S extends AbstractCoreMes
     private CoreFlexContainerPartOptions bodyOptions;
 
     // Indirect layout child
-    private CoreFlexContainerPartOptions footerOptions;
+    private CoreButtonBarPartOptions footerOptions;
 
     // Indirect layout child
     private CoreContainerPartOptions scrimOptions;

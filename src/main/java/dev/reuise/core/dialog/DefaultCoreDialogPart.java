@@ -11,6 +11,8 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
 import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.button.CoreButtonBar;
+import dev.reuise.core.button.CoreButtonBarOptions;
 import dev.reuise.core.button.CoreButtonOptions;
 import dev.reuise.core.layout.BackdropFilterSetting;
 import dev.reuise.core.layout.CoreContainer;
@@ -102,7 +104,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
 
     protected CoreFlexContainer body;
 
-    protected CoreFlexContainer footer;
+    protected CoreButtonBar footer;
 
     protected CoreContainer scrim;
 
@@ -113,6 +115,8 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
     protected Boolean open;
 
     protected Boolean removeOnClose;
+
+    protected List<CoreButton> actions;
 
     protected Boolean hasAcceptButton;
 
@@ -946,7 +950,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
         return body.getChildren();
     }
 
-    public CoreFlexContainer getFooter() {
+    public CoreButtonBar getFooter() {
         return footer;
     }
 
@@ -960,18 +964,18 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
         return false;
     }
 
-    private CoreFlexContainer createFooter(O options) {
+    private CoreButtonBar createFooter(O options) {
         if ((footer != null) || (options == null))
             return footer;
 
-        CoreFlexContainerOptions footerOptions = options.getFooterOptions();
+        CoreButtonBarOptions footerOptions = options.getFooterOptions();
         if (footerOptions == null)
             return footer;
 
         CoreParentComponentPart parent = (container != null) ? container : getParentComponentPart();
         footerOptions.setParent(container != null ? container : this);
         ComponentCreator footerCreator = options.getFooterCreator();
-        footer = (footerCreator != null) ? ((CoreFlexContainer) (footerCreator.create(footerOptions))) : getComponentFactory().createFlexContainer(footerOptions);
+        footer = (footerCreator != null) ? ((CoreButtonBar) (footerCreator.create(footerOptions))) : getComponentFactory().createButtonBar(footerOptions);
         parent.add(footer);
         return footer;
     }
@@ -1075,10 +1079,7 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
     // Implementation
     // Implementation
     public void onInitialize(O options) {
-        CoreContainer footer = getFooter();
-        options.getActions().stream().forEach(b -> {
-            footer.add(b);
-        });
+        setActions(options.getActions());
     }
 
     public void onCreate(O options) {
@@ -1170,8 +1171,73 @@ public abstract class DefaultCoreDialogPart<S extends DefaultCoreDialogPart<S, O
     }
 
     @Override
+    public List<CoreButton> getActions() {
+        return actions;
+    }
+
+    // Implementation
+    @Override
+    public S setActions(List<CoreButton> actions) {
+        if (actions == null)
+            throw new IllegalArgumentException("Dialog actions must be non-null buttons");
+
+        for (CoreButton action : actions)
+            if (action == null)
+                throw new IllegalArgumentException("Dialog actions must be non-null buttons");
+
+
+        List<CoreButton> replacement = new ArrayList<>(actions);
+        clearActions();
+        for (CoreButton action : replacement)
+            addAction(action);
+
+        return self();
+    }
+
+    // Implementation
+    @Override
+    public S addAction(CoreButton action) {
+        if (action == null)
+            throw new IllegalArgumentException("Dialog action must not be null");
+
+        if (actions == null)
+            actions = new ArrayList<>();
+
+        if (!actions.contains(action)) {
+            actions.add(action);
+            if (getFooter() != null)
+                getFooter().addButton(action);
+
+        }
+        return self();
+    }
+
+    @Override
     public S setAction(CoreButton action) {
         setActions(new ArrayList<CoreButton>(Arrays.asList(action)));
+        return self();
+    }
+
+    // Implementation
+    @Override
+    public S removeAction(CoreButton action) {
+        if (((actions != null) && actions.remove(action)) && (getFooter() != null))
+            getFooter().remove(action);
+
+        return self();
+    }
+
+    // Implementation
+    @Override
+    public S clearActions() {
+        if (actions != null) {
+            if (getFooter() != null)
+                for (CoreButton action : new ArrayList<>(actions))
+                    getFooter().remove(action);
+
+
+            actions.clear();
+        }
         return self();
     }
 

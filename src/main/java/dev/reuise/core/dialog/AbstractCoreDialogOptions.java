@@ -5,10 +5,12 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.button.ButtonType;
 import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.button.CoreButtonBarOptions;
 import dev.reuise.core.button.CoreButtonOptions;
 import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.layout.CoreFlexContainerOptions;
 import dev.reuise.core.layout.FlexDirection;
+import dev.reuise.core.layout.JustifyContent;
 import dev.reuise.core.option.ComponentOption;
 import dev.reuise.core.text.CoreHeadingOptions;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public abstract class AbstractCoreDialogOptions<S extends AbstractCoreDialogOpti
 
     protected dev.reuise.core.layout.CoreFlexContainerOptions bodyOptions;
 
-    protected dev.reuise.core.layout.CoreFlexContainerOptions footerOptions;
+    protected dev.reuise.core.button.CoreButtonBarOptions footerOptions;
 
     protected dev.reuise.core.layout.CoreContainerOptions scrimOptions;
 
@@ -436,7 +438,7 @@ public abstract class AbstractCoreDialogOptions<S extends AbstractCoreDialogOpti
     }
 
     @Override
-    public dev.reuise.core.layout.CoreFlexContainerOptions getFooterOptions() {
+    public dev.reuise.core.button.CoreButtonBarOptions getFooterOptions() {
         return footerOptions;
     }
 
@@ -446,7 +448,7 @@ public abstract class AbstractCoreDialogOptions<S extends AbstractCoreDialogOpti
     }
 
     @Override
-    public S setFooterOptions(dev.reuise.core.layout.CoreFlexContainerOptions footerOptions) {
+    public S setFooterOptions(dev.reuise.core.button.CoreButtonBarOptions footerOptions) {
         if (!hasFooterOptions())
             this.footerOptions = createDefaultFooterOptions();
 
@@ -541,10 +543,9 @@ public abstract class AbstractCoreDialogOptions<S extends AbstractCoreDialogOpti
         return options;
     }
 
-    protected CoreFlexContainerOptions createDefaultFooterOptions() {
-        CoreFlexContainerOptions options = getComponentFactory().createFlexContainerOptions();
-        options.setDirection(FlexDirection.ROW);
-        options.setGap(16);
+    protected CoreButtonBarOptions createDefaultFooterOptions() {
+        CoreButtonBarOptions options = getComponentFactory().createButtonBarOptions();
+        options.setJustifyContent(JustifyContent.END);
         options.setRequiredLayoutComponent(true);
         return options;
     }

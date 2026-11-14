@@ -11,6 +11,8 @@ public class ComponentTheme {
     private int cornerRadius;
 
     private final EnumMap<ThemeColorRole, ThemeColorSet> colorRoles = new EnumMap<>(ThemeColorRole.class);
+    private final EnumMap<ThemeColorRole, ThemeGradientSet> gradientRoles = new EnumMap<>(ThemeColorRole.class);
+    private final EnumMap<ThemeColorRole, ThemeOverlaySet> overlayRoles = new EnumMap<>(ThemeColorRole.class);
 
     public ComponentTheme() {
         this.name = "Unnamed Component Theme";
@@ -65,6 +67,41 @@ public class ComponentTheme {
         colorRoles.put(role, set);
         return this;
     }
+
+    public ThemeGradientSet getGradient(ThemeColorRole role) {
+        return gradientRoles.get(role);
+    }
+
+    public ComponentTheme setGradient(ThemeColorRole role, ThemeGradientSet gradient) {
+        requireBackgroundRole(role);
+        if (gradient == null) gradientRoles.remove(role);
+        else gradientRoles.put(role, gradient);
+        return this;
+    }
+
+    public ThemeOverlaySet getOverlay(ThemeColorRole role) {
+        return overlayRoles.get(role);
+    }
+
+    public ComponentTheme setOverlay(ThemeColorRole role, ThemeOverlaySet overlay) {
+        requireBackgroundRole(role);
+        if (overlay == null) overlayRoles.remove(role);
+        else overlayRoles.put(role, overlay);
+        return this;
+    }
+
+    private void requireBackgroundRole(ThemeColorRole role) {
+        if (role != ThemeColorRole.PRIMARY && role != ThemeColorRole.SECONDARY
+                && role != ThemeColorRole.BACKGROUND)
+            throw new IllegalArgumentException("Unsupported background role: " + role);
+    }
+
+    public ComponentTheme setPrimaryGradient(ThemeGradientSet gradient) { return setGradient(ThemeColorRole.PRIMARY, gradient); }
+    public ComponentTheme setSecondaryGradient(ThemeGradientSet gradient) { return setGradient(ThemeColorRole.SECONDARY, gradient); }
+    public ComponentTheme setBackgroundGradient(ThemeGradientSet gradient) { return setGradient(ThemeColorRole.BACKGROUND, gradient); }
+    public ComponentTheme setPrimaryOverlay(ThemeOverlaySet overlay) { return setOverlay(ThemeColorRole.PRIMARY, overlay); }
+    public ComponentTheme setSecondaryOverlay(ThemeOverlaySet overlay) { return setOverlay(ThemeColorRole.SECONDARY, overlay); }
+    public ComponentTheme setBackgroundOverlay(ThemeOverlaySet overlay) { return setOverlay(ThemeColorRole.BACKGROUND, overlay); }
 
     public ComponentTheme setColor(ThemeColorRole role, Color base) {
         return setColor(role, new ThemeColorSet(base));

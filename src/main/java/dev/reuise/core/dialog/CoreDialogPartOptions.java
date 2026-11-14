@@ -3,6 +3,8 @@ import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.button.CoreButtonBar;
+import dev.reuise.core.button.CoreButtonBarOptions;
 import dev.reuise.core.button.CoreButtonOptions;
 import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.layout.CoreContainerOptions;
@@ -123,13 +125,13 @@ public interface CoreDialogPartOptions {
 
     ComponentCreator<? extends CoreFlexContainer, ? extends CoreFlexContainerOptions> getBodyCreator();
 
-    CoreFlexContainerOptions getFooterOptions();
+    CoreButtonBarOptions getFooterOptions();
 
-    CoreDialogPartOptions setFooterOptions(CoreFlexContainerOptions footerOptions);
+    CoreDialogPartOptions setFooterOptions(CoreButtonBarOptions footerOptions);
 
     boolean hasFooterOptions();
 
-    ComponentCreator<? extends CoreFlexContainer, ? extends CoreFlexContainerOptions> getFooterCreator();
+    ComponentCreator<? extends CoreButtonBar, ? extends CoreButtonBarOptions> getFooterCreator();
 
     CoreContainerOptions getScrimOptions();
 

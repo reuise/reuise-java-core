@@ -1,6 +1,7 @@
 package dev.reuise.core.dialog;
 import dev.reuise.core.ComponentPart;
 import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.button.CoreButtonBar;
 import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.layout.CoreFlexContainer;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
@@ -20,7 +21,7 @@ public interface CoreDialogPart extends ComponentPart , CoreParentComponentPart 
 
     CoreFlexContainer getBody();
 
-    CoreFlexContainer getFooter();
+    CoreButtonBar getFooter();
 
     CoreContainer getScrim();
 
