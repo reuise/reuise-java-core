@@ -8,6 +8,9 @@ import dev.reuise.core.text.CoreLabelPartOptions;
 import java.util.List;
 public abstract class AbstractCoreMultiEmailAddressFieldOptions<S extends AbstractCoreMultiEmailAddressFieldOptions<S>> implements CoreComponentOptions , CoreMultiEmailAddressFieldOptions {
     // Indirect layout child
+    private CoreChipGroupPartOptions chipGroupOptions;
+
+    // Indirect layout child
     private CoreLabelPartOptions labelContainerOptions;
 
     // Indirect layout child
@@ -25,9 +28,6 @@ public abstract class AbstractCoreMultiEmailAddressFieldOptions<S extends Abstra
     // Indirect layout child
     private CoreInlineTextPartOptions supportingTextContainerOptions;
 
-    // Indirect layout child
-    private CoreChipGroupPartOptions chipGroupOptions;
-
     protected AbstractCoreMultiEmailAddressFieldOptions() {
     }
 
@@ -35,13 +35,13 @@ public abstract class AbstractCoreMultiEmailAddressFieldOptions<S extends Abstra
     }
 
     public boolean onPreInitialize() {
+        chipGroupOptions = getChipGroupOptions();
         labelContainerOptions = getLabelContainerOptions();
         inputContainerOptions = getInputContainerOptions();
         startIconOptions = getStartIconOptions();
         inputOptions = getInputOptions();
         endIconOptions = getEndIconOptions();
         supportingTextContainerOptions = getSupportingTextContainerOptions();
-        chipGroupOptions = getChipGroupOptions();
         return true;
     }
 

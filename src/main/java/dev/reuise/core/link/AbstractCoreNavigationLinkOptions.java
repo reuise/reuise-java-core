@@ -1,7 +1,14 @@
 package dev.reuise.core.link;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.icon.CoreIconPartOptions;
 import dev.reuise.core.option.ComponentOption;
 public abstract class AbstractCoreNavigationLinkOptions<S extends AbstractCoreNavigationLinkOptions<S>> implements CoreNavigationLinkOptions , CoreComponentOptions {
+    // Indirect layout child
+    private CoreIconPartOptions startIconOptions;
+
+    // Indirect layout child
+    private CoreIconPartOptions endIconOptions;
+
     protected AbstractCoreNavigationLinkOptions() {
     }
 
@@ -9,6 +16,8 @@ public abstract class AbstractCoreNavigationLinkOptions<S extends AbstractCoreNa
     }
 
     public boolean onPreInitialize() {
+        startIconOptions = getStartIconOptions();
+        endIconOptions = getEndIconOptions();
         return true;
     }
 

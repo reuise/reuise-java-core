@@ -11,4 +11,8 @@ public interface CoreLinkFeatures {
     String getTarget();
 
     CoreLinkFeatures setTarget(String target);
+
+    String getExternalIndicator();
+
+    CoreLinkFeatures setExternalIndicator(String externalIndicator);
 }

@@ -1,9 +1,11 @@
 package dev.reuise.core.basecomponent;
 import dev.reuise.core.CoreComponent;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.theme.Theme;
+import java.util.function.Function;
 public interface CoreBaseComponentFeatures {
     boolean isMounted();
 
@@ -148,6 +150,14 @@ public interface CoreBaseComponentFeatures {
     CoreComponent getParent();
 
     CoreBaseComponentFeatures setParent(CoreComponent parent);
+
+    LocaleContext getLocaleContext();
+
+    CoreBaseComponentFeatures setLocaleContext(LocaleContext localeContext);
+
+    Function<String, String> getLinkUrlResolver();
+
+    CoreBaseComponentFeatures setLinkUrlResolver(Function<String, String> linkUrlResolver);
 
     CoreParentComponent getWrapper();
 

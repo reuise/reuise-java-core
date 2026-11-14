@@ -4,6 +4,7 @@ import dev.reuise.core.ComponentType;
 import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
@@ -18,6 +19,7 @@ import dev.reuise.core.text.CoreLabel;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Size - CORE
 // Option: SupportingText - CORE
 // Option: Label - CORE
@@ -37,6 +39,8 @@ import java.util.List;
 // Option: MaxHeight - CORE
 // Option: RequiredLayoutComponent - CORE
 // Option: Parent - CORE
+// Option: LocaleContext - CORE
+// Option: LinkUrlResolver - CORE
 // Option: Wrapper - CORE
 // Option: Theme - CORE
 // Option: Visible - CORE
@@ -657,6 +661,28 @@ public abstract class DefaultCorePasswordFieldPart<S extends DefaultCorePassword
     @Override
     public S setParent(CoreComponent parent) {
         this.baseComponentPart.setParent(parent);
+        return self();
+    }
+
+    @Override
+    public LocaleContext getLocaleContext() {
+        return baseComponentPart.getLocaleContext();
+    }
+
+    @Override
+    public S setLocaleContext(LocaleContext localeContext) {
+        this.baseComponentPart.setLocaleContext(localeContext);
+        return self();
+    }
+
+    @Override
+    public Function<String, String> getLinkUrlResolver() {
+        return baseComponentPart.getLinkUrlResolver();
+    }
+
+    @Override
+    public S setLinkUrlResolver(Function<String, String> linkUrlResolver) {
+        this.baseComponentPart.setLinkUrlResolver(linkUrlResolver);
         return self();
     }
 

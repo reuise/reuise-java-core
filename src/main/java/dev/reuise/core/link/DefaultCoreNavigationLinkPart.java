@@ -4,19 +4,23 @@ import dev.reuise.core.ComponentType;
 import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
+import dev.reuise.core.icon.CoreIcon;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Text - CORE
 // Option: Url - CORE
 // Option: Target - CORE
+// Option: ExternalIndicator - CORE
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -32,6 +36,8 @@ import java.util.List;
 // Option: MaxHeight - CORE
 // Option: RequiredLayoutComponent - CORE
 // Option: Parent - CORE
+// Option: LocaleContext - CORE
+// Option: LinkUrlResolver - CORE
 // Option: Wrapper - CORE
 // Option: Theme - CORE
 // Option: Visible - CORE
@@ -53,6 +59,10 @@ public abstract class DefaultCoreNavigationLinkPart<S extends DefaultCoreNavigat
 
     private CoreBaseComponentPart baseComponentPart;
 
+    private CoreIcon startIcon;
+
+    private CoreIcon endIcon;
+
     protected DefaultCoreNavigationLinkPart(O options) {
     }
 
@@ -62,6 +72,8 @@ public abstract class DefaultCoreNavigationLinkPart<S extends DefaultCoreNavigat
         parentComponentPart = getParentComponentPart();
         baseComponentPart = getBaseComponentPart();
         // Layout children (indirect)
+        startIcon = getStartIcon();
+        endIcon = getEndIcon();
     }
 
     @Override
@@ -94,6 +106,17 @@ public abstract class DefaultCoreNavigationLinkPart<S extends DefaultCoreNavigat
     @Override
     public S setTarget(String target) {
         this.linkPart.setTarget(target);
+        return self();
+    }
+
+    @Override
+    public String getExternalIndicator() {
+        return linkPart.getExternalIndicator();
+    }
+
+    @Override
+    public S setExternalIndicator(String externalIndicator) {
+        this.linkPart.setExternalIndicator(externalIndicator);
         return self();
     }
 
@@ -592,6 +615,28 @@ public abstract class DefaultCoreNavigationLinkPart<S extends DefaultCoreNavigat
     @Override
     public S setParent(CoreComponent parent) {
         this.baseComponentPart.setParent(parent);
+        return self();
+    }
+
+    @Override
+    public LocaleContext getLocaleContext() {
+        return baseComponentPart.getLocaleContext();
+    }
+
+    @Override
+    public S setLocaleContext(LocaleContext localeContext) {
+        this.baseComponentPart.setLocaleContext(localeContext);
+        return self();
+    }
+
+    @Override
+    public Function<String, String> getLinkUrlResolver() {
+        return baseComponentPart.getLinkUrlResolver();
+    }
+
+    @Override
+    public S setLinkUrlResolver(Function<String, String> linkUrlResolver) {
+        this.baseComponentPart.setLinkUrlResolver(linkUrlResolver);
         return self();
     }
 

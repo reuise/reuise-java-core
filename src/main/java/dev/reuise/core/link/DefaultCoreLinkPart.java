@@ -4,16 +4,21 @@ import dev.reuise.core.ComponentType;
 import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
+import dev.reuise.core.icon.CoreIcon;
+import dev.reuise.core.icon.CoreIconOptions;
+import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -29,6 +34,8 @@ import java.util.List;
 // Option: MaxHeight - CORE
 // Option: RequiredLayoutComponent - CORE
 // Option: Parent - CORE
+// Option: LocaleContext - CORE
+// Option: LinkUrlResolver - CORE
 // Option: Wrapper - CORE
 // Option: Theme - CORE
 // Option: Visible - CORE
@@ -46,6 +53,12 @@ public abstract class DefaultCoreLinkPart<S extends DefaultCoreLinkPart<S, O>, O
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
+
+    protected CoreIcon startIcon;
+
+    protected CoreIcon endIcon;
+
+    protected String externalIndicator;
 
     protected DefaultCoreLinkPart(O options) {
     }
@@ -89,6 +102,12 @@ public abstract class DefaultCoreLinkPart<S extends DefaultCoreLinkPart<S, O>, O
     @Override
     public void setRootComponent(RootComponent rootComponent) {
         this.parentComponentPart.setRootComponent(rootComponent);
+        if (startIcon != null)
+            startIcon.setRootComponent(rootComponent);
+
+        if (endIcon != null)
+            endIcon.setRootComponent(rootComponent);
+
     }
 
     @Override
@@ -556,6 +575,28 @@ public abstract class DefaultCoreLinkPart<S extends DefaultCoreLinkPart<S, O>, O
     }
 
     @Override
+    public LocaleContext getLocaleContext() {
+        return baseComponentPart.getLocaleContext();
+    }
+
+    @Override
+    public S setLocaleContext(LocaleContext localeContext) {
+        this.baseComponentPart.setLocaleContext(localeContext);
+        return self();
+    }
+
+    @Override
+    public Function<String, String> getLinkUrlResolver() {
+        return baseComponentPart.getLinkUrlResolver();
+    }
+
+    @Override
+    public S setLinkUrlResolver(Function<String, String> linkUrlResolver) {
+        this.baseComponentPart.setLinkUrlResolver(linkUrlResolver);
+        return self();
+    }
+
+    @Override
     public CoreParentComponent getWrapper() {
         return baseComponentPart.getWrapper();
     }
@@ -693,8 +734,69 @@ public abstract class DefaultCoreLinkPart<S extends DefaultCoreLinkPart<S, O>, O
     }
 
     public boolean onPreInitialize(O options) {
+        // Layout children
+        startIcon = createStartIcon(options);
+        endIcon = createEndIcon(options);
         setupReferences();
         return true;
+    }
+
+    public CoreIcon getStartIcon() {
+        return startIcon;
+    }
+
+    private boolean needsStartIcon(O options) {
+        if (startIcon != null)
+            return false;
+
+        if (options == null)
+            return false;
+
+        return options.hasStartIconOptions();
+    }
+
+    private CoreIcon createStartIcon(O options) {
+        if ((startIcon != null) || (options == null))
+            return startIcon;
+
+        CoreIconOptions startIconOptions = options.getStartIconOptions();
+        if (startIconOptions == null)
+            return startIcon;
+
+        startIconOptions.setParent(this);
+        ComponentCreator startIconCreator = options.getStartIconCreator();
+        startIcon = (startIconCreator != null) ? ((CoreIcon) (startIconCreator.create(startIconOptions))) : getComponentFactory().createIcon(startIconOptions);
+        getParentComponentPart().add(startIcon);
+        return startIcon;
+    }
+
+    public CoreIcon getEndIcon() {
+        return endIcon;
+    }
+
+    private boolean needsEndIcon(O options) {
+        if (endIcon != null)
+            return false;
+
+        if (options == null)
+            return false;
+
+        return options.hasEndIconOptions();
+    }
+
+    private CoreIcon createEndIcon(O options) {
+        if ((endIcon != null) || (options == null))
+            return endIcon;
+
+        CoreIconOptions endIconOptions = options.getEndIconOptions();
+        if (endIconOptions == null)
+            return endIcon;
+
+        endIconOptions.setParent(this);
+        ComponentCreator endIconCreator = options.getEndIconCreator();
+        endIcon = (endIconCreator != null) ? ((CoreIcon) (endIconCreator.create(endIconOptions))) : getComponentFactory().createIcon(endIconOptions);
+        getParentComponentPart().add(endIcon);
+        return endIcon;
     }
 
     public void onInitialize(O options) {
@@ -712,6 +814,7 @@ public abstract class DefaultCoreLinkPart<S extends DefaultCoreLinkPart<S, O>, O
         applicator.add(options.getTextOption(), component::setText);
         applicator.add(options.getUrlOption(), component::setUrl);
         applicator.add(options.getTargetOption(), component::setTarget);
+        applicator.add(options.getExternalIndicatorOption(), component::setExternalIndicator);
     }
 
     public void onInitializeComponentType(RootComponent rootComponent) {
@@ -719,4 +822,15 @@ public abstract class DefaultCoreLinkPart<S extends DefaultCoreLinkPart<S, O>, O
     }
 
     protected abstract S self();
+
+    @Override
+    public String getExternalIndicator() {
+        return externalIndicator;
+    }
+
+    @Override
+    public S setExternalIndicator(String externalIndicator) {
+        this.externalIndicator = externalIndicator;
+        return self();
+    }
 }

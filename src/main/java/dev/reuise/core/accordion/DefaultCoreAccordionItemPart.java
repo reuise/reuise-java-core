@@ -5,21 +5,29 @@ import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.Html;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponentPart;
+import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.button.CoreButtonOptions;
 import dev.reuise.core.divider.CoreDivider;
 import dev.reuise.core.image.CoreImage;
 import dev.reuise.core.layout.AlignItems;
 import dev.reuise.core.layout.BackdropFilter;
 import dev.reuise.core.layout.BackdropFilterSetting;
+import dev.reuise.core.layout.CoreContainer;
+import dev.reuise.core.layout.CoreContainerOptions;
 import dev.reuise.core.layout.CoreContainerPart;
+import dev.reuise.core.layout.CoreFlexContainer;
+import dev.reuise.core.layout.CoreFlexContainerOptions;
 import dev.reuise.core.layout.CoreFlexContainerPart;
 import dev.reuise.core.layout.FlexDirection;
 import dev.reuise.core.layout.JustifyContent;
 import dev.reuise.core.link.CoreLink;
 import dev.reuise.core.list.CoreBasicList;
+import dev.reuise.core.option.ComponentCreator;
 import dev.reuise.core.option.OptionApplicator;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
@@ -28,6 +36,7 @@ import dev.reuise.core.text.CoreParagraph;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Direction - CORE
 // Option: JustifyContent - CORE
 // Option: AlignItems - CORE
@@ -58,6 +67,8 @@ import java.util.List;
 // Option: MaxHeight - CORE
 // Option: RequiredLayoutComponent - CORE
 // Option: Parent - CORE
+// Option: LocaleContext - CORE
+// Option: LinkUrlResolver - CORE
 // Option: Wrapper - CORE
 // Option: Theme - CORE
 // Option: Visible - CORE
@@ -82,6 +93,16 @@ public abstract class DefaultCoreAccordionItemPart<S extends DefaultCoreAccordio
     private CoreParentComponentPart parentComponentPart;
 
     private CoreBaseComponentPart baseComponentPart;
+
+    protected CoreFlexContainer header;
+
+    protected CoreButton toggle;
+
+    protected CoreContainer content;
+
+    protected Boolean expanded;
+
+    protected Boolean toggleAtEnd;
 
     protected DefaultCoreAccordionItemPart(O options) {
     }
@@ -348,6 +369,15 @@ public abstract class DefaultCoreAccordionItemPart<S extends DefaultCoreAccordio
     @Override
     public void setRootComponent(RootComponent rootComponent) {
         this.flexContainerPart.setRootComponent(rootComponent);
+        if (header != null)
+            header.setRootComponent(rootComponent);
+
+        if (toggle != null)
+            toggle.setRootComponent(rootComponent);
+
+        if (content != null)
+            content.setRootComponent(rootComponent);
+
     }
 
     @Override
@@ -1256,6 +1286,28 @@ public abstract class DefaultCoreAccordionItemPart<S extends DefaultCoreAccordio
     }
 
     @Override
+    public LocaleContext getLocaleContext() {
+        return baseComponentPart.getLocaleContext();
+    }
+
+    @Override
+    public S setLocaleContext(LocaleContext localeContext) {
+        this.baseComponentPart.setLocaleContext(localeContext);
+        return self();
+    }
+
+    @Override
+    public Function<String, String> getLinkUrlResolver() {
+        return baseComponentPart.getLinkUrlResolver();
+    }
+
+    @Override
+    public S setLinkUrlResolver(Function<String, String> linkUrlResolver) {
+        this.baseComponentPart.setLinkUrlResolver(linkUrlResolver);
+        return self();
+    }
+
+    @Override
     public CoreParentComponent getWrapper() {
         return baseComponentPart.getWrapper();
     }
@@ -1393,17 +1445,120 @@ public abstract class DefaultCoreAccordionItemPart<S extends DefaultCoreAccordio
     }
 
     public boolean onPreInitialize(O options) {
+        // Layout children
+        header = createHeader(options);
+        toggle = createToggle(options);
+        content = createContent(options);
         setupReferences();
         return true;
     }
 
+    public CoreFlexContainer getHeader() {
+        return header;
+    }
+
+    private boolean needsHeader(O options) {
+        if (header != null)
+            return false;
+
+        if (options == null)
+            return false;
+
+        return false;
+    }
+
+    private CoreFlexContainer createHeader(O options) {
+        if ((header != null) || (options == null))
+            return header;
+
+        CoreFlexContainerOptions headerOptions = options.getHeaderOptions();
+        if (headerOptions == null)
+            return header;
+
+        headerOptions.setParent(this);
+        ComponentCreator headerCreator = options.getHeaderCreator();
+        header = (headerCreator != null) ? ((CoreFlexContainer) (headerCreator.create(headerOptions))) : getComponentFactory().createFlexContainer(headerOptions);
+        getParentComponentPart().add(header);
+        return header;
+    }
+
+    public CoreButton getToggle() {
+        return toggle;
+    }
+
+    private boolean needsToggle(O options) {
+        if (toggle != null)
+            return false;
+
+        if (options == null)
+            return false;
+
+        return false;
+    }
+
+    private CoreButton createToggle(O options) {
+        if ((toggle != null) || (options == null))
+            return toggle;
+
+        CoreButtonOptions toggleOptions = options.getToggleOptions();
+        if (toggleOptions == null)
+            return toggle;
+
+        CoreParentComponentPart parent = (header != null) ? header : getParentComponentPart();
+        toggleOptions.setParent(header != null ? header : this);
+        ComponentCreator toggleCreator = options.getToggleCreator();
+        toggle = (toggleCreator != null) ? ((CoreButton) (toggleCreator.create(toggleOptions))) : getComponentFactory().createButton(toggleOptions);
+        parent.add(toggle);
+        return toggle;
+    }
+
+    public CoreContainer getContent() {
+        return content;
+    }
+
+    private boolean needsContent(O options) {
+        if (content != null)
+            return false;
+
+        if (options == null)
+            return false;
+
+        return false;
+    }
+
+    private CoreContainer createContent(O options) {
+        if ((content != null) || (options == null))
+            return content;
+
+        CoreContainerOptions contentOptions = options.getContentOptions();
+        if (contentOptions == null)
+            return content;
+
+        contentOptions.setParent(this);
+        ComponentCreator contentCreator = options.getContentCreator();
+        content = (contentCreator != null) ? ((CoreContainer) (contentCreator.create(contentOptions))) : getComponentFactory().createContainer(contentOptions);
+        getParentComponentPart().add(content);
+        return content;
+    }
+
+    // Implementation
+    // Implementation
+    // Implementation
     public void onInitialize(O options) {
+        setExpanded(options.isExpanded());
     }
 
     public void onCreate(O options) {
     }
 
     public void applyOptions(O options, OptionApplicator applicator, Collection<State> states) {
+        CoreAccordionItemPart component = ((CoreAccordionItemPart) (options.getComponent()));
+        if (component == null)
+            System.out.println("component is null");
+
+        // Apply options for default state
+        applicator.add(options.getExpandedOption(), component::setExpanded);
+        applicator.add(options.getToggleAtEndOption(), component::setToggleAtEnd);
     }
 
     public void onInitializeComponentType(RootComponent rootComponent) {
@@ -1411,4 +1566,35 @@ public abstract class DefaultCoreAccordionItemPart<S extends DefaultCoreAccordio
     }
 
     protected abstract S self();
+
+    @Override
+    public boolean isExpanded() {
+        return Boolean.TRUE.equals(expanded);
+    }
+
+    // Implementation
+    @Override
+    public S setExpanded(Boolean expanded) {
+        this.expanded = Boolean.TRUE.equals(expanded);
+        if (getContent() != null)
+            getContent().setVisible(this.expanded);
+
+        return self();
+    }
+
+    @Override
+    public boolean isToggleAtEnd() {
+        return Boolean.TRUE.equals(toggleAtEnd);
+    }
+
+    @Override
+    public S setToggleAtEnd(Boolean toggleAtEnd) {
+        this.toggleAtEnd = toggleAtEnd;
+        return self();
+    }
+
+    // Implementation
+    public S toggle() {
+        return setExpanded(!isExpanded());
+    }
 }

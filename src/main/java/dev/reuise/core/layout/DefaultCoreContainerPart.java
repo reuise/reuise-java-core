@@ -5,6 +5,7 @@ import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.CoreComponentOptions;
 import dev.reuise.core.Html;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSize;
 import dev.reuise.core.ScreenSizeValues;
@@ -34,6 +35,7 @@ import dev.reuise.core.text.FontWeight;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 // Option: Children - CORE
 // Option: Mounted - CORE
 // Option: Margin - CORE
@@ -49,6 +51,8 @@ import java.util.List;
 // Option: MaxHeight - CORE
 // Option: RequiredLayoutComponent - CORE
 // Option: Parent - CORE
+// Option: LocaleContext - CORE
+// Option: LinkUrlResolver - CORE
 // Option: Wrapper - CORE
 // Option: Theme - CORE
 // Option: Visible - CORE
@@ -236,6 +240,10 @@ public abstract class DefaultCoreContainerPart<S extends DefaultCoreContainerPar
     @Override
     public CoreContainerFeatures setBackdropFilter(BackdropFilter backdropFilter, Object value) {
         return setBackdropFilter(new BackdropFilterSetting(backdropFilter, value));
+    }
+
+    protected void addMarkdownInlineCode(CoreParentComponent parent, String text) {
+        parent.addText(text);
     }
 
     private CoreParentComponentPart parentComponentPart;
@@ -751,6 +759,28 @@ public abstract class DefaultCoreContainerPart<S extends DefaultCoreContainerPar
     }
 
     @Override
+    public LocaleContext getLocaleContext() {
+        return baseComponentPart.getLocaleContext();
+    }
+
+    @Override
+    public S setLocaleContext(LocaleContext localeContext) {
+        this.baseComponentPart.setLocaleContext(localeContext);
+        return self();
+    }
+
+    @Override
+    public Function<String, String> getLinkUrlResolver() {
+        return baseComponentPart.getLinkUrlResolver();
+    }
+
+    @Override
+    public S setLinkUrlResolver(Function<String, String> linkUrlResolver) {
+        this.baseComponentPart.setLinkUrlResolver(linkUrlResolver);
+        return self();
+    }
+
+    @Override
     public CoreParentComponent getWrapper() {
         return baseComponentPart.getWrapper();
     }
@@ -1119,7 +1149,7 @@ public abstract class DefaultCoreContainerPart<S extends DefaultCoreContainerPar
             inlineTextOpts.setText(text);
             CoreInlineText inlineText = componentFactory.createInlineText(inlineTextOpts);
             c.add(inlineText);
-        }).onText((c, text) -> c.addText(text)).onLink((c, label, url) -> {
+        }).onText((c, text) -> c.addText(text)).onInlineCode(this::addMarkdownInlineCode).onLink((c, label, url) -> {
             CoreLinkOptions linkOpts = componentFactory.createLinkOptions();
             linkOpts.setText(label);
             linkOpts.setUrl(url);

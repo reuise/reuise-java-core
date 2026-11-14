@@ -1,0 +1,14 @@
+package dev.reuise.core.chat;
+import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.basecomponent.CoreBaseComponentPartOptions;
+import dev.reuise.core.layout.CoreContainerOptions;
+import dev.reuise.core.layout.CoreContainerPartOptions;
+import dev.reuise.core.parentcomponent.CoreParentComponentPartOptions;
+// Todo: Clean up unneeded interfaces
+public interface CoreChatBoxOptions extends CoreChatBoxPartOptions , CoreBaseComponentPartOptions , CoreContainerPartOptions , CoreContainerOptions , CoreParentComponentPartOptions , CoreComponentOptions {
+    CoreContainerPartOptions getContainerPart();
+
+    CoreParentComponentPartOptions getParentComponentPart();
+
+    CoreBaseComponentPartOptions getBaseComponentPart();
+}

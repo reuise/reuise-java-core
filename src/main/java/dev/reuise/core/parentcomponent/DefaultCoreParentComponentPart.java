@@ -4,6 +4,7 @@ import dev.reuise.core.ComponentType;
 import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
@@ -16,6 +17,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 // Option: Mounted - CORE
 // Option: Margin - CORE
 // Option: MarginTop - CORE
@@ -30,6 +32,8 @@ import java.util.Set;
 // Option: MaxHeight - CORE
 // Option: RequiredLayoutComponent - CORE
 // Option: Parent - CORE
+// Option: LocaleContext - CORE
+// Option: LinkUrlResolver - CORE
 // Option: Wrapper - CORE
 // Option: Theme - CORE
 // Option: Visible - CORE
@@ -58,7 +62,9 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
             childWrapper.add(child);
         } else {
             CoreComponent previousParent = child.getParent();
-            if (previousParent instanceof CoreParentComponent)
+            CoreComponent previousOwner = (previousParent instanceof CoreParentComponentPart) ? ((CoreParentComponentPart) (previousParent)).getComponent() : previousParent;
+            // Layout construction assigns a parent before registering the child.
+            if ((((previousParent instanceof CoreParentComponent) && (previousParent != this)) && (previousOwner != getComponent())) && ((CoreParentComponent) (previousParent)).getChildren().contains(child))
                 ((CoreParentComponent) (previousParent)).remove(child);
 
             this.children.add(child);
@@ -532,6 +538,28 @@ public abstract class DefaultCoreParentComponentPart<S extends DefaultCoreParent
     @Override
     public S setParent(CoreComponent parent) {
         this.baseComponentPart.setParent(parent);
+        return self();
+    }
+
+    @Override
+    public LocaleContext getLocaleContext() {
+        return baseComponentPart.getLocaleContext();
+    }
+
+    @Override
+    public S setLocaleContext(LocaleContext localeContext) {
+        this.baseComponentPart.setLocaleContext(localeContext);
+        return self();
+    }
+
+    @Override
+    public Function<String, String> getLinkUrlResolver() {
+        return baseComponentPart.getLinkUrlResolver();
+    }
+
+    @Override
+    public S setLinkUrlResolver(Function<String, String> linkUrlResolver) {
+        this.baseComponentPart.setLinkUrlResolver(linkUrlResolver);
         return self();
     }
 

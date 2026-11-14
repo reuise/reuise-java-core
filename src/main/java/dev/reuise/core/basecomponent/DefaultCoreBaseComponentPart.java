@@ -4,6 +4,8 @@ import dev.reuise.core.ComponentType;
 import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.LinkUrlResolverState;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSize;
 import dev.reuise.core.ScreenSizeValues;
@@ -16,7 +18,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-public abstract class DefaultCoreBaseComponentPart<S extends DefaultCoreBaseComponentPart<S, O>, O extends CoreBaseComponentPartOptions> implements ComponentPart , CoreBaseComponent {
+import java.util.function.Function;
+public abstract class DefaultCoreBaseComponentPart<S extends DefaultCoreBaseComponentPart<S, O>, O extends CoreBaseComponentPartOptions> implements ComponentPart , LinkUrlResolverState , CoreBaseComponent {
+    String ORIGINAL_HREF = "data-reuise-original-href";
+
     private boolean mounted = false;
 
     private boolean initialized = false;
@@ -26,6 +31,101 @@ public abstract class DefaultCoreBaseComponentPart<S extends DefaultCoreBaseComp
     protected Map<ComponentPart, CoreComponentOptions> partOptions = new HashMap<>();
 
     private CoreBaseComponent component;
+
+    private LocaleContext localLocaleContext;
+
+    private Function<String, String> localLinkUrlResolver;
+
+    private LinkUrlResolverState inheritedLinkUrlResolverState;
+
+    private final List<Runnable> linkUrlResolverListeners = new ArrayList<>();
+
+    private final Runnable inheritedLinkUrlResolverListener = this::notifyLinkUrlResolverListeners;
+
+    public LocaleContext getLocaleContext() {
+        if (localLocaleContext != null)
+            return localLocaleContext;
+
+        CoreComponent parent = getParent();
+        if ((parent != null) && (parent != component))
+            return parent.getLocaleContext();
+
+        RootComponent root = getRootComponent();
+        if ((root == null) && (getComponentFactory() != null))
+            root = getComponentFactory().getRootComponent();
+
+        if ((root instanceof CoreComponent) && (root != component))
+            return ((CoreComponent) (root)).getLocaleContext();
+
+        return LocaleContext.DEFAULT;
+    }
+
+    public S setLocaleContext(LocaleContext localeContext) {
+        this.localLocaleContext = localeContext;
+        return self();
+    }
+
+    public Function<String, String> getLinkUrlResolver() {
+        if (localLinkUrlResolver != null)
+            return localLinkUrlResolver;
+
+        CoreComponent parent = getParent();
+        LinkUrlResolverState parentState = ((parent == null) || (parent == component)) ? null : LinkUrlResolverState.of(parent);
+        if ((parentState != null) && (parentState != this))
+            return parentState.getLinkUrlResolver();
+
+        RootComponent root = getRootComponent();
+        if ((root == null) && (getComponentFactory() != null))
+            root = getComponentFactory().getRootComponent();
+
+        LinkUrlResolverState rootState = ((root instanceof CoreComponent) && (root != component)) ? LinkUrlResolverState.of(((CoreComponent) (root))) : null;
+        return (rootState == null) || (rootState == this) ? null : rootState.getLinkUrlResolver();
+    }
+
+    public S setLinkUrlResolver(Function<String, String> resolver) {
+        localLinkUrlResolver = resolver;
+        notifyLinkUrlResolverListeners();
+        return self();
+    }
+
+    public void addLinkUrlResolverListener(Runnable listener) {
+        if (!linkUrlResolverListeners.contains(listener))
+            linkUrlResolverListeners.add(listener);
+
+        bindLinkUrlResolverParent();
+    }
+
+    public void removeLinkUrlResolverListener(Runnable listener) {
+        linkUrlResolverListeners.remove(listener);
+        if (linkUrlResolverListeners.isEmpty() && (inheritedLinkUrlResolverState != null)) {
+            inheritedLinkUrlResolverState.removeLinkUrlResolverListener(inheritedLinkUrlResolverListener);
+            inheritedLinkUrlResolverState = null;
+        }
+    }
+
+    private void bindLinkUrlResolverParent() {
+        CoreComponent parent = getParent();
+        LinkUrlResolverState next = ((linkUrlResolverListeners.isEmpty() || (parent == null)) || (parent == component)) ? null : LinkUrlResolverState.of(parent);
+        if (next == this)
+            next = null;
+
+        if (next == inheritedLinkUrlResolverState)
+            return;
+
+        if (inheritedLinkUrlResolverState != null)
+            inheritedLinkUrlResolverState.removeLinkUrlResolverListener(inheritedLinkUrlResolverListener);
+
+        inheritedLinkUrlResolverState = next;
+        if (next != null)
+            next.addLinkUrlResolverListener(inheritedLinkUrlResolverListener);
+
+    }
+
+    private void notifyLinkUrlResolverListeners() {
+        for (Runnable listener : new ArrayList<>(linkUrlResolverListeners))
+            listener.run();
+
+    }
 
     protected Map<ComponentPart.Type, List<ComponentPart>> getParts() {
         return parts;
@@ -163,6 +263,8 @@ public abstract class DefaultCoreBaseComponentPart<S extends DefaultCoreBaseComp
         applicator.add(options.getMaxHeightOption(), component::setMaxHeight);
         applicator.add(options.getRequiredLayoutComponentOption(), component::setRequiredLayoutComponent);
         applicator.add(options.getParentOption(), component::setParent);
+        applicator.add(options.getLocaleContextOption(), component::setLocaleContext);
+        applicator.add(options.getLinkUrlResolverOption(), component::setLinkUrlResolver);
         applicator.add(options.getWrapperOption(), component::setWrapper);
         applicator.add(options.getThemeOption(), component::setTheme);
         applicator.add(options.getVisibleOption(), component::setVisible);
@@ -281,9 +383,12 @@ public abstract class DefaultCoreBaseComponentPart<S extends DefaultCoreBaseComp
         return parent;
     }
 
+    // Implementation
     @Override
     public S setParent(CoreComponent parent) {
         this.parent = parent;
+        bindLinkUrlResolverParent();
+        notifyLinkUrlResolverListeners();
         return self();
     }
 

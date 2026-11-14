@@ -2,6 +2,7 @@ package dev.reuise.core.basecomponent;
 import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentFactory;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.option.ComponentOption;
@@ -9,6 +10,7 @@ import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.theme.Theme;
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.Function;
 public interface CoreBaseComponentPartOptions {
     <O extends CoreComponentOptions> void initialize(O options);
 
@@ -227,6 +229,18 @@ public interface CoreBaseComponentPartOptions {
     ComponentOption<CoreComponent> getParentOption();
 
     CoreBaseComponentPartOptions setParent(CoreComponent parent);
+
+    LocaleContext getLocaleContext();
+
+    ComponentOption<LocaleContext> getLocaleContextOption();
+
+    CoreBaseComponentPartOptions setLocaleContext(LocaleContext localeContext);
+
+    Function<String, String> getLinkUrlResolver();
+
+    ComponentOption<Function<String, String>> getLinkUrlResolverOption();
+
+    CoreBaseComponentPartOptions setLinkUrlResolver(Function<String, String> linkUrlResolver);
 
     CoreParentComponent getWrapper();
 

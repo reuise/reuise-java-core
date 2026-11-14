@@ -19,6 +19,7 @@ public class MarkdownParser {
     private final TriConsumer<CoreParentComponent, String, String> linkConsumer;
     private final TriConsumer<CoreParentComponent, String, String> emailConsumer;
     private final TriConsumer<CoreParentComponent, String, String> imageConsumer;
+    private final BiConsumer<CoreParentComponent, String> inlineCodeConsumer;
     private final BiConsumer<CoreParentComponent, String> boldConsumer;
     private final BiConsumer<CoreParentComponent, String> italicConsumer;
     private final BiConsumer<CoreParentComponent, String> strikeConsumer;
@@ -38,6 +39,7 @@ public class MarkdownParser {
         this.linkConsumer = b.linkConsumer;
         this.emailConsumer = b.emailConsumer;
         this.imageConsumer = b.imageConsumer;
+        this.inlineCodeConsumer = b.inlineCodeConsumer;
         this.boldConsumer = b.boldConsumer;
         this.italicConsumer = b.italicConsumer;
         this.strikeConsumer = b.strikeConsumer;
@@ -327,6 +329,34 @@ public class MarkdownParser {
         };
 
         while (index < text.length()) {
+            if (text.charAt(index) == '\\' && index + 1 < text.length() && text.charAt(index + 1) == '`') {
+                plainText.append('`');
+                index += 2;
+                continue;
+            }
+
+            if (text.charAt(index) == '`') {
+                int openingEnd = index;
+                while (openingEnd < text.length() && text.charAt(openingEnd) == '`') openingEnd++;
+                int delimiterLength = openingEnd - index;
+                int closingStart = findClosingCodeDelimiter(text, openingEnd, delimiterLength);
+                if (closingStart != -1) {
+                    flushText.run();
+                    String code = text.substring(openingEnd, closingStart).replace('\n', ' ');
+                    if (code.length() >= 2 && code.charAt(0) == ' ' && code.charAt(code.length() - 1) == ' '
+                            && !code.replace(" ", "").isEmpty()) {
+                        code = code.substring(1, code.length() - 1);
+                    }
+                    if (inlineCodeConsumer != null) inlineCodeConsumer.accept(parent, code);
+                    else if (textConsumer != null) textConsumer.accept(parent, code);
+                    index = closingStart + delimiterLength;
+                } else {
+                    plainText.append(text, index, openingEnd);
+                    index = openingEnd;
+                }
+                continue;
+            }
+
             // Line breaks
             if (text.charAt(index) == '\n') {
                 flushText.run();
@@ -345,7 +375,7 @@ public class MarkdownParser {
             if (text.startsWith("![", index)) {
                 int mid = text.indexOf("](", index);
                 int end = mid != -1 ? text.indexOf(")", mid + 2) : -1;
-                if (mid != -1 && end != -1) {
+                if (mid != -1 && end != -1 && !hasInlineCodeSpan(text, index + 2, end + 1)) {
                     flushText.run();
 
                     String alt = text.substring(index + 2, mid);
@@ -364,7 +394,7 @@ public class MarkdownParser {
             if (text.charAt(index) == '[') {
                 int mid = text.indexOf("](", index);
                 int end = mid != -1 ? text.indexOf(")", mid + 2) : -1;
-                if (mid != -1 && end != -1) {
+                if (mid != -1 && end != -1 && !hasInlineCodeSpan(text, index + 1, end + 1)) {
                     flushText.run();
 
                     String label = text.substring(index + 1, mid);
@@ -463,6 +493,32 @@ public class MarkdownParser {
         flushText.run();
     }
 
+    private static int findClosingCodeDelimiter(String text, int from, int delimiterLength) {
+        int start = from;
+        while ((start = text.indexOf('`', start)) != -1) {
+            int end = start;
+            while (end < text.length() && text.charAt(end) == '`') end++;
+            if (end - start == delimiterLength) return start;
+            start = end;
+        }
+        return -1;
+    }
+
+    private static boolean hasInlineCodeSpan(String text, int from, int before) {
+        int start = from;
+        while ((start = text.indexOf('`', start)) != -1 && start < before) {
+            if (start > 0 && text.charAt(start - 1) == '\\') {
+                start++;
+                continue;
+            }
+            int end = start;
+            while (end < text.length() && text.charAt(end) == '`') end++;
+            if (findClosingCodeDelimiter(text, end, end - start) != -1) return true;
+            start = end;
+        }
+        return false;
+    }
+
     // ---- Builder ----
     public static Builder newBuilder() {
         return new Builder();
@@ -480,6 +536,7 @@ public class MarkdownParser {
         private TriConsumer<CoreParentComponent, String, String> linkConsumer;
         private TriConsumer<CoreParentComponent, String, String> emailConsumer;
         private TriConsumer<CoreParentComponent, String, String> imageConsumer;
+        private BiConsumer<CoreParentComponent, String> inlineCodeConsumer;
         private BiConsumer<CoreParentComponent, String> boldConsumer;
         private BiConsumer<CoreParentComponent, String> italicConsumer;
         private BiConsumer<CoreParentComponent, String> strikeConsumer;
@@ -534,6 +591,11 @@ public class MarkdownParser {
 
         public Builder onImage(TriConsumer<CoreParentComponent, String, String> c) {
             imageConsumer = c;
+            return this;
+        }
+
+        public Builder onInlineCode(BiConsumer<CoreParentComponent, String> c) {
+            inlineCodeConsumer = c;
             return this;
         }
 

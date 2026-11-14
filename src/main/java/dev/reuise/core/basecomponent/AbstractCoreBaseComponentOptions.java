@@ -1,6 +1,7 @@
 package dev.reuise.core.basecomponent;
 import dev.reuise.core.CoreComponent;
 import dev.reuise.core.CoreComponentOptions;
+import dev.reuise.core.LocaleContext;
 import dev.reuise.core.ScreenSize;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
@@ -1050,6 +1051,46 @@ public abstract class AbstractCoreBaseComponentOptions<S extends AbstractCoreBas
 
     private void setDefaultParent(CoreComponent parent) {
         setDefaultOption("parent", parent);
+    }
+
+    @Override
+    public LocaleContext getLocaleContext() {
+        return ((LocaleContext) (getOptionValue("localeContext")));
+    }
+
+    @Override
+    public ComponentOption<LocaleContext> getLocaleContextOption() {
+        return ((ComponentOption<LocaleContext>) (getOption("localeContext")));
+    }
+
+    @Override
+    public S setLocaleContext(LocaleContext localeContext) {
+        setOption("localeContext", localeContext);
+        return self();
+    }
+
+    private void setDefaultLocaleContext(LocaleContext localeContext) {
+        setDefaultOption("localeContext", localeContext);
+    }
+
+    @Override
+    public Function<String, String> getLinkUrlResolver() {
+        return ((Function<String, String>) (getOptionValue("linkUrlResolver")));
+    }
+
+    @Override
+    public ComponentOption<Function<String, String>> getLinkUrlResolverOption() {
+        return ((ComponentOption<Function<String, String>>) (getOption("linkUrlResolver")));
+    }
+
+    @Override
+    public S setLinkUrlResolver(Function<String, String> linkUrlResolver) {
+        setOption("linkUrlResolver", linkUrlResolver);
+        return self();
+    }
+
+    private void setDefaultLinkUrlResolver(Function<String, String> linkUrlResolver) {
+        setDefaultOption("linkUrlResolver", linkUrlResolver);
     }
 
     @Override

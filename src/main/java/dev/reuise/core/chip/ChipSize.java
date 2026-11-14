@@ -61,7 +61,7 @@ public enum ChipSize {
 
         @Override
         public Integer getPaddingX() {
-            return 18;
+            return 16;
         }
 
         @Override
@@ -113,7 +113,7 @@ public enum ChipSize {
 
         @Override
         public Integer getPaddingX() {
-            return 28;
+            return 24;
         }
 
         @Override
