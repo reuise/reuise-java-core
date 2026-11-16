@@ -36,7 +36,8 @@ public abstract class AbstractCoreCarouselOptions<S extends AbstractCoreCarousel
     }
 
     public boolean onPreInitialize() {
-        setDefaultActiveIndex(0);
+        initializeDefaultActiveIndex(0);
+        setDefaultDefaultActiveIndex(0);
         setDefaultAlign("start");
         setDefaultWhitespace(false);
         setDefaultCircular(false);
@@ -47,6 +48,7 @@ public abstract class AbstractCoreCarouselOptions<S extends AbstractCoreCarousel
         setDefaultTransitionMillis(300);
         setDefaultShowNavigation(true);
         setDefaultShowIndicators(true);
+        setDefaultActiveDotColor("#616161");
         setDefaultGap(16);
         setDefaultLabel("Carousel");
         setDefaultPreviousLabel("Previous page");
@@ -80,9 +82,34 @@ public abstract class AbstractCoreCarouselOptions<S extends AbstractCoreCarousel
     protected void setLayoutChildrenActiveIndex(Integer activeIndex) {
     }
 
-    private void setDefaultActiveIndex(Integer activeIndex) {
+    private void initializeDefaultActiveIndex(Integer activeIndex) {
         setDefaultOption("activeIndex", activeIndex, true);
         setLayoutChildrenActiveIndex(activeIndex);
+    }
+
+    @Override
+    public Integer getDefaultActiveIndex() {
+        return ((Integer) (getOptionValue("defaultActiveIndex")));
+    }
+
+    @Override
+    public ComponentOption<Integer> getDefaultActiveIndexOption() {
+        return ((ComponentOption<Integer>) (getOption("defaultActiveIndex")));
+    }
+
+    @Override
+    public S setDefaultActiveIndex(Integer defaultActiveIndex) {
+        setOption("defaultActiveIndex", defaultActiveIndex, true);
+        setLayoutChildrenDefaultActiveIndex(defaultActiveIndex);
+        return self();
+    }
+
+    protected void setLayoutChildrenDefaultActiveIndex(Integer defaultActiveIndex) {
+    }
+
+    private void setDefaultDefaultActiveIndex(Integer defaultActiveIndex) {
+        setDefaultOption("defaultActiveIndex", defaultActiveIndex, true);
+        setLayoutChildrenDefaultActiveIndex(defaultActiveIndex);
     }
 
     @Override
@@ -358,6 +385,31 @@ public abstract class AbstractCoreCarouselOptions<S extends AbstractCoreCarousel
     private void setDefaultShowIndicators(Boolean showIndicators) {
         setDefaultOption("showIndicators", showIndicators, true);
         setLayoutChildrenShowIndicators(showIndicators);
+    }
+
+    @Override
+    public String getActiveDotColor() {
+        return ((String) (getOptionValue("activeDotColor")));
+    }
+
+    @Override
+    public ComponentOption<String> getActiveDotColorOption() {
+        return ((ComponentOption<String>) (getOption("activeDotColor")));
+    }
+
+    @Override
+    public S setActiveDotColor(String activeDotColor) {
+        setOption("activeDotColor", activeDotColor, true);
+        setLayoutChildrenActiveDotColor(activeDotColor);
+        return self();
+    }
+
+    protected void setLayoutChildrenActiveDotColor(String activeDotColor) {
+    }
+
+    private void setDefaultActiveDotColor(String activeDotColor) {
+        setDefaultOption("activeDotColor", activeDotColor, true);
+        setLayoutChildrenActiveDotColor(activeDotColor);
     }
 
     @Override

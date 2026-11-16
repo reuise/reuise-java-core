@@ -19,8 +19,9 @@ import java.util.Objects;
  * reduced motion is requested or browser APIs are unavailable. Automatic
  * triggers run once on Reuise attachment, or when configured on an already
  * connected element; after removal, explicitly start or reconfigure to replay.
- * While waiting or animating, removal observed in the document cancels the
- * controller. Mutations wholly inside a shadow root are not observed by the
+ * While waiting or animating, detachment suspends the controller and pauses its
+ * timeline; hydration-managed reattachment resumes it. Explicit cancellation
+ * remains permanent for that run. Mutations wholly inside a shadow root are not observed by the
  * document observer; cancel explicitly when managing such DOM externally.
  */
 public final class ComponentAnimation {

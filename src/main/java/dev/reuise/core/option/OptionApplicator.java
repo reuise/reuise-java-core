@@ -12,6 +12,7 @@ import dev.reuise.core.State;
 public class OptionApplicator {
     private List<AbstractComponentOptionOperation<?>> operations;
     private boolean onlyForcedOptions = false;
+    private boolean onlyExplicitOptions = false;
 
     public OptionApplicator() {
     }
@@ -19,7 +20,7 @@ public class OptionApplicator {
     public <T> void add(ComponentOption<T> option, ApplyOperation<T> operation) {
         if(option == null) return;
         T value = option.getValue();
-        if(value == null) return;
+        if(value == null && !onlyExplicitOptions) return;
 
         //operation.apply(value);
         initList();
@@ -29,7 +30,7 @@ public class OptionApplicator {
     public <T> void add(ComponentOption<T> option, State state, ApplyOperationWithState<T> operation) {
         if(option == null) return;
         T value = option.getValue();
-        if(value == null) return;
+        if(value == null && !onlyExplicitOptions) return;
         
         //operation.apply(value, state);
 
@@ -50,10 +51,17 @@ public class OptionApplicator {
         this.onlyForcedOptions = onlyForcedOptions;
     }
 
+    public void setOnlyExplicitOptions(boolean onlyExplicitOptions) {
+        this.onlyExplicitOptions = onlyExplicitOptions;
+    }
+
     private Stream<AbstractComponentOptionOperation<?>> getOperationsStream() {
         initList();
         Stream<AbstractComponentOptionOperation<?>> stream = operations.stream();
-        if(onlyForcedOptions) return stream.filter(AbstractComponentOptionOperation::isOptionForce);
+        if (onlyExplicitOptions) stream = stream.filter(operation ->
+                !(operation.getOption() instanceof DefaultComponentOption)
+                && !(operation.getOption() instanceof RehydratedComponentOption));
+        if(onlyForcedOptions) stream = stream.filter(AbstractComponentOptionOperation::isOptionForce);
         return stream;
     }
 

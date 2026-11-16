@@ -4,6 +4,10 @@ public interface CoreCarouselFeatures {
 
     CoreCarouselFeatures setActiveIndex(Integer activeIndex);
 
+    Integer getDefaultActiveIndex();
+
+    CoreCarouselFeatures setDefaultActiveIndex(Integer defaultActiveIndex);
+
     Integer getGroupSize();
 
     CoreCarouselFeatures setGroupSize(Integer groupSize);
@@ -47,6 +51,10 @@ public interface CoreCarouselFeatures {
     boolean isShowIndicators();
 
     CoreCarouselFeatures setShowIndicators(Boolean showIndicators);
+
+    String getActiveDotColor();
+
+    CoreCarouselFeatures setActiveDotColor(String activeDotColor);
 
     Integer getGap();
 

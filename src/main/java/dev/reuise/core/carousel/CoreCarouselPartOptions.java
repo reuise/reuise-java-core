@@ -16,6 +16,12 @@ public interface CoreCarouselPartOptions {
 
     CoreCarouselPartOptions setActiveIndex(Integer activeIndex);
 
+    Integer getDefaultActiveIndex();
+
+    ComponentOption<Integer> getDefaultActiveIndexOption();
+
+    CoreCarouselPartOptions setDefaultActiveIndex(Integer defaultActiveIndex);
+
     Integer getGroupSize();
 
     ComponentOption<Integer> getGroupSizeOption();
@@ -81,6 +87,12 @@ public interface CoreCarouselPartOptions {
     ComponentOption<Boolean> getShowIndicatorsOption();
 
     CoreCarouselPartOptions setShowIndicators(Boolean showIndicators);
+
+    String getActiveDotColor();
+
+    ComponentOption<String> getActiveDotColorOption();
+
+    CoreCarouselPartOptions setActiveDotColor(String activeDotColor);
 
     Integer getGap();
 

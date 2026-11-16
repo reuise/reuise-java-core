@@ -22,7 +22,9 @@ import dev.reuise.core.layout.CoreContainerPart;
 import dev.reuise.core.link.CoreLink;
 import dev.reuise.core.list.CoreBasicList;
 import dev.reuise.core.option.ComponentCreator;
+import dev.reuise.core.option.DefaultComponentOption;
 import dev.reuise.core.option.OptionApplicator;
+import dev.reuise.core.option.RehydratedComponentOption;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.core.parentcomponent.CoreParentComponentPart;
 import dev.reuise.core.text.CoreHeading;
@@ -98,6 +100,8 @@ public abstract class DefaultCoreCarouselPart<S extends DefaultCoreCarouselPart<
 
     protected Integer activeIndex;
 
+    protected Integer defaultActiveIndex;
+
     protected Integer groupSize;
 
     protected String align;
@@ -119,6 +123,8 @@ public abstract class DefaultCoreCarouselPart<S extends DefaultCoreCarouselPart<
     protected Boolean showNavigation;
 
     protected Boolean showIndicators;
+
+    protected String activeDotColor;
 
     protected Integer gap;
 
@@ -1494,7 +1500,12 @@ public abstract class DefaultCoreCarouselPart<S extends DefaultCoreCarouselPart<
         return announcement;
     }
 
+    // Implementation
+    // Implementation
+    // Implementation
     public void onInitialize(O options) {
+        setDefaultActiveIndex(options.getDefaultActiveIndex());
+        setActiveIndex((options.getActiveIndexOption() == null) || ((options.getActiveIndexOption() instanceof DefaultComponentOption) && (!(options.getActiveIndexOption() instanceof RehydratedComponentOption))) ? getDefaultActiveIndex() : options.getActiveIndex());
     }
 
     public void onCreate(O options) {
@@ -1507,6 +1518,7 @@ public abstract class DefaultCoreCarouselPart<S extends DefaultCoreCarouselPart<
 
         // Apply options for default state
         applicator.add(options.getActiveIndexOption(), component::setActiveIndex);
+        applicator.add(options.getDefaultActiveIndexOption(), component::setDefaultActiveIndex);
         applicator.add(options.getGroupSizeOption(), component::setGroupSize);
         applicator.add(options.getAlignOption(), component::setAlign);
         applicator.add(options.getWhitespaceOption(), component::setWhitespace);
@@ -1518,6 +1530,7 @@ public abstract class DefaultCoreCarouselPart<S extends DefaultCoreCarouselPart<
         applicator.add(options.getTransitionMillisOption(), component::setTransitionMillis);
         applicator.add(options.getShowNavigationOption(), component::setShowNavigation);
         applicator.add(options.getShowIndicatorsOption(), component::setShowIndicators);
+        applicator.add(options.getActiveDotColorOption(), component::setActiveDotColor);
         applicator.add(options.getGapOption(), component::setGap);
         applicator.add(options.getLabelOption(), component::setLabel);
         applicator.add(options.getPreviousLabelOption(), component::setPreviousLabel);
@@ -1541,6 +1554,21 @@ public abstract class DefaultCoreCarouselPart<S extends DefaultCoreCarouselPart<
     @Override
     public S setActiveIndex(Integer activeIndex) {
         this.activeIndex = activeIndex;
+        return self();
+    }
+
+    @Override
+    public Integer getDefaultActiveIndex() {
+        return defaultActiveIndex;
+    }
+
+    // Implementation
+    @Override
+    public S setDefaultActiveIndex(Integer defaultActiveIndex) {
+        if ((defaultActiveIndex == null) || (defaultActiveIndex < 0))
+            throw new IllegalArgumentException("DefaultActiveIndex must be at least 0");
+
+        this.defaultActiveIndex = defaultActiveIndex;
         return self();
     }
 
@@ -1662,6 +1690,17 @@ public abstract class DefaultCoreCarouselPart<S extends DefaultCoreCarouselPart<
     @Override
     public S setShowIndicators(Boolean showIndicators) {
         this.showIndicators = showIndicators;
+        return self();
+    }
+
+    @Override
+    public String getActiveDotColor() {
+        return activeDotColor;
+    }
+
+    @Override
+    public S setActiveDotColor(String activeDotColor) {
+        this.activeDotColor = activeDotColor;
         return self();
     }
 
