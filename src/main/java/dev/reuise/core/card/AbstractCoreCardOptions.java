@@ -70,7 +70,7 @@ public abstract class AbstractCoreCardOptions<S extends AbstractCoreCardOptions<
         if (headingContainerOptions == null)
             headingContainerOptions = createDefaultHeadingContainerOptions();
 
-        headingContainerOptions.setText(heading);
+        if (getOption("heading", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (headingContainerOptions.getOption("text", null) == null || headingContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) headingContainerOptions.setDefaultOption("text", heading, null, getOption("heading", null).isForce()); } else { headingContainerOptions.setText(heading); };
     }
 
     private void setDefaultHeading(String heading) {
@@ -99,7 +99,7 @@ public abstract class AbstractCoreCardOptions<S extends AbstractCoreCardOptions<
         if (subHeadingContainerOptions == null)
             subHeadingContainerOptions = createDefaultSubHeadingContainerOptions();
 
-        subHeadingContainerOptions.setText(subHeading);
+        if (getOption("subHeading", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (subHeadingContainerOptions.getOption("text", null) == null || subHeadingContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) subHeadingContainerOptions.setDefaultOption("text", subHeading, null, getOption("subHeading", null).isForce()); } else { subHeadingContainerOptions.setText(subHeading); };
     }
 
     private void setDefaultSubHeading(String subHeading) {
@@ -128,7 +128,7 @@ public abstract class AbstractCoreCardOptions<S extends AbstractCoreCardOptions<
         if (textContainerOptions == null)
             textContainerOptions = createDefaultTextContainerOptions();
 
-        textContainerOptions.setText(text);
+        if (getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (textContainerOptions.getOption("text", null) == null || textContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) textContainerOptions.setDefaultOption("text", text, null, getOption("text", null).isForce()); } else { textContainerOptions.setText(text); };
     }
 
     private void setDefaultText(String text) {
@@ -182,11 +182,11 @@ public abstract class AbstractCoreCardOptions<S extends AbstractCoreCardOptions<
         if (mediaLinkOptions == null)
             mediaLinkOptions = createDefaultMediaLinkOptions();
 
-        mediaLinkOptions.setUrl(url);
+        if (getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (mediaLinkOptions.getOption("url", null) == null || mediaLinkOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) mediaLinkOptions.setDefaultOption("url", url, null, getOption("url", null).isForce()); } else { mediaLinkOptions.setUrl(url); };
         if (headingLinkOptions == null)
             headingLinkOptions = createDefaultHeadingLinkOptions();
 
-        headingLinkOptions.setUrl(url);
+        if (getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (headingLinkOptions.getOption("url", null) == null || headingLinkOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) headingLinkOptions.setDefaultOption("url", url, null, getOption("url", null).isForce()); } else { headingLinkOptions.setUrl(url); };
     }
 
     private void setDefaultUrl(String url) {
@@ -215,7 +215,7 @@ public abstract class AbstractCoreCardOptions<S extends AbstractCoreCardOptions<
         if (imageOptions == null)
             imageOptions = createDefaultImageOptions();
 
-        imageOptions.setUrl(imageUrl);
+        if (getOption("imageUrl", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (imageOptions.getOption("url", null) == null || imageOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) imageOptions.setDefaultOption("url", imageUrl, null, getOption("imageUrl", null).isForce()); } else { imageOptions.setUrl(imageUrl); };
     }
 
     private void setDefaultImageUrl(String imageUrl) {

@@ -81,7 +81,7 @@ public abstract class AbstractCoreTableOptions<S extends AbstractCoreTableOption
         if (headerOptions == null)
             headerOptions = createDefaultHeaderOptions();
 
-        headerOptions.setFixed(fixedHeader);
+        if (getOption("fixedHeader", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (headerOptions.getOption("fixed", null) == null || headerOptions.getOption("fixed", null) instanceof dev.reuise.core.option.DefaultComponentOption) headerOptions.setDefaultOption("fixed", fixedHeader, null, getOption("fixedHeader", null).isForce()); } else { headerOptions.setFixed(fixedHeader); };
     }
 
     private void setDefaultFixedHeader(Boolean fixedHeader) {
@@ -110,7 +110,7 @@ public abstract class AbstractCoreTableOptions<S extends AbstractCoreTableOption
         if (footerOptions == null)
             footerOptions = createDefaultFooterOptions();
 
-        footerOptions.setFixed(fixedFooter);
+        if (getOption("fixedFooter", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (footerOptions.getOption("fixed", null) == null || footerOptions.getOption("fixed", null) instanceof dev.reuise.core.option.DefaultComponentOption) footerOptions.setDefaultOption("fixed", fixedFooter, null, getOption("fixedFooter", null).isForce()); } else { footerOptions.setFixed(fixedFooter); };
     }
 
     private void setDefaultFixedFooter(Boolean fixedFooter) {

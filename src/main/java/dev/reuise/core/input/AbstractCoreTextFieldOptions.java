@@ -241,7 +241,7 @@ public abstract class AbstractCoreTextFieldOptions<S extends AbstractCoreTextFie
         if (inputOptions == null)
             inputOptions = createDefaultInputOptions();
 
-        inputOptions.setError(error);
+        if (getOption("error", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (inputOptions.getOption("error", null) == null || inputOptions.getOption("error", null) instanceof dev.reuise.core.option.DefaultComponentOption) inputOptions.setDefaultOption("error", error, null, getOption("error", null).isForce()); } else { inputOptions.setError(error); };
     }
 
     private void setDefaultError(Boolean error) {
@@ -270,7 +270,7 @@ public abstract class AbstractCoreTextFieldOptions<S extends AbstractCoreTextFie
         if (supportingTextContainerOptions == null)
             supportingTextContainerOptions = createDefaultSupportingTextContainerOptions();
 
-        supportingTextContainerOptions.setText(supportingText);
+        if (getOption("supportingText", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (supportingTextContainerOptions.getOption("text", null) == null || supportingTextContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) supportingTextContainerOptions.setDefaultOption("text", supportingText, null, getOption("supportingText", null).isForce()); } else { supportingTextContainerOptions.setText(supportingText); };
     }
 
     private void setDefaultSupportingText(String supportingText) {
@@ -299,7 +299,7 @@ public abstract class AbstractCoreTextFieldOptions<S extends AbstractCoreTextFie
         if (labelContainerOptions == null)
             labelContainerOptions = createDefaultLabelContainerOptions();
 
-        labelContainerOptions.setText(label);
+        if (getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (labelContainerOptions.getOption("text", null) == null || labelContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) labelContainerOptions.setDefaultOption("text", label, null, getOption("label", null).isForce()); } else { labelContainerOptions.setText(label); };
     }
 
     private void setDefaultLabel(String label) {

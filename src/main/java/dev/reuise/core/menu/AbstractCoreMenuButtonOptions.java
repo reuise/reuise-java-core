@@ -48,7 +48,7 @@ public abstract class AbstractCoreMenuButtonOptions<S extends AbstractCoreMenuBu
         if (triggerOptions == null)
             triggerOptions = createDefaultTriggerOptions();
 
-        triggerOptions.setLabel(label);
+        if (getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (triggerOptions.getOption("label", null) == null || triggerOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) triggerOptions.setDefaultOption("label", label, null, getOption("label", null).isForce()); } else { triggerOptions.setLabel(label); };
     }
 
     private void setDefaultLabel(String label) {

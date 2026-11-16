@@ -98,7 +98,7 @@ public abstract class AbstractCoreButtonOptions<S extends AbstractCoreButtonOpti
         if (labelContainerOptions == null)
             labelContainerOptions = createDefaultLabelContainerOptions();
 
-        labelContainerOptions.setText(label);
+        if (getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (labelContainerOptions.getOption("text", null) == null || labelContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) labelContainerOptions.setDefaultOption("text", label, null, getOption("label", null).isForce()); } else { labelContainerOptions.setText(label); };
     }
 
     private void setDefaultLabel(String label) {

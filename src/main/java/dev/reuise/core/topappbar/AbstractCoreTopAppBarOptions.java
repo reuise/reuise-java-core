@@ -208,21 +208,21 @@ public abstract class AbstractCoreTopAppBarOptions<S extends AbstractCoreTopAppB
         if (navigationButtonOptions == null)
             navigationButtonOptions = createDefaultNavigationButtonOptions();
 
-        navigationButtonOptions.setVisible(hasNavigationButton);
+        if (getOption("hasNavigationButton", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (navigationButtonOptions.getOption("visible", null) == null || navigationButtonOptions.getOption("visible", null) instanceof dev.reuise.core.option.DefaultComponentOption) navigationButtonOptions.setDefaultOption("visible", hasNavigationButton, null, getOption("hasNavigationButton", null).isForce()); } else { navigationButtonOptions.setVisible(hasNavigationButton); };
     }
 
     protected void setLayoutChildrenHasNavigationButton(Boolean hasNavigationButton, State state) {
         if (navigationButtonOptions == null)
             navigationButtonOptions = createDefaultNavigationButtonOptions();
 
-        navigationButtonOptions.setVisible(hasNavigationButton, state);
+        if (getOption("hasNavigationButton", state) instanceof dev.reuise.core.option.DefaultComponentOption) { if (navigationButtonOptions.getOption("visible", state) == null || navigationButtonOptions.getOption("visible", state) instanceof dev.reuise.core.option.DefaultComponentOption) navigationButtonOptions.setDefaultOption("visible", hasNavigationButton, state, getOption("hasNavigationButton", state).isForce()); } else { navigationButtonOptions.setVisible(hasNavigationButton, state); };
     }
 
     protected void setLayoutChildrenHasNavigationButton(ScreenSizeValues<Boolean> hasNavigationButton) {
         if (navigationButtonOptions == null)
             navigationButtonOptions = createDefaultNavigationButtonOptions();
 
-        navigationButtonOptions.setVisible(hasNavigationButton);
+        if (getOption("hasNavigationButton", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (navigationButtonOptions.getOption("visible", null) == null || navigationButtonOptions.getOption("visible", null) instanceof dev.reuise.core.option.DefaultComponentOption) navigationButtonOptions.setDefaultOption("visible", hasNavigationButton, null, getOption("hasNavigationButton", null).isForce()); } else { navigationButtonOptions.setVisible(hasNavigationButton); };
     }
 
     private void setDefaultHasNavigationButton(Boolean hasNavigationButton) {

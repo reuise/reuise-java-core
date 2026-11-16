@@ -5,10 +5,18 @@ package dev.reuise.core.option;
  */
 public final class RehydratedComponentOption<T> extends DefaultComponentOption<T> {
     private RehydratedComponentOption(ComponentOption<T> option) {
-        super(option.getName(), option.getValue(), option.getIndex(), option.isForce());
+        this(option, option.isForce());
+    }
+
+    private RehydratedComponentOption(ComponentOption<T> option, boolean force) {
+        super(option.getName(), option.getValue(), option.getIndex(), force);
     }
 
     public static <T> RehydratedComponentOption<T> from(ComponentOption<T> option) {
         return new RehydratedComponentOption<>(option);
+    }
+
+    public static <T> RehydratedComponentOption<T> from(ComponentOption<T> option, boolean force) {
+        return new RehydratedComponentOption<>(option, force);
     }
 }

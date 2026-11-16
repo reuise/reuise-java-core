@@ -48,7 +48,7 @@ public abstract class AbstractCoreScrollableContainerOptions<S extends AbstractC
         if (scrollAreaOptions == null)
             scrollAreaOptions = createDefaultScrollAreaOptions();
 
-        scrollAreaOptions.setScrollDirection(scrollDirection);
+        if (getOption("scrollDirection", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (scrollAreaOptions.getOption("scrollDirection", null) == null || scrollAreaOptions.getOption("scrollDirection", null) instanceof dev.reuise.core.option.DefaultComponentOption) scrollAreaOptions.setDefaultOption("scrollDirection", scrollDirection, null, getOption("scrollDirection", null).isForce()); } else { scrollAreaOptions.setScrollDirection(scrollDirection); };
     }
 
     private void setDefaultScrollDirection(ScrollDirection scrollDirection) {
@@ -102,7 +102,7 @@ public abstract class AbstractCoreScrollableContainerOptions<S extends AbstractC
         if (scrollAreaOptions == null)
             scrollAreaOptions = createDefaultScrollAreaOptions();
 
-        scrollAreaOptions.setFadeOptions(scrollAreaFadeOptions);
+        if (getOption("scrollAreaFadeOptions", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (scrollAreaOptions.getOption("fadeOptions", null) == null || scrollAreaOptions.getOption("fadeOptions", null) instanceof dev.reuise.core.option.DefaultComponentOption) scrollAreaOptions.setDefaultOption("fadeOptions", scrollAreaFadeOptions, null, getOption("scrollAreaFadeOptions", null).isForce()); } else { scrollAreaOptions.setFadeOptions(scrollAreaFadeOptions); };
     }
 
     private void setDefaultScrollAreaFadeOptions(ScrollableContainerFadeOptions scrollAreaFadeOptions) {
@@ -131,7 +131,7 @@ public abstract class AbstractCoreScrollableContainerOptions<S extends AbstractC
         if (scrollAreaOptions == null)
             scrollAreaOptions = createDefaultScrollAreaOptions();
 
-        scrollAreaOptions.setBorderRadius(scrollAreaBorderRadius);
+        if (getOption("scrollAreaBorderRadius", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (scrollAreaOptions.getOption("borderRadius", null) == null || scrollAreaOptions.getOption("borderRadius", null) instanceof dev.reuise.core.option.DefaultComponentOption) scrollAreaOptions.setDefaultOption("borderRadius", scrollAreaBorderRadius, null, getOption("scrollAreaBorderRadius", null).isForce()); } else { scrollAreaOptions.setBorderRadius(scrollAreaBorderRadius); };
     }
 
     private void setDefaultScrollAreaBorderRadius(Integer scrollAreaBorderRadius) {
@@ -160,7 +160,7 @@ public abstract class AbstractCoreScrollableContainerOptions<S extends AbstractC
         if (scrollAreaOptions == null)
             scrollAreaOptions = createDefaultScrollAreaOptions();
 
-        scrollAreaOptions.setFillColor(scrollAreaFillColor);
+        if (getOption("scrollAreaFillColor", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (scrollAreaOptions.getOption("fillColor", null) == null || scrollAreaOptions.getOption("fillColor", null) instanceof dev.reuise.core.option.DefaultComponentOption) scrollAreaOptions.setDefaultOption("fillColor", scrollAreaFillColor, null, getOption("scrollAreaFillColor", null).isForce()); } else { scrollAreaOptions.setFillColor(scrollAreaFillColor); };
     }
 
     private void setDefaultScrollAreaFillColor(String scrollAreaFillColor) {

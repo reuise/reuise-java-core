@@ -46,7 +46,7 @@ public abstract class AbstractCoreOverflowBarOptions<S extends AbstractCoreOverf
         if (overflowMenuOptions == null)
             overflowMenuOptions = createDefaultOverflowMenuOptions();
 
-        overflowMenuOptions.setLabel(moreLabel);
+        if (getOption("moreLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (overflowMenuOptions.getOption("label", null) == null || overflowMenuOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) overflowMenuOptions.setDefaultOption("label", moreLabel, null, getOption("moreLabel", null).isForce()); } else { overflowMenuOptions.setLabel(moreLabel); };
     }
 
     private void setDefaultMoreLabel(String moreLabel) {

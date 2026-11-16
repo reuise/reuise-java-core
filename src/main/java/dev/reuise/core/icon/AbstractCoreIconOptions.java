@@ -135,7 +135,7 @@ public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<
         if (imageOptions == null)
             imageOptions = createDefaultImageOptions();
 
-        imageOptions.setUrl(url);
+        if (getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (imageOptions.getOption("url", null) == null || imageOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) imageOptions.setDefaultOption("url", url, null, getOption("url", null).isForce()); } else { imageOptions.setUrl(url); };
     }
 
     private void setDefaultUrl(String url) {
@@ -189,7 +189,7 @@ public abstract class AbstractCoreIconOptions<S extends AbstractCoreIconOptions<
         if (linkOptions == null)
             linkOptions = createDefaultLinkOptions();
 
-        linkOptions.setUrl(linkUrl);
+        if (getOption("linkUrl", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (linkOptions.getOption("url", null) == null || linkOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) linkOptions.setDefaultOption("url", linkUrl, null, getOption("linkUrl", null).isForce()); } else { linkOptions.setUrl(linkUrl); };
     }
 
     private void setDefaultLinkUrl(String linkUrl) {

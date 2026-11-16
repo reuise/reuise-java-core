@@ -47,7 +47,7 @@ public abstract class AbstractCoreIconLabelOptions<S extends AbstractCoreIconLab
         if (labelContainerOptions == null)
             labelContainerOptions = createDefaultLabelContainerOptions();
 
-        labelContainerOptions.setText(text);
+        if (getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (labelContainerOptions.getOption("text", null) == null || labelContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) labelContainerOptions.setDefaultOption("text", text, null, getOption("text", null).isForce()); } else { labelContainerOptions.setText(text); };
     }
 
     private void setDefaultText(String text) {
@@ -76,7 +76,7 @@ public abstract class AbstractCoreIconLabelOptions<S extends AbstractCoreIconLab
         if (linkOptions == null)
             linkOptions = createDefaultLinkOptions();
 
-        linkOptions.setUrl(linkUrl);
+        if (getOption("linkUrl", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (linkOptions.getOption("url", null) == null || linkOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) linkOptions.setDefaultOption("url", linkUrl, null, getOption("linkUrl", null).isForce()); } else { linkOptions.setUrl(linkUrl); };
     }
 
     private void setDefaultLinkUrl(String linkUrl) {

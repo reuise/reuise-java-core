@@ -50,7 +50,7 @@ public abstract class AbstractCoreTabOptions<S extends AbstractCoreTabOptions<S>
         if (labelContainerOptions == null)
             labelContainerOptions = createDefaultLabelContainerOptions();
 
-        labelContainerOptions.setText(label);
+        if (getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (labelContainerOptions.getOption("text", null) == null || labelContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) labelContainerOptions.setDefaultOption("text", label, null, getOption("label", null).isForce()); } else { labelContainerOptions.setText(label); };
     }
 
     private void setDefaultLabel(String label) {
@@ -79,7 +79,7 @@ public abstract class AbstractCoreTabOptions<S extends AbstractCoreTabOptions<S>
         if (linkOptions == null)
             linkOptions = createDefaultLinkOptions();
 
-        linkOptions.setUrl(url);
+        if (getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (linkOptions.getOption("url", null) == null || linkOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) linkOptions.setDefaultOption("url", url, null, getOption("url", null).isForce()); } else { linkOptions.setUrl(url); };
     }
 
     private void setDefaultUrl(String url) {
@@ -108,7 +108,7 @@ public abstract class AbstractCoreTabOptions<S extends AbstractCoreTabOptions<S>
         if (badgeOptions == null)
             badgeOptions = createDefaultBadgeOptions();
 
-        badgeOptions.setVisible(badgeVisible);
+        if (getOption("badgeVisible", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (badgeOptions.getOption("visible", null) == null || badgeOptions.getOption("visible", null) instanceof dev.reuise.core.option.DefaultComponentOption) badgeOptions.setDefaultOption("visible", badgeVisible, null, getOption("badgeVisible", null).isForce()); } else { badgeOptions.setVisible(badgeVisible); };
     }
 
     private void setDefaultBadgeVisible(Boolean badgeVisible) {
@@ -137,7 +137,7 @@ public abstract class AbstractCoreTabOptions<S extends AbstractCoreTabOptions<S>
         if (badgeOptions == null)
             badgeOptions = createDefaultBadgeOptions();
 
-        badgeOptions.setLabel(badgeLabel);
+        if (getOption("badgeLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (badgeOptions.getOption("label", null) == null || badgeOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) badgeOptions.setDefaultOption("label", badgeLabel, null, getOption("badgeLabel", null).isForce()); } else { badgeOptions.setLabel(badgeLabel); };
     }
 
     private void setDefaultBadgeLabel(String badgeLabel) {

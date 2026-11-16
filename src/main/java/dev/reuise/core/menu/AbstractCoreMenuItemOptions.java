@@ -7,6 +7,9 @@ import dev.reuise.core.link.CoreLinkPartOptions;
 import dev.reuise.core.text.CoreInlineTextPartOptions;
 public abstract class AbstractCoreMenuItemOptions<S extends AbstractCoreMenuItemOptions<S>> implements CoreMenuItemOptions , CoreComponentOptions {
     // Indirect layout child
+    private CoreLinkPartOptions linkOptions;
+
+    // Indirect layout child
     private CoreCheckboxPartOptions checkboxOptions;
 
     // Indirect layout child
@@ -24,9 +27,6 @@ public abstract class AbstractCoreMenuItemOptions<S extends AbstractCoreMenuItem
     // Indirect layout child
     private CoreIconPartOptions endIconOptions;
 
-    // Indirect layout child
-    private CoreLinkPartOptions linkOptions;
-
     protected AbstractCoreMenuItemOptions() {
     }
 
@@ -34,13 +34,13 @@ public abstract class AbstractCoreMenuItemOptions<S extends AbstractCoreMenuItem
     }
 
     public boolean onPreInitialize() {
+        linkOptions = getLinkOptions();
         checkboxOptions = getCheckboxOptions();
         startIconOptions = getStartIconOptions();
         textContainerOptions = getTextContainerOptions();
         labelContainerOptions = getLabelContainerOptions();
         secondaryLabelContainerOptions = getSecondaryLabelContainerOptions();
         endIconOptions = getEndIconOptions();
-        linkOptions = getLinkOptions();
         return true;
     }
 

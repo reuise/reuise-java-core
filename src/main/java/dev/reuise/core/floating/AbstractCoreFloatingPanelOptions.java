@@ -67,7 +67,7 @@ public abstract class AbstractCoreFloatingPanelOptions<S extends AbstractCoreFlo
         if (titleContainerOptions == null)
             titleContainerOptions = createDefaultTitleContainerOptions();
 
-        titleContainerOptions.setText(title);
+        if (getOption("title", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (titleContainerOptions.getOption("text", null) == null || titleContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) titleContainerOptions.setDefaultOption("text", title, null, getOption("title", null).isForce()); } else { titleContainerOptions.setText(title); };
     }
 
     private void setDefaultTitle(String title) {
@@ -96,7 +96,7 @@ public abstract class AbstractCoreFloatingPanelOptions<S extends AbstractCoreFlo
         if (closeButtonOptions == null)
             closeButtonOptions = createDefaultCloseButtonOptions();
 
-        closeButtonOptions.setLabel(closeLabel);
+        if (getOption("closeLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (closeButtonOptions.getOption("label", null) == null || closeButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) closeButtonOptions.setDefaultOption("label", closeLabel, null, getOption("closeLabel", null).isForce()); } else { closeButtonOptions.setLabel(closeLabel); };
     }
 
     private void setDefaultCloseLabel(String closeLabel) {
@@ -125,7 +125,7 @@ public abstract class AbstractCoreFloatingPanelOptions<S extends AbstractCoreFlo
         if (minimiseButtonOptions == null)
             minimiseButtonOptions = createDefaultMinimiseButtonOptions();
 
-        minimiseButtonOptions.setLabel(minimiseLabel);
+        if (getOption("minimiseLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (minimiseButtonOptions.getOption("label", null) == null || minimiseButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) minimiseButtonOptions.setDefaultOption("label", minimiseLabel, null, getOption("minimiseLabel", null).isForce()); } else { minimiseButtonOptions.setLabel(minimiseLabel); };
     }
 
     private void setDefaultMinimiseLabel(String minimiseLabel) {

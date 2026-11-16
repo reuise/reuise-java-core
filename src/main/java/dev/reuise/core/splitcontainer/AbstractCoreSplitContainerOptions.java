@@ -99,21 +99,21 @@ public abstract class AbstractCoreSplitContainerOptions<S extends AbstractCoreSp
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setDirection(direction);
+        if (getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("direction", null) == null || startPanelOptions.getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("direction", direction, null, getOption("direction", null).isForce()); } else { startPanelOptions.setDirection(direction); };
     }
 
     protected void setLayoutChildrenDirection(SplitDirection direction, State state) {
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setDirection(direction, state);
+        if (getOption("direction", state) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("direction", state) == null || startPanelOptions.getOption("direction", state) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("direction", direction, state, getOption("direction", state).isForce()); } else { startPanelOptions.setDirection(direction, state); };
     }
 
     protected void setLayoutChildrenDirection(ScreenSizeValues<SplitDirection> direction) {
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setDirection(direction);
+        if (getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("direction", null) == null || startPanelOptions.getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("direction", direction, null, getOption("direction", null).isForce()); } else { startPanelOptions.setDirection(direction); };
     }
 
     private void setDefaultDirection(SplitDirection direction) {
@@ -315,21 +315,21 @@ public abstract class AbstractCoreSplitContainerOptions<S extends AbstractCoreSp
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setSize(splitPosition);
+        if (getOption("splitPosition", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("size", null) == null || startPanelOptions.getOption("size", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("size", splitPosition, null, getOption("splitPosition", null).isForce()); } else { startPanelOptions.setSize(splitPosition); };
     }
 
     protected void setLayoutChildrenSplitPosition(Object splitPosition, State state) {
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setSize(splitPosition, state);
+        if (getOption("splitPosition", state) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("size", state) == null || startPanelOptions.getOption("size", state) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("size", splitPosition, state, getOption("splitPosition", state).isForce()); } else { startPanelOptions.setSize(splitPosition, state); };
     }
 
     protected void setLayoutChildrenSplitPosition(ScreenSizeValues<Object> splitPosition) {
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setSize(splitPosition);
+        if (getOption("splitPosition", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("size", null) == null || startPanelOptions.getOption("size", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("size", splitPosition, null, getOption("splitPosition", null).isForce()); } else { startPanelOptions.setSize(splitPosition); };
     }
 
     private void setDefaultSplitPosition(Object splitPosition) {
@@ -412,21 +412,21 @@ public abstract class AbstractCoreSplitContainerOptions<S extends AbstractCoreSp
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setMinSize(minSplitPosition);
+        if (getOption("minSplitPosition", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("minSize", null) == null || startPanelOptions.getOption("minSize", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("minSize", minSplitPosition, null, getOption("minSplitPosition", null).isForce()); } else { startPanelOptions.setMinSize(minSplitPosition); };
     }
 
     protected void setLayoutChildrenMinSplitPosition(Object minSplitPosition, State state) {
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setMinSize(minSplitPosition, state);
+        if (getOption("minSplitPosition", state) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("minSize", state) == null || startPanelOptions.getOption("minSize", state) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("minSize", minSplitPosition, state, getOption("minSplitPosition", state).isForce()); } else { startPanelOptions.setMinSize(minSplitPosition, state); };
     }
 
     protected void setLayoutChildrenMinSplitPosition(ScreenSizeValues<Object> minSplitPosition) {
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setMinSize(minSplitPosition);
+        if (getOption("minSplitPosition", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("minSize", null) == null || startPanelOptions.getOption("minSize", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("minSize", minSplitPosition, null, getOption("minSplitPosition", null).isForce()); } else { startPanelOptions.setMinSize(minSplitPosition); };
     }
 
     private void setDefaultMinSplitPosition(Object minSplitPosition) {
@@ -509,21 +509,21 @@ public abstract class AbstractCoreSplitContainerOptions<S extends AbstractCoreSp
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setMaxSize(maxSplitPosition);
+        if (getOption("maxSplitPosition", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("maxSize", null) == null || startPanelOptions.getOption("maxSize", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("maxSize", maxSplitPosition, null, getOption("maxSplitPosition", null).isForce()); } else { startPanelOptions.setMaxSize(maxSplitPosition); };
     }
 
     protected void setLayoutChildrenMaxSplitPosition(Object maxSplitPosition, State state) {
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setMaxSize(maxSplitPosition, state);
+        if (getOption("maxSplitPosition", state) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("maxSize", state) == null || startPanelOptions.getOption("maxSize", state) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("maxSize", maxSplitPosition, state, getOption("maxSplitPosition", state).isForce()); } else { startPanelOptions.setMaxSize(maxSplitPosition, state); };
     }
 
     protected void setLayoutChildrenMaxSplitPosition(ScreenSizeValues<Object> maxSplitPosition) {
         if (startPanelOptions == null)
             startPanelOptions = createDefaultStartPanelOptions();
 
-        startPanelOptions.setMaxSize(maxSplitPosition);
+        if (getOption("maxSplitPosition", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("maxSize", null) == null || startPanelOptions.getOption("maxSize", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("maxSize", maxSplitPosition, null, getOption("maxSplitPosition", null).isForce()); } else { startPanelOptions.setMaxSize(maxSplitPosition); };
     }
 
     private void setDefaultMaxSplitPosition(Object maxSplitPosition) {

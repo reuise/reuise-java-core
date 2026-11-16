@@ -317,7 +317,7 @@ public abstract class AbstractCoreChatBoxOptions<S extends AbstractCoreChatBoxOp
         if (composerOptions == null)
             composerOptions = createDefaultComposerOptions();
 
-        composerOptions.setPlaceholder(composerPlaceholder);
+        if (getOption("composerPlaceholder", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (composerOptions.getOption("placeholder", null) == null || composerOptions.getOption("placeholder", null) instanceof dev.reuise.core.option.DefaultComponentOption) composerOptions.setDefaultOption("placeholder", composerPlaceholder, null, getOption("composerPlaceholder", null).isForce()); } else { composerOptions.setPlaceholder(composerPlaceholder); };
     }
 
     private void setDefaultComposerPlaceholder(String composerPlaceholder) {
@@ -346,7 +346,7 @@ public abstract class AbstractCoreChatBoxOptions<S extends AbstractCoreChatBoxOp
         if (sendButtonOptions == null)
             sendButtonOptions = createDefaultSendButtonOptions();
 
-        sendButtonOptions.setLabel(sendLabel);
+        if (getOption("sendLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (sendButtonOptions.getOption("label", null) == null || sendButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) sendButtonOptions.setDefaultOption("label", sendLabel, null, getOption("sendLabel", null).isForce()); } else { sendButtonOptions.setLabel(sendLabel); };
     }
 
     private void setDefaultSendLabel(String sendLabel) {
@@ -375,7 +375,7 @@ public abstract class AbstractCoreChatBoxOptions<S extends AbstractCoreChatBoxOp
         if (stopButtonOptions == null)
             stopButtonOptions = createDefaultStopButtonOptions();
 
-        stopButtonOptions.setLabel(stopLabel);
+        if (getOption("stopLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (stopButtonOptions.getOption("label", null) == null || stopButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) stopButtonOptions.setDefaultOption("label", stopLabel, null, getOption("stopLabel", null).isForce()); } else { stopButtonOptions.setLabel(stopLabel); };
     }
 
     private void setDefaultStopLabel(String stopLabel) {
@@ -404,7 +404,7 @@ public abstract class AbstractCoreChatBoxOptions<S extends AbstractCoreChatBoxOp
         if (retryButtonOptions == null)
             retryButtonOptions = createDefaultRetryButtonOptions();
 
-        retryButtonOptions.setLabel(retryLabel);
+        if (getOption("retryLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (retryButtonOptions.getOption("label", null) == null || retryButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) retryButtonOptions.setDefaultOption("label", retryLabel, null, getOption("retryLabel", null).isForce()); } else { retryButtonOptions.setLabel(retryLabel); };
     }
 
     private void setDefaultRetryLabel(String retryLabel) {
@@ -433,7 +433,7 @@ public abstract class AbstractCoreChatBoxOptions<S extends AbstractCoreChatBoxOp
         if (requestHumanButtonOptions == null)
             requestHumanButtonOptions = createDefaultRequestHumanButtonOptions();
 
-        requestHumanButtonOptions.setLabel(requestHumanLabel);
+        if (getOption("requestHumanLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (requestHumanButtonOptions.getOption("label", null) == null || requestHumanButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) requestHumanButtonOptions.setDefaultOption("label", requestHumanLabel, null, getOption("requestHumanLabel", null).isForce()); } else { requestHumanButtonOptions.setLabel(requestHumanLabel); };
     }
 
     private void setDefaultRequestHumanLabel(String requestHumanLabel) {
@@ -462,7 +462,7 @@ public abstract class AbstractCoreChatBoxOptions<S extends AbstractCoreChatBoxOp
         if (loadingIndicatorOptions == null)
             loadingIndicatorOptions = createDefaultLoadingIndicatorOptions();
 
-        loadingIndicatorOptions.setText(loadingLabel);
+        if (getOption("loadingLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (loadingIndicatorOptions.getOption("text", null) == null || loadingIndicatorOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) loadingIndicatorOptions.setDefaultOption("text", loadingLabel, null, getOption("loadingLabel", null).isForce()); } else { loadingIndicatorOptions.setText(loadingLabel); };
     }
 
     private void setDefaultLoadingLabel(String loadingLabel) {

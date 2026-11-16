@@ -54,7 +54,7 @@ public abstract class AbstractCoreAppLayoutOptions<S extends AbstractCoreAppLayo
         if (topAppBarSplitOptions == null)
             topAppBarSplitOptions = createDefaultTopAppBarSplitOptions();
 
-        topAppBarSplitOptions.setSplitPosition(topAppBar.getHeight());
+        if (getOption("topAppBar", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (topAppBarSplitOptions.getOption("splitPosition", null) == null || topAppBarSplitOptions.getOption("splitPosition", null) instanceof dev.reuise.core.option.DefaultComponentOption) topAppBarSplitOptions.setDefaultOption("splitPosition", topAppBar.getHeight(), null, getOption("topAppBar", null).isForce()); } else { topAppBarSplitOptions.setSplitPosition(topAppBar.getHeight()); };
     }
 
     private void setDefaultTopAppBar(CoreTopAppBar topAppBar) {
@@ -108,7 +108,7 @@ public abstract class AbstractCoreAppLayoutOptions<S extends AbstractCoreAppLayo
         if (drawerSplitOptions == null)
             drawerSplitOptions = createDefaultDrawerSplitOptions();
 
-        drawerSplitOptions.setResizable(drawer.isResizable());
+        if (getOption("drawer", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (drawerSplitOptions.getOption("resizable", null) == null || drawerSplitOptions.getOption("resizable", null) instanceof dev.reuise.core.option.DefaultComponentOption) drawerSplitOptions.setDefaultOption("resizable", drawer.isResizable(), null, getOption("drawer", null).isForce()); } else { drawerSplitOptions.setResizable(drawer.isResizable()); };
     }
 
     private void setDefaultDrawer(CoreDrawer drawer) {

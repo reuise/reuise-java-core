@@ -81,7 +81,7 @@ public abstract class AbstractCoreDialogOptions<S extends AbstractCoreDialogOpti
         if (titleHeadingOptions == null)
             titleHeadingOptions = createDefaultTitleHeadingOptions();
 
-        titleHeadingOptions.setText(title);
+        if (getOption("title", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (titleHeadingOptions.getOption("text", null) == null || titleHeadingOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) titleHeadingOptions.setDefaultOption("text", title, null, getOption("title", null).isForce()); } else { titleHeadingOptions.setText(title); };
     }
 
     private void setDefaultTitle(String title) {

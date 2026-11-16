@@ -483,7 +483,7 @@ public abstract class AbstractCoreCarouselOptions<S extends AbstractCoreCarousel
         if (previousButtonOptions == null)
             previousButtonOptions = createDefaultPreviousButtonOptions();
 
-        previousButtonOptions.setLabel(previousLabel);
+        if (getOption("previousLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (previousButtonOptions.getOption("label", null) == null || previousButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) previousButtonOptions.setDefaultOption("label", previousLabel, null, getOption("previousLabel", null).isForce()); } else { previousButtonOptions.setLabel(previousLabel); };
     }
 
     private void setDefaultPreviousLabel(String previousLabel) {
@@ -512,7 +512,7 @@ public abstract class AbstractCoreCarouselOptions<S extends AbstractCoreCarousel
         if (nextButtonOptions == null)
             nextButtonOptions = createDefaultNextButtonOptions();
 
-        nextButtonOptions.setLabel(nextLabel);
+        if (getOption("nextLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (nextButtonOptions.getOption("label", null) == null || nextButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) nextButtonOptions.setDefaultOption("label", nextLabel, null, getOption("nextLabel", null).isForce()); } else { nextButtonOptions.setLabel(nextLabel); };
     }
 
     private void setDefaultNextLabel(String nextLabel) {
@@ -541,7 +541,7 @@ public abstract class AbstractCoreCarouselOptions<S extends AbstractCoreCarousel
         if (autoplayButtonOptions == null)
             autoplayButtonOptions = createDefaultAutoplayButtonOptions();
 
-        autoplayButtonOptions.setLabel(playLabel);
+        if (getOption("playLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (autoplayButtonOptions.getOption("label", null) == null || autoplayButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) autoplayButtonOptions.setDefaultOption("label", playLabel, null, getOption("playLabel", null).isForce()); } else { autoplayButtonOptions.setLabel(playLabel); };
     }
 
     private void setDefaultPlayLabel(String playLabel) {

@@ -49,7 +49,7 @@ public abstract class AbstractCoreNavigationTreeLinkOptions<S extends AbstractCo
         if (itemOptions == null)
             itemOptions = createDefaultItemOptions();
 
-        itemOptions.setLabel(label);
+        if (getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (itemOptions.getOption("label", null) == null || itemOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) itemOptions.setDefaultOption("label", label, null, getOption("label", null).isForce()); } else { itemOptions.setLabel(label); };
     }
 
     private void setDefaultLabel(String label) {

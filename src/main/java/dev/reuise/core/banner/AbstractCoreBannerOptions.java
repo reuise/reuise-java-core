@@ -59,7 +59,7 @@ public abstract class AbstractCoreBannerOptions<S extends AbstractCoreBannerOpti
         if (messageParagraphOptions == null)
             messageParagraphOptions = createDefaultMessageParagraphOptions();
 
-        messageParagraphOptions.setText(message);
+        if (getOption("message", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (messageParagraphOptions.getOption("text", null) == null || messageParagraphOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) messageParagraphOptions.setDefaultOption("text", message, null, getOption("message", null).isForce()); } else { messageParagraphOptions.setText(message); };
     }
 
     private void setDefaultMessage(String message) {
@@ -138,7 +138,7 @@ public abstract class AbstractCoreBannerOptions<S extends AbstractCoreBannerOpti
         if (dismissButtonOptions == null)
             dismissButtonOptions = createDefaultDismissButtonOptions();
 
-        dismissButtonOptions.setLabel(dismissLabel);
+        if (getOption("dismissLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (dismissButtonOptions.getOption("label", null) == null || dismissButtonOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) dismissButtonOptions.setDefaultOption("label", dismissLabel, null, getOption("dismissLabel", null).isForce()); } else { dismissButtonOptions.setLabel(dismissLabel); };
     }
 
     private void setDefaultDismissLabel(String dismissLabel) {

@@ -318,6 +318,8 @@ public interface CoreBaseComponentPartOptions {
 
     Map<String, ComponentOption<? extends Object>> getOptions();
 
+    Map<String, ComponentOption<? extends Object>> getOptions(State state);
+
     Collection<ComponentOption<? extends Object>> getOptionValues(String option);
 
     <T> void setOption(String option, T value);

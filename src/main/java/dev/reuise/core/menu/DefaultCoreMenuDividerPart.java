@@ -75,6 +75,8 @@ public abstract class DefaultCoreMenuDividerPart<S extends DefaultCoreMenuDivide
 
     private CoreBaseComponentPart baseComponentPart;
 
+    private CoreLink link;
+
     private CoreCheckbox checkbox;
 
     private CoreIcon startIcon;
@@ -87,8 +89,6 @@ public abstract class DefaultCoreMenuDividerPart<S extends DefaultCoreMenuDivide
 
     private CoreIcon endIcon;
 
-    private CoreLink link;
-
     protected DefaultCoreMenuDividerPart(O options) {
     }
 
@@ -100,13 +100,13 @@ public abstract class DefaultCoreMenuDividerPart<S extends DefaultCoreMenuDivide
         parentComponentPart = getParentComponentPart();
         baseComponentPart = getBaseComponentPart();
         // Layout children (indirect)
+        link = getLink();
         checkbox = getCheckbox();
         startIcon = getStartIcon();
         textContainer = getTextContainer();
         labelContainer = getLabelContainer();
         secondaryLabelContainer = getSecondaryLabelContainer();
         endIcon = getEndIcon();
-        link = getLink();
     }
 
     @Override

@@ -52,7 +52,7 @@ public abstract class AbstractCoreAvatarOptions<S extends AbstractCoreAvatarOpti
         if (imageOptions == null)
             imageOptions = createDefaultImageOptions();
 
-        imageOptions.setUrl(url);
+        if (getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (imageOptions.getOption("url", null) == null || imageOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) imageOptions.setDefaultOption("url", url, null, getOption("url", null).isForce()); } else { imageOptions.setUrl(url); };
     }
 
     private void setDefaultUrl(String url) {
@@ -216,7 +216,7 @@ public abstract class AbstractCoreAvatarOptions<S extends AbstractCoreAvatarOpti
         if (badgeOptions == null)
             badgeOptions = createDefaultBadgeOptions();
 
-        badgeOptions.setVisible(badgeVisible);
+        if (getOption("badgeVisible", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (badgeOptions.getOption("visible", null) == null || badgeOptions.getOption("visible", null) instanceof dev.reuise.core.option.DefaultComponentOption) badgeOptions.setDefaultOption("visible", badgeVisible, null, getOption("badgeVisible", null).isForce()); } else { badgeOptions.setVisible(badgeVisible); };
     }
 
     private void setDefaultBadgeVisible(Boolean badgeVisible) {

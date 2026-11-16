@@ -40,7 +40,7 @@ public abstract class AbstractCoreCheckboxTableCellOptions<S extends AbstractCor
         if (checkboxOptions == null)
             checkboxOptions = createDefaultCheckboxOptions();
 
-        checkboxOptions.setChecked(checked);
+        if (getOption("checked", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (checkboxOptions.getOption("checked", null) == null || checkboxOptions.getOption("checked", null) instanceof dev.reuise.core.option.DefaultComponentOption) checkboxOptions.setDefaultOption("checked", checked, null, getOption("checked", null).isForce()); } else { checkboxOptions.setChecked(checked); };
     }
 
     private void setDefaultChecked(Boolean checked) {
@@ -69,7 +69,7 @@ public abstract class AbstractCoreCheckboxTableCellOptions<S extends AbstractCor
         if (checkboxOptions == null)
             checkboxOptions = createDefaultCheckboxOptions();
 
-        checkboxOptions.setLabel(label);
+        if (getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (checkboxOptions.getOption("label", null) == null || checkboxOptions.getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) checkboxOptions.setDefaultOption("label", label, null, getOption("label", null).isForce()); } else { checkboxOptions.setLabel(label); };
     }
 
     private void setDefaultLabel(String label) {

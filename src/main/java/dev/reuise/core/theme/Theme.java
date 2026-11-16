@@ -2,17 +2,17 @@ package dev.reuise.core.theme;
 public class Theme {
     protected ComponentTheme globalTheme;
 
+    protected ComponentTheme buttonTheme;
+
+    protected ComponentTheme dialogTheme;
+
+    protected ComponentTheme surfaceTheme;
+
     protected ComponentTheme tabTheme;
 
     protected ComponentTheme headingTheme;
 
-    protected ComponentTheme dialogTheme;
-
-    protected ComponentTheme buttonTheme;
-
     protected ComponentTheme textFieldTheme;
-
-    protected ComponentTheme surfaceTheme;
 
     public Theme() {
     }
@@ -23,6 +23,33 @@ public class Theme {
 
     public Theme setGlobalTheme(ComponentTheme globalTheme) {
         this.globalTheme = globalTheme;
+        return this;
+    }
+
+    public ComponentTheme getButtonTheme() {
+        return buttonTheme;
+    }
+
+    public Theme setButtonTheme(ComponentTheme buttonTheme) {
+        this.buttonTheme = buttonTheme;
+        return this;
+    }
+
+    public ComponentTheme getDialogTheme() {
+        return dialogTheme;
+    }
+
+    public Theme setDialogTheme(ComponentTheme dialogTheme) {
+        this.dialogTheme = dialogTheme;
+        return this;
+    }
+
+    public ComponentTheme getSurfaceTheme() {
+        return surfaceTheme;
+    }
+
+    public Theme setSurfaceTheme(ComponentTheme surfaceTheme) {
+        this.surfaceTheme = surfaceTheme;
         return this;
     }
 
@@ -44,39 +71,12 @@ public class Theme {
         return this;
     }
 
-    public ComponentTheme getDialogTheme() {
-        return dialogTheme;
-    }
-
-    public Theme setDialogTheme(ComponentTheme dialogTheme) {
-        this.dialogTheme = dialogTheme;
-        return this;
-    }
-
-    public ComponentTheme getButtonTheme() {
-        return buttonTheme;
-    }
-
-    public Theme setButtonTheme(ComponentTheme buttonTheme) {
-        this.buttonTheme = buttonTheme;
-        return this;
-    }
-
     public ComponentTheme getTextFieldTheme() {
         return textFieldTheme;
     }
 
     public Theme setTextFieldTheme(ComponentTheme textFieldTheme) {
         this.textFieldTheme = textFieldTheme;
-        return this;
-    }
-
-    public ComponentTheme getSurfaceTheme() {
-        return surfaceTheme;
-    }
-
-    public Theme setSurfaceTheme(ComponentTheme surfaceTheme) {
-        this.surfaceTheme = surfaceTheme;
         return this;
     }
 

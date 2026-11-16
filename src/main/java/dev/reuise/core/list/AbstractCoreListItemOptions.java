@@ -114,7 +114,7 @@ public abstract class AbstractCoreListItemOptions<S extends AbstractCoreListItem
         if (labelContainerOptions == null)
             labelContainerOptions = createDefaultLabelContainerOptions();
 
-        labelContainerOptions.setText(label);
+        if (getOption("label", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (labelContainerOptions.getOption("text", null) == null || labelContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) labelContainerOptions.setDefaultOption("text", label, null, getOption("label", null).isForce()); } else { labelContainerOptions.setText(label); };
     }
 
     private void setDefaultLabel(String label) {
@@ -143,7 +143,7 @@ public abstract class AbstractCoreListItemOptions<S extends AbstractCoreListItem
         if (secondaryLabelContainerOptions == null)
             secondaryLabelContainerOptions = createDefaultSecondaryLabelContainerOptions();
 
-        secondaryLabelContainerOptions.setText(secondaryLabel);
+        if (getOption("secondaryLabel", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (secondaryLabelContainerOptions.getOption("text", null) == null || secondaryLabelContainerOptions.getOption("text", null) instanceof dev.reuise.core.option.DefaultComponentOption) secondaryLabelContainerOptions.setDefaultOption("text", secondaryLabel, null, getOption("secondaryLabel", null).isForce()); } else { secondaryLabelContainerOptions.setText(secondaryLabel); };
     }
 
     private void setDefaultSecondaryLabel(String secondaryLabel) {

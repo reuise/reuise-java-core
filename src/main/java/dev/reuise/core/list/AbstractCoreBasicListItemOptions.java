@@ -39,7 +39,7 @@ public abstract class AbstractCoreBasicListItemOptions<S extends AbstractCoreBas
         if (linkOptions == null)
             linkOptions = createDefaultLinkOptions();
 
-        linkOptions.setUrl(url);
+        if (getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (linkOptions.getOption("url", null) == null || linkOptions.getOption("url", null) instanceof dev.reuise.core.option.DefaultComponentOption) linkOptions.setDefaultOption("url", url, null, getOption("url", null).isForce()); } else { linkOptions.setUrl(url); };
     }
 
     private void setDefaultUrl(String url) {
