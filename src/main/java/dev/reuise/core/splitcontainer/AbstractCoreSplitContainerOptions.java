@@ -100,6 +100,10 @@ public abstract class AbstractCoreSplitContainerOptions<S extends AbstractCoreSp
             startPanelOptions = createDefaultStartPanelOptions();
 
         if (getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("direction", null) == null || startPanelOptions.getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("direction", direction, null, getOption("direction", null).isForce()); } else { startPanelOptions.setDirection(direction); };
+        if (endPanelOptions == null)
+            endPanelOptions = createDefaultEndPanelOptions();
+
+        if (getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (endPanelOptions.getOption("direction", null) == null || endPanelOptions.getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) endPanelOptions.setDefaultOption("direction", direction, null, getOption("direction", null).isForce()); } else { endPanelOptions.setDirection(direction); };
     }
 
     protected void setLayoutChildrenDirection(SplitDirection direction, State state) {
@@ -107,6 +111,10 @@ public abstract class AbstractCoreSplitContainerOptions<S extends AbstractCoreSp
             startPanelOptions = createDefaultStartPanelOptions();
 
         if (getOption("direction", state) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("direction", state) == null || startPanelOptions.getOption("direction", state) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("direction", direction, state, getOption("direction", state).isForce()); } else { startPanelOptions.setDirection(direction, state); };
+        if (endPanelOptions == null)
+            endPanelOptions = createDefaultEndPanelOptions();
+
+        if (getOption("direction", state) instanceof dev.reuise.core.option.DefaultComponentOption) { if (endPanelOptions.getOption("direction", state) == null || endPanelOptions.getOption("direction", state) instanceof dev.reuise.core.option.DefaultComponentOption) endPanelOptions.setDefaultOption("direction", direction, state, getOption("direction", state).isForce()); } else { endPanelOptions.setDirection(direction, state); };
     }
 
     protected void setLayoutChildrenDirection(ScreenSizeValues<SplitDirection> direction) {
@@ -114,6 +122,10 @@ public abstract class AbstractCoreSplitContainerOptions<S extends AbstractCoreSp
             startPanelOptions = createDefaultStartPanelOptions();
 
         if (getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (startPanelOptions.getOption("direction", null) == null || startPanelOptions.getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) startPanelOptions.setDefaultOption("direction", direction, null, getOption("direction", null).isForce()); } else { startPanelOptions.setDirection(direction); };
+        if (endPanelOptions == null)
+            endPanelOptions = createDefaultEndPanelOptions();
+
+        if (getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) { if (endPanelOptions.getOption("direction", null) == null || endPanelOptions.getOption("direction", null) instanceof dev.reuise.core.option.DefaultComponentOption) endPanelOptions.setDefaultOption("direction", direction, null, getOption("direction", null).isForce()); } else { endPanelOptions.setDirection(direction); };
     }
 
     private void setDefaultDirection(SplitDirection direction) {
@@ -643,6 +655,7 @@ public abstract class AbstractCoreSplitContainerOptions<S extends AbstractCoreSp
 
     protected CoreSplitContainerPanelOptions createDefaultEndPanelOptions() {
         CoreSplitContainerPanelOptions options = getComponentFactory().createSplitContainerPanelOptions();
+        options.setSize(null);
         options.setRequiredLayoutComponent(true);
         return options;
     }
