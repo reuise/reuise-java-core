@@ -11,6 +11,11 @@ public final class CarouselPages {
 
     public CarouselPages(double[] positions, double[] widths, double viewport, Integer groupSize,
             String align, boolean whitespace) {
+        this(positions, widths, viewport, groupSize, align, whitespace, false);
+    }
+
+    public CarouselPages(double[] positions, double[] widths, double viewport, Integer groupSize,
+            String align, boolean whitespace, boolean circular) {
         if (positions.length != widths.length || !Double.isFinite(viewport) || viewport < 0
                 || (groupSize != null && groupSize < 1))
             throw new IllegalArgumentException("Invalid carousel measurements");
@@ -36,16 +41,18 @@ public final class CarouselPages {
             double offset = positions[first];
             if ("center".equals(align)) offset -= (viewport - width) / 2;
             else if ("end".equals(align)) offset -= viewport - width;
-            if (!whitespace) offset = Math.max(0, Math.min(Math.max(0, total - viewport), offset));
-            addPage(first, end, offset, viewport, positions, widths);
+            if (!whitespace && !circular)
+                offset = Math.max(0, Math.min(Math.max(0, total - viewport), offset));
+            addPage(first, end, offset, viewport, positions, widths, circular);
             first = end;
         }
-        if (!offsets.isEmpty() && total - viewport > offsets.get(offsets.size() - 1) + .5)
-            addPage(starts.get(starts.size() - 1), widths.length, total - viewport, viewport, positions, widths);
+        if (!circular && !offsets.isEmpty() && total - viewport > offsets.get(offsets.size() - 1) + .5)
+            addPage(starts.get(starts.size() - 1), widths.length, total - viewport, viewport, positions, widths, false);
     }
 
-    private void addPage(int first, int end, double offset, double viewport, double[] positions, double[] widths) {
-        if (offsets.isEmpty() && offset > .5) {
+    private void addPage(int first, int end, double offset, double viewport, double[] positions, double[] widths,
+            boolean circular) {
+        if (!circular && offsets.isEmpty() && offset > .5) {
             starts.add(first);
             ends.add(end);
             offsets.add(0d);

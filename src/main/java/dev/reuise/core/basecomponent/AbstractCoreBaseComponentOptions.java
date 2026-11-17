@@ -1085,12 +1085,12 @@ public abstract class AbstractCoreBaseComponentOptions<S extends AbstractCoreBas
 
     @Override
     public S setLinkUrlResolver(Function<String, String> linkUrlResolver) {
-        setOption("linkUrlResolver", linkUrlResolver);
+        setOption("linkUrlResolver", linkUrlResolver, true);
         return self();
     }
 
     private void setDefaultLinkUrlResolver(Function<String, String> linkUrlResolver) {
-        setDefaultOption("linkUrlResolver", linkUrlResolver);
+        setDefaultOption("linkUrlResolver", linkUrlResolver, true);
     }
 
     @Override
