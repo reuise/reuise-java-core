@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,6 +25,10 @@ public abstract class AbstractCoreBaseComponentOptions<S extends AbstractCoreBas
     @Override
     public void setComponent(CoreBaseComponent component) {
         this.component = component;
+    }
+
+    private void mergeOptionsMap(Map<String, ComponentOption<?>> target, Map<String, ComponentOption<?>> source) {
+        source.forEach((name, value) -> target.merge(name, value, this::mergeOptions));
     }
 
     private <T, O extends ComponentOption<?>> O mergeOptions(O v1, O v2) {
@@ -122,7 +127,13 @@ public abstract class AbstractCoreBaseComponentOptions<S extends AbstractCoreBas
         if (other == null)
             return;
 
-        this.options = Stream.of(this.options, other.getOptions()).flatMap(map -> map.entrySet().stream()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, this::mergeOptions));
+        mergeOptionsMap(this.options, other.getOptions());
+        Collection<State> states = other.getStates();
+        if (states != null) {
+            for (State state : new ArrayList<>(states))
+                mergeOptionsMap(getOptions(state), other.getOptions(state));
+
+        }
     }
 
     private void setOption(String option, ComponentOption<?> value) {
